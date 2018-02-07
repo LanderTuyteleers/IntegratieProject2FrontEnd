@@ -41,16 +41,11 @@
   </div>
 
   <div class="form-group">
-    <label for="gender">Gender:</label>
-    <input
-      [(ngModel)]="registerUser.gender" name="gender"
-      formControlName="gender"
-      id="gender"
-      type="text"
-      class="form-control">
-    <div *ngIf="gender.touched && gender.invalid" class="alert alert-danger">
-      <div *ngIf="gender.errors.required">Birthday is required</div>
-    </div>
+    <label>Gender:</label>
+    <input type="radio" formControlName="gender" value="Male" name="gender" [(ngModel)]="registerUser.gender"> Male
+    <input type="radio" formControlName="gender" value="Female" name="gender" [(ngModel)]="registerUser.gender"> Female
+
+
   </div>
 
   <div class="form-group">

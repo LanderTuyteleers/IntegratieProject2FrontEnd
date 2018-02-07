@@ -28,7 +28,7 @@ export class HttpLoginServiceService {
 
   doRegister(registerUser: RegisterUser) {
     const url = this.springURL + '/register';
-    console.log(registerUser.birthday, registerUser.firstName);
+    console.log(registerUser.birthday, registerUser.firstName, registerUser.gender);
     return this.http.post(url, registerUser, httpOptions).subscribe(
       (data) => console.log(data),
       (err) => console.log(err)

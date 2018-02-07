@@ -1,7 +1,12 @@
+form {
+  margin: 0 3%;
+}
+
 label {
   font-size: 0.8em;
 }
 
 .btn-primary {
   width: 80px;
+  background-color: #00a8ff;
 }
