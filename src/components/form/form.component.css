@@ -1,0 +1,17 @@
+.form {
+  margin: 30px 3%;
+}
+
+button {
+  width: 100px;
+  height: 30px;
+  color: #fff;
+  background-color: #000;
+  border-color: #000;
+}
+
+.active {
+  background-color: red;
+  border-color: red;
+}
+
