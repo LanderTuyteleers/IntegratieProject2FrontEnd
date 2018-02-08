@@ -7,11 +7,11 @@ button {
   height: 50px;
   color: #fff;
   background-color: #192a56;
-  border-color: #192a56;
+  border: none;
+  outline: none;
 }
 
 .active {
   background-color: #e84118;
-  border-color: #e84118;
 }
 

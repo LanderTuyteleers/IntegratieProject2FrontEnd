@@ -1,0 +1,13 @@
+#btnCreateSession {
+  height: 50px;
+  width: 120px;
+  background-color: #e84118;
+  outline: none;
+  border: none;
+  color: #fff;
+}
+
+#btnCreateSession:hover {
+  cursor: pointer;
+  background-color: #c23616;
+}
