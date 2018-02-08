@@ -11,6 +11,7 @@ import {RegisterUser} from "../../model/RegisterUser";
 export class SignupFormComponent {
   private service: HttpLoginServiceService;
   registerUser: RegisterUser = new RegisterUser('','','','','','','');
+  private label;
 
   constructor(service: HttpLoginServiceService){
     this.service = service;
@@ -56,5 +57,6 @@ export class SignupFormComponent {
 
   clickRegister(){
     this.service.doRegister(this.registerUser);
+    this.label = this.service.error;
   }
 }

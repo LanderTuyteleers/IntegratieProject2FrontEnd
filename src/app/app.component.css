@@ -42,9 +42,10 @@ hr {
   -moz-border-left-colors: none;
   -moz-border-right-colors: none;
   -moz-border-top-colors: none;
-  border-color: #000;
+  border-color: #00a8ff;
   border-style: solid none;
   border-width: 1px 0;
   margin: 45px auto;
   width: 75%;
 }
+

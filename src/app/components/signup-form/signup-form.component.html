@@ -88,5 +88,6 @@
       <div *ngIf="password.errors.minlength">Password must be {{password.errors.minlength.requiredLength}}</div>
     </div>
   </div>
+  <label>{{label}}</label>
   <button class="btn btn-primary" type="submit" (click)=clickRegister()>Sign Up</button>
 </form>

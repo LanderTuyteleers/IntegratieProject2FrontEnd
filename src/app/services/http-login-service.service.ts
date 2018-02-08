@@ -14,6 +14,7 @@ export class HttpLoginServiceService {
   private port = 8080;
   private localUrl = 'http://localhost:';
   private springURL = this.localUrl + this.port + this.baseURL;
+  private _error;
   constructor(private http: HttpClient) { }
 
 
@@ -30,8 +31,13 @@ export class HttpLoginServiceService {
     const url = this.springURL + '/register';
     console.log(registerUser.birthday, registerUser.firstName, registerUser.gender);
     return this.http.post(url, registerUser, httpOptions).subscribe(
-      (data) => console.log(data),
+      (data) => this._error = data,
       (err) => console.log(err)
     );
+  }
+
+
+  get error() {
+    return this._error;
   }
 }
