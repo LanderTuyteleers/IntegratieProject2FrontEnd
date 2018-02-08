@@ -15,6 +15,9 @@ export class HttpLoginServiceService {
   private localUrl = 'http://localhost:';
   private springURL = this.localUrl + this.port + this.baseURL;
   private _error;
+  private _registrationComplete = false;
+  private _loginComplete = false;
+
   constructor(private http: HttpClient) { }
 
 
@@ -22,7 +25,7 @@ export class HttpLoginServiceService {
     const url = this.springURL + '/login';
     console.log(url, loginUser.username, loginUser.password);
     return this.http.post(url, loginUser, httpOptions).subscribe(
-      (data) => console.log(data),
+      (data) => this._loginComplete = true,
       (err) => console.log(err)
     );
   }
@@ -31,13 +34,22 @@ export class HttpLoginServiceService {
     const url = this.springURL + '/register';
     console.log(registerUser.birthday, registerUser.firstName, registerUser.gender);
     return this.http.post(url, registerUser, httpOptions).subscribe(
-      (data) => this._error = data,
-      (err) => console.log(err)
+      (data) => this._registrationComplete = true,
+      (err) => this._error = err.error
     );
   }
 
 
   get error() {
     return this._error;
+  }
+
+
+  get registrationComplete(): boolean {
+    return this._registrationComplete;
+  }
+
+  get loginComplete(): boolean {
+    return this._loginComplete;
   }
 }
