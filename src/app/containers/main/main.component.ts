@@ -10,6 +10,7 @@ import {HttpLoginServiceService} from "../../services/http-login-service.service
 export class MainComponent {
   private router: Router;
   private service: HttpLoginServiceService;
+  session = true;
 
   constructor(router: Router, service: HttpLoginServiceService) {
     this.router = router;
@@ -17,5 +18,13 @@ export class MainComponent {
     if (!this.service.loginComplete){
       router.navigateByUrl('login');
     }
+  }
+
+  sessionClick(){
+    this.session = true;
+  }
+
+  profileClick(){
+    this.session = false;
   }
 }

@@ -1,3 +1,19 @@
-<p>
-  main works!
-</p>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 sidebar text-center">
+      <img id="profilePic" src="https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png"/>
+      <h4>Beau Boeynaems</h4>
+      <p>active sessions: 0</p>
+      <hr/>
+      <h5 (click)=sessionClick()>My sessions</h5>
+      <h5 (click)=profileClick()>My profile</h5>
+    </div>
+    <div class="col-md-9 main">
+      <div class="row" *ngIf="session;then session_content else profile_content"></div>
+
+      <ng-template #session_content><app-session></app-session></ng-template>
+      <ng-template #profile_content><app-profile></app-profile></ng-template>
+    </div>
+  </div>
+</div>

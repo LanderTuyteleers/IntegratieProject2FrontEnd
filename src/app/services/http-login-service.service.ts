@@ -16,7 +16,7 @@ export class HttpLoginServiceService {
   private springURL = this.localUrl + this.port + this.baseURL;
   private _error;
   private _registrationComplete = false;
-  private _loginComplete = false;
+  private _loginComplete = true;
 
   constructor(private http: HttpClient) { }
 

@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
 import { AppComponent } from './app.component';
 import {SignupFormComponent} from "./components/signup-form/signup-form.component";
 import {FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -11,9 +9,10 @@ import {FormComponent} from "./components/form/form.component";
 import {HttpLoginServiceService} from "./services/http-login-service.service";
 import {HttpClientModule} from "@angular/common/http";
 import { MainComponent } from './containers/main/main.component';
-import {RouterModule, Routes} from "@angular/router";
 import { LoginComponent } from './containers/login/login.component';
 import {AppRoutingModule} from "./app-routing.module";
+import { ProfileComponent } from './components/profile/profile.component';
+import { SessionComponent } from './components/session/session.component';
 
 
 @NgModule({
@@ -24,7 +23,9 @@ import {AppRoutingModule} from "./app-routing.module";
     LoginFormComponent,
     FormComponent,
     MainComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent,
+    SessionComponent
   ],
   imports: [
     BrowserModule,
