@@ -4,11 +4,12 @@ import {MainComponent} from "./containers/main/main.component";
 import {AppComponent} from "./app.component";
 import {NgModule} from "@angular/core";
 import {LoginComponent} from "./containers/login/login.component";
+import {AuthGuardService} from "./guards/auth-guard.service";
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'main', component: MainComponent}
+  {path: 'main', component: MainComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

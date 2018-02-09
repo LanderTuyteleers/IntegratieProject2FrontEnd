@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 import {HttpLoginServiceService} from "../../services/http-login-service.service";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-main',
@@ -12,12 +13,12 @@ export class MainComponent {
   private service: HttpLoginServiceService;
   session = true;
 
-  constructor(router: Router, service: HttpLoginServiceService) {
+  constructor(router: Router, service: HttpLoginServiceService, private userService: UserService) {
     this.router = router;
     this.service = service;
-    if (!this.service.loginComplete){
+/*    if (!this.service.loginComplete){
       router.navigateByUrl('login');
-    }
+    }*/
   }
 
   sessionClick(){
