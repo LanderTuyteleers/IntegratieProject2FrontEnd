@@ -6,6 +6,7 @@ import {LoginUser} from "../../model/loginUser";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {AuthService} from "../../services/auth.service";
+import {TOKEN_NAME} from "../../services/auth.constant";
 
 @Component({
   selector: 'login-form',
@@ -41,12 +42,13 @@ export class LoginFormComponent implements OnInit{
   }
 
   clickLogin(){
-/*    this.service.doLogin(this.loginUser);
-    if (this.service.loginComplete){
+    this.service.doLogin(this.loginUser);
+    if (localStorage.getItem(TOKEN_NAME) != ""){
       this.router.navigateByUrl('main');
-    }*/
 
-    this.authService.login(this.loginUser.username, this.loginUser.password)
+    }
+
+/*    this.authService.login(this.loginUser.username, this.loginUser.password)
       .subscribe(
         res => {
           if (res) {
@@ -59,7 +61,7 @@ export class LoginFormComponent implements OnInit{
         err => {
           this.error = 'Username or password incorrect!';
         }
-      )
+      )*/
   }
 
 }
