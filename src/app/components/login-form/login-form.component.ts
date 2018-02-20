@@ -16,7 +16,7 @@ export class LoginFormComponent implements OnInit{
   private service: HttpLoginServiceService;
   loginUser = new LoginUser('','');
   private router: Router;
-  private error = '';
+  public error = '';
 
   constructor(service: HttpLoginServiceService, router: Router, private userService: UserService, private authService: AuthService) {
     this.service = service;
