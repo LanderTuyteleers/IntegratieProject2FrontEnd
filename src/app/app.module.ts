@@ -48,7 +48,8 @@ export function authHttpServiceFactory(http: Http) {
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    SharedModule
   ],
   providers: [
     {provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http]},
