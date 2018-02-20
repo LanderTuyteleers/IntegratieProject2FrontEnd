@@ -18,7 +18,6 @@ import {AuthConfig, AuthHttp} from "angular2-jwt";
 import {Http, HttpModule} from "@angular/http";
 import {AuthService} from "./services/auth.service";
 import {UserService} from "./services/user.service";
-import { SharedModule } from "./shared/shared.module";
 
 export function authHttpServiceFactory(http: Http) {
   return new AuthHttp(new AuthConfig({
@@ -50,7 +49,6 @@ export function authHttpServiceFactory(http: Http) {
     HttpClientModule,
     AppRoutingModule,
     HttpModule,
-    SharedModule
   ],
   providers: [
     {provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http]},
