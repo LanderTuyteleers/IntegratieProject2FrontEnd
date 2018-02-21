@@ -15,13 +15,16 @@ import {TOKEN_NAME} from "../../services/auth.constant";
 })
 export class LoginFormComponent implements OnInit{
   private service: AuthService;
+  private httpService: HttpLoginServiceService;
   loginUser = new LoginUser('','');
   private router: Router;
   public error = '';
+  private feedback='';
 
-  constructor(router: Router, private userService: UserService, private authService: AuthService) {
+  constructor(router: Router, private userService: UserService, private authService: AuthService, private httpLoginService: HttpLoginServiceService) {
     this.service = authService;
     this.router = router;
+    this.httpService = httpLoginService;
   }
 
   form = new FormGroup({
@@ -30,7 +33,10 @@ export class LoginFormComponent implements OnInit{
   });
 
   ngOnInit(): void {
-    this.userService.logout();
+    //this.userService.logout();
+    if (this.httpService.registrationComplete){
+      this.feedback = 'You are registered.';
+    }
   }
 
   get username() {
@@ -44,7 +50,7 @@ export class LoginFormComponent implements OnInit{
   clickLogin(){
 
 
-   this.authService.login(this.loginUser.username, this.loginUser.password)
+   this.authService.login(this.loginUser)
       .subscribe(
         res => {
           if (res) {
