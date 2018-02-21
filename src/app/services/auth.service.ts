@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 import {LoginUser} from "../model/loginUser";
-import {TOKEN_NAME} from "./auth.constant";
+import {TOKEN_NAME, USERNAME} from "./auth.constant";
 
 @Injectable()
 export class AuthService {
@@ -18,7 +18,7 @@ export class AuthService {
     headers.append('Authorization', 'Bearer ' + TOKEN_NAME);
     headers.append("Content-Type", "application/json");
 
-
+    localStorage.setItem(USERNAME, loginUser.username);
     return this.http.post(AuthService.AUTH_TOKEN, loginUser, {headers})
       .map(res => res.json())
       .map((res: any) => {
