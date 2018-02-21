@@ -42,7 +42,9 @@ export class LoginFormComponent implements OnInit{
   }
 
   clickLogin(){
-    this.service.login(this.loginUser)
+
+
+   this.authService.login(this.loginUser.username, this.loginUser.password)
       .subscribe(
         res => {
           if (res) {
