@@ -4,31 +4,21 @@ import {LoginUser} from "../model/loginUser";
 import {Observable} from "rxjs/Observable";
 import {catchError, tap} from "rxjs/operators";
 import {RegisterUser} from "../model/RegisterUser";
+import {TOKEN_NAME} from "./auth.constant";
 
 
 const httpOptions = {headers: new HttpHeaders({'content-type': 'application/json'})};
 
 @Injectable()
 export class HttpLoginServiceService {
-  private baseURL = '/api';
+  private baseURL = '/api/public';
   private port = 8080;
   private localUrl = 'http://localhost:';
   private springURL = this.localUrl + this.port + this.baseURL;
   private _error;
   private _registrationComplete = false;
-  private _loginComplete = true;
 
   constructor(private http: HttpClient) { }
-
-
-  doLogin(loginUser: LoginUser) {
-    const url = this.springURL + '/login';
-    console.log(url, loginUser.username, loginUser.password);
-    return this.http.post(url, loginUser, httpOptions).subscribe(
-      (data) => this._loginComplete = true,
-      (err) => console.log(err)
-    );
-  }
 
   doRegister(registerUser: RegisterUser) {
     const url = this.springURL + '/register';
@@ -47,9 +37,5 @@ export class HttpLoginServiceService {
 
   get registrationComplete(): boolean {
     return this._registrationComplete;
-  }
-
-  get loginComplete(): boolean {
-    return this._loginComplete;
   }
 }

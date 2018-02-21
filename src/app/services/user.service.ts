@@ -12,11 +12,7 @@ export class UserService {
 
   login(accessToken: string) {
     const decodedToken = this.jwtHelper.decodeToken(accessToken);
-    console.log(decodedToken);
-
-    this.isAdmin = decodedToken.authorities.some(el => el === 'ADMIN_USER');
     this.accessToken = accessToken;
-
     localStorage.setItem(TOKEN_NAME, accessToken);
   }
 
