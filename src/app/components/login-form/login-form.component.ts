@@ -14,13 +14,13 @@ import {TOKEN_NAME} from "../../services/auth.constant";
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit{
-  private service: HttpLoginServiceService;
+  private service: AuthService;
   loginUser = new LoginUser('','');
   private router: Router;
-  private error = '';
+  public error = '';
 
-  constructor(service: HttpLoginServiceService, router: Router, private userService: UserService, private authService: AuthService) {
-    this.service = service;
+  constructor(router: Router, private userService: UserService, private authService: AuthService) {
+    this.service = authService;
     this.router = router;
   }
 
@@ -42,13 +42,9 @@ export class LoginFormComponent implements OnInit{
   }
 
   clickLogin(){
-    this.service.doLogin(this.loginUser);
-    if (localStorage.getItem(TOKEN_NAME) != ""){
-      this.router.navigateByUrl('main');
 
-    }
 
-/*    this.authService.login(this.loginUser.username, this.loginUser.password)
+   this.authService.login(this.loginUser.username, this.loginUser.password)
       .subscribe(
         res => {
           if (res) {
@@ -61,7 +57,7 @@ export class LoginFormComponent implements OnInit{
         err => {
           this.error = 'Username or password incorrect!';
         }
-      )*/
+      )
   }
 
 }

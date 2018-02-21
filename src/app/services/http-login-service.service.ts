@@ -15,24 +15,12 @@ const headers = new Headers();
 export class HttpLoginServiceService {
   private baseURL = '/api/public';
   private port = 8080;
-  private localUrl = 'http://localhost:';
-  private springURL = this.localUrl + this.port + this.baseURL;
+  private localUrl = 'https://kandoe.herokuapp.com';
+  private springURL = this.localUrl + this.baseURL;
   private _error;
   private _registrationComplete = false;
-  private _loginComplete = true;
 
   constructor(private http: Http) { }
-
-
-  doLogin(loginUser: LoginUser) {
-    //headers.append('Authorization', 'Bearer ' + btoa(TOKEN_AUTH_USERNAME + ':' + TOKEN_AUTH_PASSWORD));
-    const url = this.springURL + '/login';
-    console.log(url, loginUser.username, loginUser.password);
-    return this.http.post(url, loginUser, {headers}).subscribe(
-      (data) => this._loginComplete = true,
-      (err) => localStorage.setItem(TOKEN_NAME, err.text)
-    );
-  }
 
   doRegister(registerUser: RegisterUser) {
     const url = this.springURL + '/register';
@@ -51,9 +39,5 @@ export class HttpLoginServiceService {
 
   get registrationComplete(): boolean {
     return this._registrationComplete;
-  }
-
-  get loginComplete(): boolean {
-    return this._loginComplete;
   }
 }
