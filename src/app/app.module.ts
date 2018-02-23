@@ -18,6 +18,8 @@ import {AuthConfig, AuthHttp} from "angular2-jwt";
 import {Http, HttpModule} from "@angular/http";
 import {AuthService} from "./services/auth.service";
 import {UserService} from "./services/user.service";
+import { SessionSetupComponent } from './components/session-setup/session-setup.component';
+import { CardComponent } from './components/card/card.component';
 
 export function authHttpServiceFactory(http: Http) {
   return new AuthHttp(new AuthConfig({
@@ -40,7 +42,9 @@ export function authHttpServiceFactory(http: Http) {
     MainComponent,
     LoginComponent,
     ProfileComponent,
-    SessionComponent
+    SessionComponent,
+    SessionSetupComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
