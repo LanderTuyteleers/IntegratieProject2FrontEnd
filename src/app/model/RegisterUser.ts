@@ -6,6 +6,7 @@ export class RegisterUser {
     public lastName: String,
     public email: String,
     public birthday: String,
-    public gender: String
+    public gender: String,
+    public profilePicture
   ){}
 }

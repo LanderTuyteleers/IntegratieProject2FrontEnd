@@ -15,19 +15,22 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SessionComponent } from './components/session/session.component';
 import {TOKEN_NAME} from "./services/auth.constant";
 import {AuthConfig, AuthHttp} from "angular2-jwt";
-import {Http, HttpModule} from "@angular/http";
+import {Http, HttpModule, RequestOptions} from "@angular/http";
 import {AuthService} from "./services/auth.service";
 import {UserService} from "./services/user.service";
+import {AppDataService} from "./services/app-data.service";
+import { JwttestComponent } from './components/jwttest/jwttest.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { GameSessionComponent } from './components/game-session/game-session.component';
+import { CreateGameSessionComponent } from './components/create-game-session/create-game-session.component';
 
-export function authHttpServiceFactory(http: Http) {
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
-    headerPrefix: 'Bearer',
     tokenName: TOKEN_NAME,
-    globalHeaders: [{'Content-Type': 'application/json'}],
-    noJwtError: false,
-    noTokenScheme: true,
-    tokenGetter: (() => localStorage.getItem(TOKEN_NAME))
-  }), http);
+    tokenGetter: (() => {return "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJLYW5kb2UiLCJzdWIiOiJzdmVuZW1hbiIsImF1ZCI6IndlYiIsImlhdCI6MTUxOTM4MzQyNywiZXhwIjoxNTE5Mzg3MDI3fQ.ACdBoEeppBPfWYv6k4ouwEmGzaCS9sRzF4SiDb9Dtpohb50n_Z4kidqRncL3hKjVK37JJWxPVLLOGgJgE-IYjw"}),
+    globalHeaders: [{'Content-Type':'application/json'}],
+  }), http, options);
 }
 
 @NgModule({
@@ -40,7 +43,12 @@ export function authHttpServiceFactory(http: Http) {
     MainComponent,
     LoginComponent,
     ProfileComponent,
-    SessionComponent
+    SessionComponent,
+    JwttestComponent,
+    FileUploadComponent,
+    ImageUploadComponent,
+    GameSessionComponent,
+    CreateGameSessionComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +62,8 @@ export function authHttpServiceFactory(http: Http) {
     {provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http]},
     AuthService,
     UserService,
-    HttpLoginServiceService
+    HttpLoginServiceService,
+    AppDataService
   ],
   bootstrap: [AppComponent]
 })
