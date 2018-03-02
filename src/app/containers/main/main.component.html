@@ -4,16 +4,16 @@
     <div class="col-md-3 sidebar text-center">
       <img (click)="profileImageUploadClick()" id="profilePic" src="https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png"/>
       <h4>{{user$.firstName}} {{user$.lastName}}</h4>
-      <p>active sessions: 0</p>
+      <p>active sessions: {{activeSessionsNumber}}</p>
       <hr/>
       <h5 (click)=sessionClick()>My sessions</h5>
       <h5 (click)=profileClick()>My profile</h5>
     </div>
 
-    <div class="col-md-9 main" [ngSwitch]="page">
+    <div class="col-md-9 main" align="center" [ngSwitch]="page">
       <app-profile *ngSwitchCase="'profile'" [_user$]="user$" (userChanged)="onUserChanged($event)"></app-profile>
-      <app-game-session *ngSwitchCase="'session'" (pageChanged)="onPageChanged($event)"></app-game-session>
-      <app-create-game-session *ngSwitchCase="'createGameSession'" [_user$]="user$"></app-create-game-session>
+      <app-game-session *ngSwitchCase="'session'" (pageChanged)="onPageChanged($event)" (activeSessionsChanged)="updateActiveSessions($event)"></app-game-session>
+      <app-create-game-session *ngSwitchCase="'createGameSession'" [_user$]="user$" (pageChanged)="onPageChanged($event)"></app-create-game-session>
 
       <!--<div class="row" *ngIf="session;then session_content else profile_content"></div>-->
       <!--<ng-template #profile_content><app-profile [_user$]="user$" (userChanged)="onUserChanged($event)"></app-profile></ng-template>-->

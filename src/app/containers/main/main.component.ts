@@ -19,6 +19,7 @@ export class MainComponent implements OnInit{
   profileImageUpload = false;
   user$: User;
   page: string = 'session';
+  activeSessionsNumber: 0;
 
   constructor(router: Router, service: HttpLoginServiceService, private userService: UserService, private appDataService: AppDataService) {
     this.router = router;
@@ -61,4 +62,8 @@ export class MainComponent implements OnInit{
   onUserChanged(user){
     this.user$ = user;
   }
+
+  updateActiveSessions(number){
+    this.activeSessionsNumber = number;
+}
 }
