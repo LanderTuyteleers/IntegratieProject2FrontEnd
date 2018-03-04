@@ -1,5 +1,4 @@
-<form>
-
+<form *ngIf="!sessionCreated">
   <div class="holder">
     <table width="100%">
       <tr>
@@ -65,3 +64,18 @@
     </table>
   </div>
 </form>
+
+<div class="holder" *ngIf="sessionCreated">
+    <table width="100%">
+      <tr>
+        <td>Upload an image to customize your game session</td>
+        <td>
+          <div>
+            <app-image-upload [typeOfUpload]="'gameSessionImage'" [createdSessionId]="createdSessionId"></app-image-upload>
+            <span></span>
+          </div>
+        </td>
+      </tr>
+    </table>
+</div>
+

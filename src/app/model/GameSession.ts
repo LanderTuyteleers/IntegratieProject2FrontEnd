@@ -8,6 +8,7 @@ export class GameSession {
   public selectionLimit;
   public timer;
   public title;
+  public gameSessionId;
 
 
   constructor(users, organisator, isOrganisatorPlaying, allowUsersToAdd, limit, selectionLimit, timer, title) {
@@ -29,6 +30,7 @@ export class GameSession {
     this.timer = obj.timer;
     this.title = obj.title;
     this.organisator = obj.organisator;
+    this.gameSessionId = obj.gameSessionId;
     return this;
   }
 }

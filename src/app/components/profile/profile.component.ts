@@ -18,8 +18,9 @@ export class ProfileComponent implements OnInit{
    private _passwordsAreTheSame: boolean = false;
    public passwordError = "Passwords are not the same!";
    copyUser: User;
-  updateUser: RegisterUser = new RegisterUser('','','','','','','', '');
-
+   updateUser: RegisterUser = new RegisterUser('','','','','','','', '');
+   @Input() public imageSrc: String;
+  @Output() profilePictureChanged: EventEmitter<String> = new EventEmitter<String>();
 
   form = new FormGroup({
     'firstName': new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -87,6 +88,10 @@ export class ProfileComponent implements OnInit{
     this.userChanged.emit(this._user$);
   }
 
+  onProfilePictureChanged(newUrl){
+    this.profilePictureChanged.emit(newUrl);
+  }
+
   changeUser(){
     if(this.form.valid){
       this.appDataService.updateUser(this.updatedUser).subscribe(
@@ -96,5 +101,9 @@ export class ProfileComponent implements OnInit{
         }
       );
     }
+  }
+
+  onChange(event){
+    console.log(event);
   }
 }

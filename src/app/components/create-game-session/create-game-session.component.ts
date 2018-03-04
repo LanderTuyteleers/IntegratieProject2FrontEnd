@@ -15,6 +15,8 @@ export class CreateGameSessionComponent implements OnInit {
   gameSession: GameSession = new GameSession('', '', true, true, 3, 3, 84600, '');
   private http: AppDataService;
   @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
+  sessionCreated: Boolean = false;
+  createdSessionId;
 
   constructor(http: AppDataService) {
     this.http = http;
@@ -70,9 +72,15 @@ export class CreateGameSessionComponent implements OnInit {
 
 
     this.http.createGameSession(this.gameSession).subscribe(
-      (data) => this.sendPage("session"),
+      //(data) => this.sendPage("session"),
+      (data) => {
+        this.sessionCreated = true;
+        this.createdSessionId = data;
+      },
       (error) => console.log(error)
     );
+
+    //
   }
 
 

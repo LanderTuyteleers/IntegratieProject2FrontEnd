@@ -20,10 +20,13 @@ import {AuthService} from "./services/auth.service";
 import {UserService} from "./services/user.service";
 import {AppDataService} from "./services/app-data.service";
 import { JwttestComponent } from './components/jwttest/jwttest.component';
-import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { GameSessionComponent } from './components/game-session/game-session.component';
 import { CreateGameSessionComponent } from './components/create-game-session/create-game-session.component';
+import { GameSessionSettingsComponent } from './components/game-session-settings/game-session-settings.component';
+import { routes } from './app.router';
+import { GameSessionEditComponent } from './components/game-session-edit/game-session-edit.component';
+import { ListViewComponent } from './components/list-view/list-view.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -45,10 +48,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProfileComponent,
     SessionComponent,
     JwttestComponent,
-    FileUploadComponent,
     ImageUploadComponent,
     GameSessionComponent,
-    CreateGameSessionComponent
+    CreateGameSessionComponent,
+    GameSessionSettingsComponent,
+    GameSessionEditComponent,
+    ListViewComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +62,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     HttpClientModule,
     AppRoutingModule,
     HttpModule,
+    routes
   ],
   providers: [
     {provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http]},

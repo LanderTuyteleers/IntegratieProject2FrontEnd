@@ -2,7 +2,6 @@ import {Component, ViewChild} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {HttpLoginServiceService} from "../../services/http-login-service.service";
 import {RegisterUser} from "../../model/RegisterUser";
-import {FileUploadComponent} from "../file-upload/file-upload.component";
 
 @Component({
   selector: 'signup-form',

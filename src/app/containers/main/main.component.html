@@ -1,8 +1,7 @@
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3 sidebar text-center">
-      <img (click)="profileImageUploadClick()" id="profilePic" src="https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png"/>
+      <img (click)="profileImageUploadClick()" id="profilePic" [src]="domSanitizerService.bypassSecurityTrustUrl(imageSrc)"/>
       <h4>{{user$.firstName}} {{user$.lastName}}</h4>
       <p>active sessions: {{activeSessionsNumber}}</p>
       <hr/>
@@ -11,14 +10,11 @@
     </div>
 
     <div class="col-md-9 main" align="center" [ngSwitch]="page">
-      <app-profile *ngSwitchCase="'profile'" [_user$]="user$" (userChanged)="onUserChanged($event)"></app-profile>
-      <app-game-session *ngSwitchCase="'session'" (pageChanged)="onPageChanged($event)" (activeSessionsChanged)="updateActiveSessions($event)"></app-game-session>
+      <app-profile *ngSwitchCase="'profile'" [_user$]="user$" (userChanged)="onUserChanged($event)" [imageSrc]="imageSrc" (profilePictureChanged)="updateProfilePicture($event)"></app-profile>
+      <app-game-session *ngSwitchCase="'session'" (pageChanged)="onPageChanged($event)" (activeSessionsChanged)="updateActiveSessions($event)" (chosenGameSessionId)="setChosenGameSessionId($event)"></app-game-session>
       <app-create-game-session *ngSwitchCase="'createGameSession'" [_user$]="user$" (pageChanged)="onPageChanged($event)"></app-create-game-session>
-
-      <!--<div class="row" *ngIf="session;then session_content else profile_content"></div>-->
-      <!--<ng-template #profile_content><app-profile [_user$]="user$" (userChanged)="onUserChanged($event)"></app-profile></ng-template>-->
-      <!--<ng-template #session_content><app-game-session (pageChanged)="onPageChanged($event)"></app-game-session></ng-template>-->
+      <app-game-session-settings *ngSwitchCase="'gameSessionSettings'" [chosenGameSessionId]="chosenGameSessionId" [username]="user$.username"></app-game-session-settings>
+      <app-game-session-edit *ngSwitchCase="'gameSessionEdit'" [chosenGameSessionId]="chosenGameSessionId"></app-game-session-edit>
     </div>
-
   </div>
 </div>
