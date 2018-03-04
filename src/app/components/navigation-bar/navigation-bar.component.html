@@ -1,7 +1,33 @@
-<nav>
-  <h2 id="title">Kandoe</h2>
-  <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Over</a></li>
-  </ul>
-</nav>
+<div class="Sidebar" ng-class="boolie ? 'is-collapsed' : ''">
+  <header class="Sidebar-header">
+    <div class="Sidebar-logo"></div>
+  </header>
+  <nav role="navigation">
+    <ul>
+      <li class="Sidebar-navItem">
+        <i class="Sidebar-menuIcon fa fa-bar-chart"></i>
+        <a href="">Performance</a>
+      </li>
+      <li class="Sidebar-navItem">
+        <i class="Sidebar-menuIcon fa fa-shopping-cart"></i>
+        <a href="#">Activities</a>
+      </li>
+      <li class="Sidebar-navItem">
+        <i class="Sidebar-menuIcon fa fa-cog"></i>
+        <a href="#">Settings</a>
+      </li>
+      <li class="Sidebar-navItem">
+        <i class="Sidebar-menuIcon fa fa-question-circle"></i>
+        <a href="#">Help & Support</a>
+      </li>
+      <li class="Sidebar-navItem">
+        <i class="Sidebar-menuIcon fa fa-sign-out"></i>
+        <a href="#">Log out</a>
+      </li>
+    </ul>
+  </nav>
+  <footer class="Sidebar-footer" ng-click="boolie = !boolie">
+    <i class="Sidebar-toggleArrow Sidebar-menuIcon fa fa-arrow-left" ng-class="boolie ? 'rotate' : ''"></i>
+    <span class="Sidebar-toggleText">Minimize menu</span>
+  </footer>
+</div>
