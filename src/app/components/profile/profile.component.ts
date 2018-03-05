@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit{
    @Input() public _user$: User;
    @Output() userChanged: EventEmitter<User> = new EventEmitter<User>();
    updatedUser: RegisterUser;
-   private _passwordsAreTheSame: boolean = false;
+   public _passwordsAreTheSame: boolean = false;
    public passwordError = "Passwords are not the same!";
    copyUser: User;
    updateUser: RegisterUser = new RegisterUser('','','','','','','', '');
