@@ -62,7 +62,7 @@ export class ImageUploadComponent implements OnInit {
       this.actionUrl = "https://kandoe.herokuapp.com/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
     }
     else if(this.typeOfUpload === 'gameSessionImage'){
-      this.actionUrl = "https://kandoe.herokuapp.com//api/private/users/" + sessionStorage.getItem(USERNAME) + "/sessions/" + this.createdSessionId + "/uploadImage";
+      this.actionUrl = "https://kandoe.herokuapp.com/api/private/users/" + sessionStorage.getItem(USERNAME) + "/sessions/" + this.createdSessionId + "/uploadImage";
     }
 
     this.http.post(this.actionUrl.toString(), this.formData, this.options)
