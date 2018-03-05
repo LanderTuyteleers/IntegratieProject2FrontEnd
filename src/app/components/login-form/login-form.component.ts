@@ -6,6 +6,7 @@ import {LoginUser} from "../../model/loginUser";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {AuthService} from "../../services/auth.service";
+import {TOKEN_NAME} from "../../services/auth.constant";
 
 @Component({
   selector: 'login-form',
@@ -13,14 +14,17 @@ import {AuthService} from "../../services/auth.service";
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit{
-  private service: HttpLoginServiceService;
+  private service: AuthService;
+  private httpService: HttpLoginServiceService;
   loginUser = new LoginUser('','');
   private router: Router;
   public error = '';
+  private feedback='';
 
-  constructor(service: HttpLoginServiceService, router: Router, private userService: UserService, private authService: AuthService) {
-    this.service = service;
+  constructor(router: Router, private userService: UserService, private authService: AuthService, private httpLoginService: HttpLoginServiceService) {
+    this.service = authService;
     this.router = router;
+    this.httpService = httpLoginService;
   }
 
   form = new FormGroup({
@@ -29,7 +33,10 @@ export class LoginFormComponent implements OnInit{
   });
 
   ngOnInit(): void {
-    this.userService.logout();
+    //this.userService.logout();
+    if (this.httpService.registrationComplete){
+      this.feedback = 'You are registered.';
+    }
   }
 
   get username() {
@@ -41,12 +48,7 @@ export class LoginFormComponent implements OnInit{
   }
 
   clickLogin(){
-/*    this.service.doLogin(this.loginUser);
-    if (this.service.loginComplete){
-      this.router.navigateByUrl('main');
-    }*/
-
-    this.authService.login(this.loginUser.username, this.loginUser.password)
+   this.authService.login(this.loginUser)
       .subscribe(
         res => {
           if (res) {

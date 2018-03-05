@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" name="loginForm">
   <div class="form-group">
     <label for="firstName">First name:</label>
     <input
@@ -44,8 +44,6 @@
     <label>Gender:</label>
     <input type="radio" formControlName="gender" value="Male" name="gender" [(ngModel)]="registerUser.gender"> Male
     <input type="radio" formControlName="gender" value="Female" name="gender" [(ngModel)]="registerUser.gender"> Female
-
-
   </div>
 
   <div class="form-group">
@@ -87,7 +85,30 @@
       <div *ngIf="password.errors.required">Password is required</div>
       <div *ngIf="password.errors.minlength">Password must be {{password.errors.minlength.requiredLength}}</div>
     </div>
+    <div *ngIf="password.touched && password2.touched && !_passwordsAreTheSame" class="alert alert-danger">
+      <div *ngIf="!passwordsAreTheSame">{{passwordError}}</div>
+    </div>
   </div>
+
+  <div class="form-group">
+    <label>Retype password</label>
+    <input
+      (keyup)="checkPassword()"
+      formControlName="password2"
+      id="password2"
+      name="password2"
+      type="password"
+      class="form-control">
+    <div *ngIf="password2.touched && password2.invalid" class="alert alert-danger">
+      <div *ngIf="password2.errors.required">Password is required</div>
+      <div *ngIf="password2.errors.minlength">Password must be {{password2.errors.minlength.requiredLength}}</div>
+    </div>
+    <div *ngIf="password.touched && password2.touched && !_passwordsAreTheSame" class="alert alert-danger">
+      <div *ngIf="!passwordsAreTheSame">{{passwordError}}</div>
+    </div>
+  </div>
+
   <label>{{label}}</label>
+
   <button class="btn btn-primary" type="submit" (click)=clickRegister()>Sign Up</button>
 </form>

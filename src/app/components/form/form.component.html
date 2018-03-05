@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="loginForm;then login_content else signup_content"></div>
+<div class="row" *ngIf="loginForm || service.registrationComplete;then login_content else signup_content"></div>
 
 <ng-template #login_content><login-form></login-form></ng-template>
 <ng-template #signup_content><signup-form></signup-form></ng-template>
