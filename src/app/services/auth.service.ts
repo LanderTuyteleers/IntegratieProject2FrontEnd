@@ -8,7 +8,7 @@ import {User} from "../model/User";
 @Injectable()
 export class AuthService {
 
-  static AUTH_TOKEN = 'http://localhost:9090/api/public/login';
+  static AUTH_TOKEN = 'https://angularkandoe.herokuapp.com/api/public/login';
 
   constructor(private http: Http) {
   }

@@ -10,7 +10,7 @@ export class JwttestComponent implements OnInit {
 
   private http: AuthHttp;
   public result: String;
-  private springURL = "http://localhost:9090/api/private/users/username/sveneman";
+  private springURL = "https://angularkandoe.herokuapp.com/api/private/users/username/sveneman";
 
   constructor(http: AuthHttp) {
     this.http = http;

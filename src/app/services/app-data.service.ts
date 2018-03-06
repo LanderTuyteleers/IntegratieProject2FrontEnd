@@ -16,7 +16,7 @@ import {UserItem} from "../model/UserItem";
 @Injectable()
 export class AppDataService {
   //Please work
-  private springURL = "http://localhost:9090/api/private";
+  private springURL = "https://angularkandoe.herokuapp.com/api/private";
   public http;
 
   constructor(http: HttpClient) {
