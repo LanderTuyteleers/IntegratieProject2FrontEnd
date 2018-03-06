@@ -27,6 +27,8 @@ import { GameSessionSettingsComponent } from './components/game-session-settings
 import { routes } from './app.router';
 import { GameSessionEditComponent } from './components/game-session-edit/game-session-edit.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
+import { SessionSetupComponent } from './components/session-setup/session-setup.component';
+import { CardComponent } from './components/card/card.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -47,6 +49,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     LoginComponent,
     ProfileComponent,
     SessionComponent,
+    SessionSetupComponent,
+    CardComponent,
     JwttestComponent,
     ImageUploadComponent,
     GameSessionComponent,
