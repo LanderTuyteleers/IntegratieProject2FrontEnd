@@ -18,7 +18,7 @@ const headers = new HttpHeaders();
 export class HttpLoginServiceService {
   private baseURL = '/api/public';
   private port = 8080;
-  private localUrl = 'https://kandoe.herokuapp.com';
+  private localUrl = 'http://localhost:9090';
   private springURL = this.localUrl + this.baseURL;
   private _error;
   private _registrationComplete = false;
