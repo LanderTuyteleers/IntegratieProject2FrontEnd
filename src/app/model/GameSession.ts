@@ -1,3 +1,5 @@
+import {USERNAME} from "../services/auth.constant";
+
 export class GameSession {
 
   public users; //All users that play in the session
@@ -9,7 +11,7 @@ export class GameSession {
   public timer;
   public title;
   public gameSessionId;
-
+  protected isOrganiser = false;
 
   constructor(users, organisator, isOrganisatorPlaying, allowUsersToAdd, limit, selectionLimit, timer, title) {
     this.users = users;
@@ -31,6 +33,19 @@ export class GameSession {
     this.title = obj.title;
     this.organisator = obj.organisator;
     this.gameSessionId = obj.gameSessionId;
+    this.checkIfOrganiser();
     return this;
+  }
+
+  checkIfOrganiser(){
+    console.log(sessionStorage.getItem(USERNAME));
+    console.log(this.organisator);
+    if(sessionStorage.getItem(USERNAME) === this.organisator){
+      this.isOrganiser = true;
+    }
+  }
+
+  getIsOrganisator(){
+    return this.isOrganiser;
   }
 }

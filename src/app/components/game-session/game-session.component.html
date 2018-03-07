@@ -18,7 +18,7 @@
         </div>
 
         <div class="modernButtonContainer">
-          <button class="modernButton modernButtonEdit" (click)="onEditClick($event)" [attr.id]="index"></button>
+          <button class="modernButton modernButtonEdit" (click)="onEditClick($event)" [attr.id]="index" *ngIf="gameSession.getIsOrganisator()"></button>
         </div>
 
         <div class="modernButtonContainer">
