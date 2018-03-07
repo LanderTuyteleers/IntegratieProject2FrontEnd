@@ -38,8 +38,6 @@ export class GameSession {
   }
 
   checkIfOrganiser(){
-    console.log(sessionStorage.getItem(USERNAME));
-    console.log(this.organisator);
     if(sessionStorage.getItem(USERNAME) === this.organisator){
       this.isOrganiser = true;
     }

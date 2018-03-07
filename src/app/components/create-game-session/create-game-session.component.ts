@@ -77,7 +77,7 @@ export class CreateGameSessionComponent implements OnInit {
         this.sessionCreated = true;
         this.createdSessionId = data;
       },
-      (error) => console.log(error)
+      (error) => console.log(error.status)
     );
 
     //

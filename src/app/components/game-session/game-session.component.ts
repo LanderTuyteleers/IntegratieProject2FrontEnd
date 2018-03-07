@@ -63,7 +63,7 @@ export class GameSessionComponent implements OnInit {
         this.sendActiveEvent();
         this.getGameSessionImage();
       },
-      (error) => console.log(error)
+      (error) => console.log(error.status)
     );
   }
 

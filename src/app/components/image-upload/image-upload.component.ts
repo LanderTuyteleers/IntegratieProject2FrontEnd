@@ -68,7 +68,7 @@ export class ImageUploadComponent implements OnInit {
     this.http.post(this.actionUrl.toString(), this.formData, this.options)
       .subscribe(
         (data) => this.profilePictureUpdated(),
-        (error) => console.log(error)
+        (error) => console.log(error.status)
       );
   }
 

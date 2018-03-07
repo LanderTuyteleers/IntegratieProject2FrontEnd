@@ -67,7 +67,6 @@ export class AppDataService {
       "Content-Type": "application/octet-stream",
       "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
     });
-  console.log("SENDING USERNAME " + username);
     return this.http.get(this.springURL + "/users/" + username + "/picture", {
       headers: headers,
       responseType: 'arraybuffer'

@@ -32,13 +32,20 @@ export class GameSessionEditComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getAllUsersFromSession();
+    this.getAllUsers();
+  }
+
+  getAllUsersFromSession(){
     this.http.getUsersFromSession(this.chosenGameSessionId).subscribe(
       (data) => {
         this.users = data;
         this.getProfilePicturesOfUsers();
       }
     );
+  }
 
+  getAllUsers(){
     this.http.getAllUsers().subscribe(
       (data) => {
         this.searchData = data;
@@ -80,10 +87,11 @@ export class GameSessionEditComponent implements OnInit {
   onAddUserClick() {
     if (this.searchString != "") {
       this.http.addUserToGameSession(this.chosenGameSessionId, this.searchString).subscribe(
-        (data) => console.log(data),
-        (error) => console.log(error)
+        (data) => this.getAllUsersFromSession(),
+        (error) => console.log(error.status)
       );
     }
+
   }
 
 

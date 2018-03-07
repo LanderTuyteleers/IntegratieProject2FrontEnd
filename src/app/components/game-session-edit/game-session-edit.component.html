@@ -31,7 +31,7 @@
 
 <div class="holder">
   <table width="100%" *ngFor="let user of users; let index = index">
-    <thead>Users</thead>
+    <!--<thead>Users</thead>-->
 
     <tr class="item">
       <td>{{user.getFirstName()}} {{user.getLastName()}} ({{user.getUsername()}}) [{{user.getRole()}}]</td>
@@ -44,6 +44,7 @@
     </tr>
 
   </table>
+
   <div>
     <div class="modernButtonContainer">
       <button class="modernButton" (click)="onAddUserClick()">Add user</button>
