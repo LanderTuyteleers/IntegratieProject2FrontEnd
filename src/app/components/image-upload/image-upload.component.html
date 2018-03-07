@@ -1,0 +1,3 @@
+<input type="file" name="file" (change)="fileChange($event)" placeholder="Upload image">
+<img id="profilePic" [src]="domSanitizerService.bypassSecurityTrustUrl(imageUrl)"/>
+<input type="submit" value="Upload" (click)="doUploadFile()">

@@ -1,0 +1,57 @@
+<form>
+
+  <div class="holder">
+    <table width="100%">
+
+      <thead>Notification Settings {{chosenGameSessionId}}</thead>
+
+      <tr>
+        <td>I want to receive notifications when the game starts</td>
+        <td>
+          <div>
+            <input type="checkbox" name="startGame" id="startGame"  [checked]="notifications.startGame" [(ngModel)]="notifications.startGame" />
+            <span></span>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>I want to receive notifications when the game ends</td>
+        <td>
+          <div>
+            <input type="checkbox" name="endGame" id="endGame" [checked]="notifications.endGame" [(ngModel)]="notifications.endGame"/>
+            <span></span>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>I want to receive notifications when it's my turn</td>
+        <td>
+          <div>
+            <input type="checkbox" name="yourTurn" id="yourTurn" [checked]="notifications.yourTurn" [(ngModel)]="notifications.yourTurn"/>
+            <span></span>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>I want to receive notifications when someone ends their turn</td>
+        <td>
+          <div>
+            <input type="checkbox" name="endTurn" id="endTurn" [checked]="notifications.endTurn" [(ngModel)]="notifications.endTurn"/>
+            <span></span>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <input type="submit" value="Save settings" (click)="onSubmitClicked()">
+        </td>
+      </tr>
+    </table>
+  </div>
+</form>
+
+<h3 *ngIf="success">{{successMessage}}</h3>

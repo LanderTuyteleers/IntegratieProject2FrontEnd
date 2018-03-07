@@ -48,8 +48,6 @@ export class LoginFormComponent implements OnInit{
   }
 
   clickLogin(){
-
-
    this.authService.login(this.loginUser)
       .subscribe(
         res => {
