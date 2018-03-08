@@ -13,6 +13,7 @@ body {
   align-content: stretch;
   align-items: stretch;
   height: 100vh;
+  background: #9A9A9A;
 }
 
 app-root {
@@ -21,3 +22,4 @@ app-root {
   align-self: auto;
   display: block;
 }
+

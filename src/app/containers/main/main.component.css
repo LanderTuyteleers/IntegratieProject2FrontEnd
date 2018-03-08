@@ -261,3 +261,7 @@ p{
   min-width: 333px;
   max-width: 333px;
 }
+
+.active{
+  background-color: #323232;
+}

@@ -27,6 +27,7 @@ import { routes } from './app.router';
 import { GameSessionEditComponent } from './components/game-session-edit/game-session-edit.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 import {CompleterService, Ng2CompleterModule} from "ng2-completer";
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -53,6 +54,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     GameSessionSettingsComponent,
     GameSessionEditComponent,
     ListViewComponent,
+    UpdatePasswordComponent,
   ],
   imports: [
     BrowserModule,
