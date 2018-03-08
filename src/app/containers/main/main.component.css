@@ -256,6 +256,8 @@ p{
   padding-bottom: 30px;
 }
 
-/*.scrollable{*/
-  /*position: fixed;*/
-/*}*/
+.scrollable{
+  position: fixed;
+  min-width: 333px;
+  max-width: 333px;
+}

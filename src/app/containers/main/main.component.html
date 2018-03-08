@@ -1,9 +1,7 @@
 <div class="Wrapper" ng-app="myApp">
-  <div class="scrollable">
-    <div class="Sidebar" ng-class="boolie ? 'is-collapsed' : ''">
+  <div class="Sidebar" ng-class="boolie ? 'is-collapsed' : ''">
 
-
-
+    <div class="scrollable">
       <header class="Sidebar-header">
         <img class="Sidebar-logo" (click)="profileImageUploadClick()" id="profilePic" [src]="domSanitizerService.bypassSecurityTrustUrl(imageSrc)"/>
       </header>
@@ -43,8 +41,11 @@
           </li>
         </ul>
       </nav>
-
     </div>
+
+  </div>
+
+
     <div class="Main col-md-9" [ngSwitch]="page">
       <app-profile *ngSwitchCase="'profile'" [_user$]="user$" (userChanged)="onUserChanged($event)" [imageSrc]="imageSrc" (profilePictureChanged)="updateProfilePicture($event)"></app-profile>
       <app-game-session *ngSwitchCase="'session'" (pageChanged)="onPageChanged($event)" (activeSessionsChanged)="updateActiveSessions($event)" (chosenGameSessionId)="setChosenGameSessionId($event)"></app-game-session>
@@ -52,5 +53,9 @@
       <app-game-session-settings *ngSwitchCase="'gameSessionSettings'" [chosenGameSessionId]="chosenGameSessionId" [username]="user$.username"></app-game-session-settings>
       <app-game-session-edit *ngSwitchCase="'gameSessionEdit'" [chosenGameSessionId]="chosenGameSessionId"></app-game-session-edit>
     </div>
-  </div>
 </div>
+
+
+
+
+
