@@ -15,8 +15,17 @@
   background: white;
 }
 
+.flex-item{
+  /*margin: 5px 5px;*/
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  /*padding: 2%;*/
+  margin: 5px;
+}
+
 app-card {
-  margin: auto;
+  /*margin: auto;*/
   background: slategrey;
 }
 
@@ -29,5 +38,7 @@ app-card {
   height: 98%;
   padding: 20%;
 }
+
+
 
 
