@@ -10,7 +10,7 @@ export class CardComponent implements OnInit {
 
   @Input() theme;
   changing:boolean = false;
-  @Output() public myEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public myEvent = new EventEmitter<any>();
 
   constructor(private _http: Http) { }
 
@@ -26,8 +26,10 @@ export class CardComponent implements OnInit {
   }
 
   deleteTheme() {
-    let url = "http://localhost:9090/api/theme?name="+ this.theme.name;
-    this._http.delete(url).subscribe(theme => this.myEvent.emit(theme.json()));
+    let url = "http://localhost:9090/api/public/theme?name="+ this.theme.name;
+    let deletedTheme = this.theme;
+    this._http.delete(url).subscribe(theme => deletedTheme = theme.json());
+    this.myEvent.emit(deletedTheme);
   }
 
 }

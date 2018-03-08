@@ -4,10 +4,11 @@
   border: solid 2px;
 }
 .flex-item{
-  margin: 5px 5px;
+  /*margin: 5px 5px;*/
   order: 0;
   flex: 0 1 auto;
   align-self: auto;
+  padding: 2%;
 }
 
 .ThemeImage {

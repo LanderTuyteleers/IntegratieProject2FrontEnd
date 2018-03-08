@@ -1,5 +1,5 @@
-<div class="flex-container" (myEvent)="myEvent($event)">
-  <app-card *ngFor="let theme of themes"
+<div class="flex-container">
+  <app-card (myEvent)="myEvent($event)" *ngFor="let theme of themes"
             [theme]=theme>
   </app-card>
   <button class="Themecard flex-item">
