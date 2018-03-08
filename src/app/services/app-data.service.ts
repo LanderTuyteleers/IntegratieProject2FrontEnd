@@ -196,6 +196,17 @@ export class AppDataService {
 
       return this.http.post(this.springURL + "/users/" + username + "/sessions/" + id, notifications, {headers: headers}).map((resp: Response) => resp);
     }
+
+
+    ///api/private/sessions/{id}/users/{username}/upgradeacceslevel
+  grantSubModeratorAccessLevel(sessionId, username){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.post(this.springURL + "/sessions/" + sessionId + "/users/" + username + "/upgradeacceslevel", null, {headers: headers}).map((resp: Response) => resp);
+  }
 }
 
 

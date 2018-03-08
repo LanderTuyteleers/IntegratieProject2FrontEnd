@@ -38,11 +38,13 @@
       <td>
         <div>
           <img [src]="domSanitizerService.bypassSecurityTrustUrl(users[index].getProfilePicture())" class="avatar"/>
+          <div class="modernButtonContainer" *ngIf="index > 0">
+            <button class="modernButton" (click)="onGrantRightsClick($event)" [attr.id]="user.getUsername()">Grant rights</button>
+          </div>
           <span></span>
         </div>
       </td>
     </tr>
-
   </table>
 
   <div>
@@ -50,7 +52,6 @@
       <button class="modernButton" (click)="onAddUserClick()">Add user</button>
     </div>
     <ng2-completer [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
-    <!--<input type="text" [(ngModel)]="searchString">-->
   </div>
 </div>
 
