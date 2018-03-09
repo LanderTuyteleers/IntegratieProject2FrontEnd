@@ -27,7 +27,10 @@ import { routes } from './app.router';
 import { GameSessionEditComponent } from './components/game-session-edit/game-session-edit.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 import {CompleterService, Ng2CompleterModule} from "ng2-completer";
-import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { NgLoadingSpinnerModule, NgLoadingSpinnerInterceptor } from 'ng-loading-spinner';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CreateMainThemeComponent } from './components/create-main-theme/create-main-theme.component';
+
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -54,7 +57,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     GameSessionSettingsComponent,
     GameSessionEditComponent,
     ListViewComponent,
-    UpdatePasswordComponent,
+    CreateMainThemeComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AppRoutingModule,
     HttpModule,
     Ng2CompleterModule,
-    routes
+    routes,
+    HttpClientModule,
+    NgLoadingSpinnerModule,
   ],
   providers: [
     {provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http]},
@@ -73,7 +78,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     HttpLoginServiceService,
     AppDataService,
     Ng2CompleterModule,
-    CompleterService
+    CompleterService,
+    { provide: HTTP_INTERCEPTORS, useClass: NgLoadingSpinnerInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent]
 })

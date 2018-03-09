@@ -2,7 +2,6 @@ import {USERNAME} from "../services/auth.constant";
 
 export class GameSession {
 
-  //TODO ervoor zorgen dat edit knop ook showt wnr iemand een suborganisator is
   public users; //All users that play in the session
   public organisator; //Username of organisator
   public isOrganisatorPlaying;
@@ -13,8 +12,10 @@ export class GameSession {
   public title;
   public gameSessionId;
   protected isOrganiser = false;
+  protected isSubOrganiser = false;
+  protected subOrganisators;
 
-  constructor(users, organisator, isOrganisatorPlaying, allowUsersToAdd, limit, selectionLimit, timer, title) {
+  constructor(users, organisator, isOrganisatorPlaying, allowUsersToAdd, limit, selectionLimit, timer, title, subOrganisators) {
     this.users = users;
     this.organisator = organisator;
     this.isOrganisatorPlaying = isOrganisatorPlaying;//
@@ -23,6 +24,7 @@ export class GameSession {
     this.selectionLimit = selectionLimit;//
     this.timer = timer;
     this.title = title;//
+    this.subOrganisators = subOrganisators;
   }
 
   fromJSON(obj: any){
@@ -34,7 +36,10 @@ export class GameSession {
     this.title = obj.title;
     this.organisator = obj.organisator;
     this.gameSessionId = obj.gameSessionId;
+    this.subOrganisators = obj.subOrganisators;
     this.checkIfOrganiser();
+    this.checkIfSubOrganiser();
+    console.log(this);
     return this;
   }
 
@@ -44,7 +49,24 @@ export class GameSession {
     }
   }
 
+  checkIfSubOrganiser(){
+    let username = sessionStorage.getItem(USERNAME);
+    console.log(this);
+    if(this.subOrganisators.indexOf(username) !== -1){
+      this.isSubOrganiser = true;
+    }
+  }
+
+
   getIsOrganisator(){
     return this.isOrganiser;
+  }
+
+  getIsSubOrganistor(){
+    return this.isSubOrganiser;
+  }
+
+  setSubOrganisators(subOrganisators){
+    this.subOrganisators = subOrganisators;
   }
 }

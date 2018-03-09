@@ -1,4 +1,9 @@
 <form *ngIf="!sessionCreated">
+
+  <app-create-main-theme></app-create-main-theme>
+
+
+
   <div class="holder">
     <table width="100%">
       <tr>
@@ -75,10 +80,13 @@
         <td>Upload an image to customize your game session</td>
         <td>
           <div>
-            <app-image-upload [typeOfUpload]="'gameSessionImage'" [createdSessionId]="createdSessionId"></app-image-upload>
+            <app-image-upload [typeOfUpload]="'gameSessionImage'" [createdSessionId]="createdSessionId" (pageChanged)="onSkipPressed()"></app-image-upload>
             <span></span>
           </div>
         </td>
+      </tr>
+      <tr>
+        <button class="btn btn-primary" (click)="onSkipPressed()">Skip this step</button>
       </tr>
     </table>
 </div>

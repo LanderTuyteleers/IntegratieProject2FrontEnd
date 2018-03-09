@@ -120,7 +120,7 @@ export class AppDataService {
     return this.http.get(this.springURL + "/" + sessionStorage.getItem(USERNAME) + "/gamesessions", {headers}).map((resp) => {
 
       resp.forEach(gameSession => {
-        let session = new GameSession('', '', '', '', '', '', '', '').fromJSON(gameSession);
+        let session = new GameSession('', '', '', '', '', '', '', '', '').fromJSON(gameSession);
         gameSessions.push(session);
       });
       return gameSessions;
@@ -174,6 +174,7 @@ export class AppDataService {
       "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
     });
 
+    console.log(gameSesion);
     return this.http.post(this.springURL + "/sessions", gameSesion, {headers: headers}).map((resp: Response) => resp);
   }
 

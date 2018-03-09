@@ -1,13 +1,15 @@
 <div class="google-cards">
 
-  <div class="google-card">
+
+  <div class="google-card customForm">
     <div class="google-card-content">
+
       <div class="text-center">
         <h2>My profile details</h2>
       </div>
+
       <div>
-        <div class="col-md-2"></div>
-        <div class="col-md-10">
+        <div class="">
           <form *ngIf="updateUserDetails" [formGroup]="form">
 
             <div class="form-group">
@@ -111,25 +113,33 @@
             <button class="btn btn-primary" (click)="updatePassword()" type="submit">Change</button>
           </form>
         </div>
-
-
-        <!--<div class="col-md-4 text-center">-->
-        <!--<app-image-upload [imageUrl]="imageSrc" (profilePictureChanged)="onProfilePictureChanged($event)"></app-image-upload>-->
-        <!--</div>-->
-
+        <div class="text-center">
+          <p class="largerP">{{message}}</p>
+        </div>
       </div>
-      <button class="btn btn-primary" *ngIf="updateUserDetails" (click)="onChangePasswordClicked()">Change password</button>
-      <button class="btn btn-primary" *ngIf="!updateUserDetails" (click)="onChangeUserDetailsClicked()">Change user details</button>
+
+      <div class="customButtonPosition">
+        <button class="btn btn-primary" *ngIf="updateUserDetails" (click)="onChangePasswordClicked()">Change password</button>
+        <button class="btn btn-primary" *ngIf="!updateUserDetails" (click)="onChangeUserDetailsClicked()">Change user details</button>
+      </div>
     </div>
   </div>
 
-  <div class="google-card">
+
+
+  <div class="google-card customForm2">
     <div class="google-card-content">
-      <div class="col-md-4 text-center">
+      <div class="text-center">
+        <h2>My profile picture</h2>
+      </div>
+      <div class="text-center">
         <app-image-upload [imageUrl]="imageSrc" (profilePictureChanged)="onProfilePictureChanged($event)"></app-image-upload>
       </div>
     </div>
   </div>
+
+
+
 </div>
 
 

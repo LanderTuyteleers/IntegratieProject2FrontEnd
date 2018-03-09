@@ -12,7 +12,7 @@ import {User} from "../../model/User";
 export class CreateGameSessionComponent implements OnInit {
 
   @Input() public _user$: User;
-  gameSession: GameSession = new GameSession('', '', true, true, 3, 3, 84600, '');
+  gameSession: GameSession = new GameSession('', '', true, true, 3, 3, 84600, '', '');
   private http: AppDataService;
   @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
   sessionCreated: Boolean = false;
@@ -75,6 +75,7 @@ export class CreateGameSessionComponent implements OnInit {
       this.gameSession.title = "default";
     }
 
+      this.gameSession.setSubOrganisators([]);
 
       this.http.createGameSession(this.gameSession).subscribe(
         //(data) => this.sendPage("session"),
@@ -86,6 +87,8 @@ export class CreateGameSessionComponent implements OnInit {
       );
   }
 
-
+  onSkipPressed(){
+    this.sendPage("session");
+  }
 
 }

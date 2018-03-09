@@ -29,27 +29,6 @@ export class GameSessionComponent implements OnInit {
     this.domSanitizerService = this.domSanitizer;
 
     let allUsers = [];
-    // allUsers = this.createDummyUsers();
-    //
-    //
-    // let gameSession = new GameSession(allUsers, allUsers[0], true, false, 3, 5, 3600, "Cool Session");
-    //
-    //
-    // let usersSession2 = [];
-    // usersSession2[0] = allUsers[0];
-    // usersSession2[1] = allUsers[1];
-    // usersSession2[2] = allUsers[2];
-    // let gameSession2 = new GameSession(usersSession2, usersSession2[1], false, true, 4, 4, 4800, "Game Session 2");
-    // let gameSession3 = new GameSession(usersSession2, usersSession2[1], false, true, 4, 4, 4800, "Game Session 3");
-    // let gameSession4 = new GameSession(usersSession2, usersSession2[1], false, true, 4, 4, 4800, "Game Session 4");
-    //
-
-
-
-    // this.gameSessions[0] = gameSession;
-    // this.gameSessions[1] = gameSession2;
-    // this.gameSessions[2] = gameSession3;
-    // this.gameSessions[3] = gameSession4;
   }
 
   onAddClick(){
@@ -57,6 +36,10 @@ export class GameSessionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getGameSessions();
+  }
+
+   getGameSessions(){
     this.http.getGameSessions().subscribe(
       (data) => {
         this.gameSessions = data.reverse();

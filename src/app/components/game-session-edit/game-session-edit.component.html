@@ -1,3 +1,4 @@
+
 <div class="holder">
     <table width="100%">
       <thead>Edit game session {{chosenGameSessionId}}</thead>
@@ -34,12 +35,12 @@
     <!--<thead>Users</thead>-->
 
     <tr class="item">
-      <td>{{user.getFirstName()}} {{user.getLastName()}} ({{user.getUsername()}}) [{{user.getRole()}}]</td>
+      <td>{{user.getFirstName()}} {{user.getLastName()}} ({{user.getUsername()}}) <span><img src="" width="30" height="30"/></span> </td>
       <td>
         <div>
           <img [src]="domSanitizerService.bypassSecurityTrustUrl(users[index].getProfilePicture())" class="avatar"/>
 
-          <div class="modernButtonContainer" *ngIf="index > 0">
+          <div class="modernButtonContainer"  *ngIf="user.getRole() === 'Participant'">
             <button class="modernButton" (click)="onGrantRightsClick($event)" [attr.id]="user.getUsername()">Grant rights</button>
           </div>
           <span></span>
@@ -50,12 +51,18 @@
 
   <div>
     <div class="modernButtonContainer">
+
+
+      <ng2-completer class="completer" [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
+
       <button class="modernButton" (click)="onAddUserClick()">Add user</button>
+
+
       <span></span>
     </div>
-    <ng2-completer [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
   </div>
 </div>
+
 
 
 

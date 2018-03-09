@@ -19,6 +19,7 @@ export class ImageUploadComponent implements OnInit {
   @Input() public typeOfUpload;
   @Input() public createdSessionId;
   @Output() profilePictureChanged: EventEmitter<String> = new EventEmitter<String>();
+  @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
   actionUrl: String;
   domSanitizerService;
   private http: Http;
@@ -70,6 +71,7 @@ export class ImageUploadComponent implements OnInit {
         (data) => this.profilePictureUpdated(),
         (error) => console.log(error.status)
       );
+    this.sendPage("session");
   }
 
   profilePictureUpdated(){
@@ -95,4 +97,7 @@ export class ImageUploadComponent implements OnInit {
     this.actionUrl = "http://localhost:8080/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
   }
 
+  sendPage(page){
+    this.pageChanged.emit(page);
+  }
 }
