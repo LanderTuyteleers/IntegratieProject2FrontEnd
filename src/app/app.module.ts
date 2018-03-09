@@ -7,7 +7,7 @@ import {NavigationBarComponent} from "./components/navigation-bar/navigation-bar
 import {LoginFormComponent} from "./components/login-form/login-form.component";
 import {FormComponent} from "./components/form/form.component";
 import {HttpLoginServiceService} from "./services/http-login-service.service";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import { MainComponent } from './containers/main/main.component';
 import { LoginComponent } from './containers/login/login.component';
 import {AppRoutingModule} from "./app-routing.module";
@@ -27,7 +27,9 @@ import { routes } from './app.router';
 import { GameSessionEditComponent } from './components/game-session-edit/game-session-edit.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 import {CompleterService, Ng2CompleterModule} from "ng2-completer";
-import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { SharebuttonsComponent } from './components/sharebuttons/sharebuttons.component';
+//import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -54,13 +56,16 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     GameSessionSettingsComponent,
     GameSessionEditComponent,
     ListViewComponent,
-    UpdatePasswordComponent,
+    SharebuttonsComponent,
+    //UpdatePasswordComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    HttpClientJsonpModule,  // for linkedin and tumblr share counts
+    ShareButtonsModule.forRoot(),
     AppRoutingModule,
     HttpModule,
     Ng2CompleterModule,
