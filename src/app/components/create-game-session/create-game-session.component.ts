@@ -17,6 +17,9 @@ export class CreateGameSessionComponent implements OnInit {
   @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
   sessionCreated: Boolean = false;
   createdSessionId;
+  errorMessage: String = "";
+
+  validForm: boolean;
 
   constructor(http: AppDataService) {
     this.http = http;
@@ -32,6 +35,10 @@ export class CreateGameSessionComponent implements OnInit {
   });
 
   ngOnInit() {
+  }
+
+  reset(){
+    this.errorMessage = "";
   }
 
   get title() {
@@ -64,23 +71,19 @@ export class CreateGameSessionComponent implements OnInit {
 
   onSubmitClicked(){
     this.gameSession.organisator = this._user$.username;
-
-    if(!this.gameSession.allowUsersToAdd){
-      this.gameSession.limit = 0;
-
+    if(this.gameSession.title.length < 1){
+      this.gameSession.title = "default";
     }
 
 
-    this.http.createGameSession(this.gameSession).subscribe(
-      //(data) => this.sendPage("session"),
-      (data) => {
-        this.sessionCreated = true;
-        this.createdSessionId = data;
-      },
-      (error) => console.log(error.status)
-    );
-
-    //
+      this.http.createGameSession(this.gameSession).subscribe(
+        //(data) => this.sendPage("session"),
+        (data) => {
+          this.sessionCreated = true;
+          this.createdSessionId = data;
+        },
+        (error) => console.log(error.status)
+      );
   }
 
 

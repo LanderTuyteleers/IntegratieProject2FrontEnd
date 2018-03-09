@@ -13,7 +13,12 @@ body {
   align-content: stretch;
   align-items: stretch;
   height: 100vh;
-  background: #9A9A9A;
+
+  /*dark background*/
+  /*background: #9A9A9A;*/
+
+  /*light background*/
+  background: #E9EBEE;
 }
 
 app-root {
