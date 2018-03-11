@@ -81,7 +81,8 @@ export class GameSessionEditComponent implements OnInit {
   }
 
   initialiseSearchDataSets() {
-    this.dataService = this.completerService.local(this.searchData, 'username', 'username').imageField('profilePicture');
+    this.dataService = this.completerService.local(this.searchData, 'username', 'username');
+      //.imageField('profilePicture');
   }
 
   onAddUserClick() {

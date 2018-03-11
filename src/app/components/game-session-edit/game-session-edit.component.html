@@ -51,13 +51,8 @@
 
   <div>
     <div class="modernButtonContainer">
-
-
-      <ng2-completer class="completer" [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
-
+      <ng2-completer class="completer" [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0" [clearUnselected]="true" [clearSelected]="true" [textNoResults]="'No results found'"></ng2-completer>
       <button class="modernButton" (click)="onAddUserClick()">Add user</button>
-
-
       <span></span>
     </div>
   </div>

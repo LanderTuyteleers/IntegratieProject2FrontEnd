@@ -18,7 +18,8 @@ body {
   /*background: #9A9A9A;*/
 
   /*light background*/
-  background: #E9EBEE;
+  background: #E9EBEE !important;
+  overflow-x: hidden;
 }
 
 app-root {
@@ -28,3 +29,6 @@ app-root {
   display: block;
 }
 
+*{
+  box-sizing: border-box;
+}

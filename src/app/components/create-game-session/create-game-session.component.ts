@@ -12,14 +12,15 @@ import {User} from "../../model/User";
 export class CreateGameSessionComponent implements OnInit {
 
   @Input() public _user$: User;
+  @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
+
   gameSession: GameSession = new GameSession('', '', true, true, 3, 3, 84600, '', '');
   private http: AppDataService;
-  @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
   sessionCreated: Boolean = false;
   createdSessionId;
   errorMessage: String = "";
-
   validForm: boolean;
+  currentlyActive = "theme";
 
   constructor(http: AppDataService) {
     this.http = http;
@@ -82,6 +83,7 @@ export class CreateGameSessionComponent implements OnInit {
         (data) => {
           this.sessionCreated = true;
           this.createdSessionId = data;
+          this.loadComponenent("picture");
         },
         (error) => console.log(error.status)
       );
@@ -91,4 +93,7 @@ export class CreateGameSessionComponent implements OnInit {
     this.sendPage("session");
   }
 
+  loadComponenent(next){
+    this.currentlyActive = next;
+  }
 }

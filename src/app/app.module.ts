@@ -30,6 +30,7 @@ import {CompleterService, Ng2CompleterModule} from "ng2-completer";
 import { NgLoadingSpinnerModule, NgLoadingSpinnerInterceptor } from 'ng-loading-spinner';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CreateMainThemeComponent } from './components/create-main-theme/create-main-theme.component';
+import { MainThemesComponent } from './components/main-themes/main-themes.component';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -58,6 +59,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     GameSessionEditComponent,
     ListViewComponent,
     CreateMainThemeComponent,
+    MainThemesComponent,
   ],
   imports: [
     BrowserModule,
