@@ -15,7 +15,7 @@ import {UserItem} from "../model/UserItem";
 
 @Injectable()
 export class AppDataService {
-  private springURL = "http://localhost:8080/api/private";
+  private springURL = "http://localhost:9090/api/private";
   public http;
 
   constructor(http: HttpClient) {

@@ -17,8 +17,8 @@ const headers = new HttpHeaders();
 @Injectable()
 export class HttpLoginServiceService {
   private baseURL = '/api/public';
-  private port = 8080;
-  private localUrl = 'http://localhost:8080';
+  private port = 9090;
+  private localUrl = 'http://localhost:9090';
   private springURL = this.localUrl + this.baseURL;
   private _error;
   private _registrationComplete = false;

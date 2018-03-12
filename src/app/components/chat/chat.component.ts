@@ -20,7 +20,7 @@ export class ChatComponent implements OnInit {
   message: Message;
 
   constructor() {
-    const socket = new SockJS('http://localhost:8080/chat');
+    const socket = new SockJS('http://localhost:9090/chat');
     this.stompClient = Stomp.over(socket);
     const that = this;
     this.stompClient.connect({}, function (frame) {
