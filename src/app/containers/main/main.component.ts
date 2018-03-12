@@ -39,14 +39,17 @@ export class MainComponent implements OnInit{
   ngOnInit() {
     this.user$ = new User();
     this.appDataService.getUser(sessionStorage.getItem(USERNAME)).subscribe(data => {
-      this.user$ = data;
-    });
+        this.user$ = data;
+      },
+      err => this.router.navigateByUrl('login')
+    );
 
     this.appDataService.getProfilePicture().subscribe(
       (data) => {
         this.imageSrc = data;
       }
     );
+
   }
 
   ngAfterViewInit()

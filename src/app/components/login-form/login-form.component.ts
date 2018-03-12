@@ -59,7 +59,7 @@ export class LoginFormComponent implements OnInit{
           }
         },
         err => {
-          this.error = 'Username or password incorrect!';
+          this.error = 'Unexpected error';
         }
       )
   }
