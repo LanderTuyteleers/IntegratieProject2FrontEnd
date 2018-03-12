@@ -22,11 +22,7 @@ export class ProfileComponent implements OnInit{
    @Input() public imageSrc: String;
   @Output() profilePictureChanged: EventEmitter<String> = new EventEmitter<String>();
 
-  updatedUser: RegisterUser;
-  private _passwordsAreTheSame: boolean = false;
-  public passwordError = "Passwords are not the same!";
-  // copyUser: User;
-  // updateUser: RegisterUser = new RegisterUser('','','','','','','', '');
+
   updateUserDetails: Boolean = true;
 
 

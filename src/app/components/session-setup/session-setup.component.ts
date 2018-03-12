@@ -18,7 +18,7 @@ export class SessionSetupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._http.get("https://kandoe.herokuapp.com/api/themes").subscribe(data => this.themes = data.json());
+    this._http.get("http://localhost:8080/api/themes").subscribe(data => this.themes = data.json());
     this.myForm = new FormGroup({
       name: new FormControl('', [<any>Validators.required, <any>Validators.minLength(5), <any>Validators.maxLength(25)]),
       description: new FormControl('', [<any>Validators.required, <any>Validators.minLength(5), <any>Validators.maxLength(25)])
@@ -40,7 +40,7 @@ export class SessionSetupComponent implements OnInit {
 
   addTheme() {
     const theme = {themeId: 0, name: this.myForm.value.name, description: this.myForm.value.description};
-    this._http.post("https://kandoe.herokuapp.com/api/themes", theme).subscribe(theme => {
+    this._http.post("http://localhost:8080/api/themes", theme).subscribe(theme => {
       this.themes.push(theme.json());
     });
     this.myForm.reset();
