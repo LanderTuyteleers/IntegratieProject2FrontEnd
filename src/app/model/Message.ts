@@ -1,13 +1,13 @@
 export class Message{
   public messageId;
-  public user;
+  public sender;
   public session;
   public content;
   public dateTime: Date;
 
 
-  constructor(user, session, content, dateTime: Date) {
-    this.user = user;
+  constructor(sender, content, session, dateTime: Date) {
+    this.sender = sender;
     this.session = session;
     this.content = content;
     this.dateTime = dateTime;

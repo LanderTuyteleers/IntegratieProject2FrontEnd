@@ -37,11 +37,11 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.chatroom = [];
-    this.message = new Message(this.user, this.session, '', null);
+    this.message = new Message(this.user, '', this.session, null);
   }
 
   sendMessage(content) {
-    this.message.user = this.user;
+    this.message.sender = this.user;
     this.message.session = this.session;
     this.message.content = content;
     this.stompClient.send('/app/send/message/' + /*this.session.gameSessionId*/1, {},  JSON.stringify(this.message));
