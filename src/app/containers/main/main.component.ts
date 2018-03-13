@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {HttpLoginServiceService} from "../../services/http-login-service.service";
 import {UserService} from "../../services/user.service";
@@ -109,4 +109,6 @@ export class MainComponent implements OnInit{
     sessionStorage.clear();
     this.router.navigateByUrl("login");
   }
+
+
 }

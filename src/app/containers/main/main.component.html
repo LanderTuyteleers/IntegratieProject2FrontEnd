@@ -47,8 +47,8 @@
       <app-profile *ngSwitchCase="'profile'" [_user$]="user$" (userChanged)="onUserChanged($event)" [imageSrc]="imageSrc" (profilePictureChanged)="updateProfilePicture($event)"></app-profile>
       <app-game-session *ngSwitchCase="'session'" (pageChanged)="onPageChanged($event)" (activeSessionsChanged)="updateActiveSessions($event)" (chosenGameSessionId)="setChosenGameSessionId($event)"></app-game-session>
       <app-create-game-session *ngSwitchCase="'createGameSession'" [_user$]="user$" (pageChanged)="onPageChanged($event)"></app-create-game-session>
-      <app-game-session-settings *ngSwitchCase="'gameSessionSettings'" [chosenGameSessionId]="chosenGameSessionId" [username]="user$.username"></app-game-session-settings>
-      <app-game-session-edit *ngSwitchCase="'gameSessionEdit'" [chosenGameSessionId]="chosenGameSessionId"></app-game-session-edit>
+      <app-game-session-settings *ngSwitchCase="'gameSessionSettings'" [chosenGameSessionId]="chosenGameSessionId" [username]="user$.username" (pageChanged)="onPageChanged($event)"></app-game-session-settings>
+      <app-game-session-edit *ngSwitchCase="'gameSessionEdit'" [chosenGameSessionId]="chosenGameSessionId" (pageChanged)="onPageChanged($event)"></app-game-session-edit>
     </div>
 </div>
 

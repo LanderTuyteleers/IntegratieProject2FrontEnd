@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserItem} from "../../model/UserItem";
 import {AppDataService} from "../../services/app-data.service";
 import {DomSanitizer} from "@angular/platform-browser";
@@ -13,6 +13,7 @@ import {CompleterData, Ng2CompleterModule, CompleterService,} from "ng2-complete
 export class GameSessionEditComponent implements OnInit {
 
   @Input() public chosenGameSessionId;
+  @Output() pageChanged: EventEmitter<any> = new EventEmitter<any>();
   users: UserItem[] = [];
   private http;
   domSanitizerService;
@@ -20,7 +21,7 @@ export class GameSessionEditComponent implements OnInit {
   //
   searchString;
   searchData;
-  protected dataService: CompleterData;
+  public dataService: CompleterData;
   protected completerService;
 
 
@@ -102,5 +103,7 @@ export class GameSessionEditComponent implements OnInit {
     );
   }
 
-
+  goBack(event: any){
+    this.pageChanged.emit("session");
+  }
 }
