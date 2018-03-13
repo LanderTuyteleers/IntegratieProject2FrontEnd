@@ -13,7 +13,7 @@ import {Message} from '../../model/Message';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  @Input() user: User = null;
+  @Input() user: string = null;
   @Input() session: GameSession = null;
   chatroom: Message[];
   private stompClient;
