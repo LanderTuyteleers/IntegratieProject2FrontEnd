@@ -35,7 +35,7 @@ export class ImageUploadComponent implements OnInit {
   });
 
   fileChange(event){
-   this.image = event.srcElement.files[0];
+   this.image = event.target.files[0];
    this.readUrl(event);
 
    let fileList: FileList = event.target.files;
@@ -77,7 +77,8 @@ export class ImageUploadComponent implements OnInit {
   }
 
   onChange(event){
-    this.image = event.srcElement.files[0];
+    console.log(event);
+    this.image = event.target.files[0];
     this.readUrl(event);
   }
 

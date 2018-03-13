@@ -95,7 +95,7 @@ export class GameSessionEditComponent implements OnInit {
   }
 
   onGrantRightsClick(event){
-    let username = event.srcElement.attributes.id.value;
+    let username = event.target.attributes.id.value;
     this.http.grantSubModeratorAccessLevel(this.chosenGameSessionId, username).subscribe(
       (data) => this.getAllUsersFromSession(),
       (error) => console.log(error)
