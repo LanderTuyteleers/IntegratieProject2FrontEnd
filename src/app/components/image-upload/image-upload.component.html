@@ -3,5 +3,7 @@
   <br>
   <input type="file" name="file" (change)="fileChange($event)" placeholder="Upload image">
   <button type="submit" class="btn btn-primary" (click)="doUploadFile()" value="Upload">Upload</button>
-  <!--<input type="submit" value="Upload" (click)="doUploadFile()">-->
+  <div *ngIf="typeOfUpload==='gameSessionImage'">
+    <input type="button" value="Skip" (click)="goBack()">
+  </div>
 </div>

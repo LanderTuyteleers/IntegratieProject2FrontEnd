@@ -19,6 +19,7 @@ export class ImageUploadComponent implements OnInit {
   @Input() public typeOfUpload;
   @Input() public createdSessionId;
   @Output() profilePictureChanged: EventEmitter<String> = new EventEmitter<String>();
+  @Output() pageChanged: EventEmitter<any> = new EventEmitter<any>();
   actionUrl: String;
   domSanitizerService;
   private http: Http;
@@ -96,4 +97,8 @@ export class ImageUploadComponent implements OnInit {
     this.actionUrl = "http://localhost:9090/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
   }
 
+
+  goBack(event: any){
+    this.pageChanged.emit("session");
+  }
 }

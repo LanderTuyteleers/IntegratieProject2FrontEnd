@@ -75,7 +75,7 @@
         <td>Upload an image to customize your game session</td>
         <td>
           <div>
-            <app-image-upload [typeOfUpload]="'gameSessionImage'" [createdSessionId]="createdSessionId"></app-image-upload>
+            <app-image-upload [typeOfUpload]="'gameSessionImage'" [createdSessionId]="createdSessionId" (pageChanged)="sendPage('session')"></app-image-upload>
             <span></span>
           </div>
         </td>
