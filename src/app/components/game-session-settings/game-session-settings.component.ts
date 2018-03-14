@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Notification} from "rxjs/Notification";
 import {Notifications} from "../../model/Notifications";
 import {AppDataService} from "../../services/app-data.service";
 
