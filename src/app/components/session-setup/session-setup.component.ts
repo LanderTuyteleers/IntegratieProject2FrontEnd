@@ -1,6 +1,6 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {Http} from "@angular/http";
-import {Theme} from "./theme";
+import {Theme} from "../../model/theme";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
