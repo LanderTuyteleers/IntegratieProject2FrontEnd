@@ -20,7 +20,7 @@ export class MainComponent implements OnInit{
   profile = false;
   profileImageUpload = false;
   user$: User;
-  page: string = 'session';
+  page = 'session';
   activeSessionsNumber: 0;
   chosenGameSessionId: Number;
   imageSrc = "https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png";

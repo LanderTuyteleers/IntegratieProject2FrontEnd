@@ -6,6 +6,7 @@ declare var require: any;
 const SockJS = require('sockjs-client');
 const Stomp = require('stompjs');
 import {Message} from '../../model/Message';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
@@ -13,7 +14,7 @@ import {Message} from '../../model/Message';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  @Input() user: string = null;
+  @Input('userName') user: string;
   @Input() session: GameSession = null;
   chatroom: Message[];
   private stompClient;
@@ -45,6 +46,7 @@ export class ChatComponent implements OnInit {
     this.message.session = this.session;
     this.message.content = content;
     this.stompClient.send('/app/send/message/' + /*this.session.gameSessionId*/1, {},  JSON.stringify(this.message));
-    this.message.content = '';
+    this.message.content = null;
+    console.log('Send!');
   }
 }
