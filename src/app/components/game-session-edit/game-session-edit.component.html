@@ -1,0 +1,50 @@
+<div class="holder">
+    <table width="100%">
+      <thead>Edit game session {{chosenGameSessionId}}</thead>
+
+      <tr>
+        <td>I think it's time to stop</td>
+        <td>
+          <div>
+            <div class="modernButtonContainer">
+              <button class="modernButton modernButtonEndGame"></button>
+            </div>
+            <span></span>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>I want to create a new session based on this one</td>
+        <td>
+          <div>
+            <div class="modernButtonContainer">
+              <button class="modernButton">CLONE GAME</button>
+            </div>
+            <span></span>
+          </div>
+        </td>
+      </tr>
+
+    </table>
+</div>
+
+<div class="holder">
+  <table width="100%" *ngFor="let user of users; let index = index">
+    <thead>Users</thead>
+
+    <tr class="item">
+      <td>{{user.getFirstName()}} {{user.getLastName()}} ({{user.getUsername()}}) [{{user.getRole()}}]</td>
+      <td>
+        <div>
+          <img [src]="domSanitizerService.bypassSecurityTrustUrl(users[index].getProfilePicture())" class="avatar"/>
+          <span></span>
+        </div>
+      </td>
+    </tr>
+
+  </table>
+</div>
+
+
+
