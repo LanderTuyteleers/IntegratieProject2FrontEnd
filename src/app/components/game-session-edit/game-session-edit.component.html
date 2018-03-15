@@ -44,7 +44,15 @@
     </tr>
 
   </table>
+  <div>
+    <div class="modernButtonContainer">
+      <button class="modernButton" (click)="onAddUserClick()">Add user</button>
+    </div>
+    <ng2-completer [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
+    <!--<input type="text" [(ngModel)]="searchString">-->
+  </div>
 </div>
+
 
 
 

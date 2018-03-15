@@ -68,7 +68,7 @@ export class AppDataService {
       "Content-Type": "application/octet-stream",
       "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
     });
-
+  console.log("SENDING USERNAME " + username);
     return this.http.get(this.springURL + "/users/" + username + "/picture", {
       headers: headers,
       responseType: 'arraybuffer'
@@ -119,7 +119,7 @@ export class AppDataService {
 
     let gameSessions: GameSession[] = [];
     //return this.http.get(this.springURL + "/temp/gamesessions", {headers}).map((resp: Response) => new GameSession('', '','','','','','','').fromJSON(resp));
-    return this.http.get(this.springURL + "/temp/gamesessions", {headers}).map((resp) => {
+    return this.http.get(this.springURL + "/" + sessionStorage.getItem(USERNAME) + "/gamesessions", {headers}).map((resp) => {
 
       resp.forEach(gameSession => {
         let session = new GameSession('', '', '', '', '', '', '', '').fromJSON(gameSession);
@@ -139,12 +139,36 @@ export class AppDataService {
     let users : UserItem[] = [];
     return this.http.get(this.springURL + "/sessions/" + sessionId + "/users", {headers}).map((resp) =>{
       resp.forEach(userDto => {
-        console.log(userDto);
         let user = new UserItem().fromJSON(userDto);
         users.push(user);
       });
       return users;
     });
+  }
+
+  getAllUsers(){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    let users : UserItem[] = [];
+    return this.http.get(this.springURL + "/users/limited", {headers}).map((resp) =>{
+      resp.forEach(userDto => {
+        let user = new UserItem().fromJSON(userDto);
+        users.push(user);
+      });
+      return users;
+    });
+  }
+
+  addUserToGameSession(gameSessionId, usernameToAdd){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.post(this.springURL + "/sessions/" + gameSessionId + "/users/" + usernameToAdd, null, {headers: headers});
   }
 
   createGameSession(gameSesion: GameSession) {

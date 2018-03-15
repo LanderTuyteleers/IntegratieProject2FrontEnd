@@ -5,7 +5,7 @@ export class UserItem {
   private lastName;
   private email;
   private role;
-  private profilePicture;
+  public profilePicture;
 
   constructor() {
     this.username = "";
@@ -17,7 +17,6 @@ export class UserItem {
   }
 
   fromJSON(obj: any){
-    console.log(obj);
     this.username = obj.username;
     this.firstName = obj.firstName;
     this.lastName= obj.lastName;

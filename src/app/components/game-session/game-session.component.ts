@@ -4,6 +4,7 @@ import {User} from "../../model/User";
 import {AppDataService} from "../../services/app-data.service";
 import {error} from "util";
 import {DomSanitizer} from "@angular/platform-browser";
+import {USERNAME} from "../../services/auth.constant";
 
 @Component({
   selector: 'app-game-session',
@@ -14,6 +15,7 @@ export class GameSessionComponent implements OnInit {
   amountOfSessions: Number;
   gameSessions: GameSession[] = [];
   gameSessionImages: String[] = [];
+
   @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
   @Output() activeSessionsChanged: EventEmitter<Number> = new EventEmitter<Number>();
   @Output() chosenGameSessionId: EventEmitter<Number> = new EventEmitter<Number>();
@@ -50,48 +52,6 @@ export class GameSessionComponent implements OnInit {
     // this.gameSessions[3] = gameSession4;
   }
 
-  // createDummyUsers(){
-  //   let sven = new User();
-  //   sven.username = "sveneman";
-  //   sven.firstName= "sven";
-  //   sven.lastName= "matthys";
-  //   sven.email= "matthys.sven@gmail.com";
-  //   sven.gender= "Male";
-  //   sven.birthday = "1997-03-06";
-  //
-  //   let bob = new User();
-  //   bob.username = "bobdb";
-  //   bob.firstName= "bob";
-  //   bob.lastName= "de bouwer";
-  //   bob.email= "bobdb@gmail.com";
-  //   bob.gender= "Male";
-  //   bob.birthday = "1990-11-10";
-  //
-  //   let plop = new User();
-  //   plop.username = "kabouterplop";
-  //   plop.firstName= "plop";
-  //   plop.lastName= "kabouter";
-  //   plop.email= "plop@gmail.com";
-  //   plop.gender= "Male";
-  //   plop.birthday = "1994-09-14";
-  //
-  //   let mindy = new User();
-  //   mindy .username = "megam";
-  //   mindy .firstName= "mindy";
-  //   mindy .lastName= "mega";
-  //   mindy .email= "megaM@gmail.com";
-  //   mindy .gender= "Female";
-  //   mindy .birthday = "2005-06-09";
-  //
-  //   let users = [];
-  //   users[0] = sven;
-  //   users[1] = bob;
-  //   users[2] = plop;
-  //   users[3] = mindy;
-  //
-  //   return users;
-  // }
-
   onAddClick(){
     this.pageChanged.emit("createGameSession");
   }
@@ -105,7 +65,6 @@ export class GameSessionComponent implements OnInit {
       },
       (error) => console.log(error)
     );
-
   }
 
   getGameSessionImage(){
