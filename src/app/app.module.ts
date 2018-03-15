@@ -35,8 +35,8 @@ import { SharebuttonsComponent } from './components/sharebuttons/sharebuttons.co
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { NgLoadingSpinnerModule, NgLoadingSpinnerInterceptor } from 'ng-loading-spinner';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CreateMainThemeComponent } from './components/create-main-theme/create-main-theme.component';
-import { MainThemesComponent } from './components/main-themes/main-themes.component';
+//import { CreateMainThemeComponent } from './components/create-main-theme/create-main-theme.component';
+//import { MainThemesComponent } from './components/main-themes/main-themes.component';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -68,8 +68,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     SharebuttonsComponent,
     //UpdatePasswordComponent,
     ListViewComponent,
-    CreateMainThemeComponent,
-    MainThemesComponent,
+    //CreateMainThemeComponent,
+    //MainThemesComponent,
     ChatComponent
   ],
   imports: [
