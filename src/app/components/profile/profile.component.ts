@@ -22,15 +22,22 @@ export class ProfileComponent implements OnInit{
    @Input() public imageSrc: String;
   @Output() profilePictureChanged: EventEmitter<String> = new EventEmitter<String>();
 
+
+  updateUserDetails: Boolean = true;
+  message = '';
+
   form = new FormGroup({
     'firstName': new FormControl('', [Validators.required, Validators.minLength(3)]),
     'lastName': new FormControl('', [Validators.required, Validators.minLength(3)]),
     'username': new FormControl(),
     'email': new FormControl(),
-    'password': new FormControl('', [Validators.required, Validators.minLength(8)]),
-    'password2': new FormControl('', [Validators.required, Validators.minLength(8)]),
     'birthday': new FormControl('', [Validators.required]),
     'gender': new FormControl('', [Validators.required])
+  });
+
+  changePasswordForm = new FormGroup({
+    'password': new FormControl('', [Validators.required, Validators.minLength(8)]),
+    'password2': new FormControl('', [Validators.required, Validators.minLength(8)])
   });
 
   constructor(private appDataService: AppDataService) {
@@ -47,10 +54,10 @@ export class ProfileComponent implements OnInit{
     this.updatedUser.gender = this._user$.gender;
   }
 
-
   checkPassword(){
-    let password:String = this.form.get('password').value;
-    let password2:String = this.form.get('password2').value;
+    let password:String = this.changePasswordForm.get('password').value;
+    let password2:String = this.changePasswordForm.get('password2').value;
+
 
     if(password === password2){
       this._passwordsAreTheSame = true;
@@ -69,11 +76,11 @@ export class ProfileComponent implements OnInit{
   }
 
   get password() {
-    return this.form.get('password');
+    return this.changePasswordForm.get('password');
   }
 
   get password2() {
-    return this.form.get('password2');
+    return this.changePasswordForm.get('password2');
   }
 
   get birthday() {
@@ -97,13 +104,34 @@ export class ProfileComponent implements OnInit{
       this.appDataService.updateUser(this.updatedUser).subscribe(
         data => {
           this._user$ = data;
+          this.message = "Your details were updated successfully";
           this.onUserChanged();
-        }
-      );
+        },
+        error => this.message = "Oeps something went wrong while updating your details. Try again later!"
+    );
     }
   }
 
   onChange(event){
     console.log(event);
+  }
+
+  onChangePasswordClicked(){
+    this.message = "";
+    this.updateUserDetails = false;
+  }
+
+  onChangeUserDetailsClicked(){
+    this.message = "";
+    this.updateUserDetails = true;
+  }
+
+  updatePassword(){
+    if(this.changePasswordForm.valid){
+      this.appDataService.updatePassword(this.updatedUser).subscribe(
+        (data) => this.message = "Password updated successfully",
+        (error) => this.message = "Something went wrong while updating your password!"
+      );
+    }
   }
 }

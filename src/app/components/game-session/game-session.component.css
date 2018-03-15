@@ -71,7 +71,7 @@ h1 {
 }
 
 .plus-button {
-  position: absolute;
+  position: fixed;
   bottom: 30px;
   right: 30px;
   z-index: 100;
@@ -157,7 +157,7 @@ h1 {
 }
 
 .modernButtonSettings:after {
-  content: "SETTINGS";
+  content: "NOTIFY";
 }
 
 .modernButtonPlay:after {
@@ -195,7 +195,17 @@ h1 {
 
 .gameSessionImage{
   /*border: 3px solid black;*/
-  height: 200px;
+  height: 250px;
   width: 200px;
 }
 
+.realmiddle{
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+.themes{
+ width: 100%;
+}

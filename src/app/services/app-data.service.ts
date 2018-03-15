@@ -11,12 +11,13 @@ import {GameSession} from "../model/GameSession";
 import {Notifications} from "../model/Notifications";
 import {Headers, RequestOptions} from "@angular/http";
 import {UserItem} from "../model/UserItem";
+import {MainThema} from "../model/MainThema";
+import * as Globals from '../../globals';
 
 
 @Injectable()
 export class AppDataService {
-  //Please work
-  private springURL = "https://kandoe.herokuapp.com/api/private";
+  private springURL = Globals.baseUrl+"/api/private";
   public http;
 
   constructor(http: HttpClient) {
@@ -68,7 +69,6 @@ export class AppDataService {
       "Content-Type": "application/octet-stream",
       "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
     });
-
     return this.http.get(this.springURL + "/users/" + username + "/picture", {
       headers: headers,
       responseType: 'arraybuffer'
@@ -119,10 +119,10 @@ export class AppDataService {
 
     let gameSessions: GameSession[] = [];
     //return this.http.get(this.springURL + "/temp/gamesessions", {headers}).map((resp: Response) => new GameSession('', '','','','','','','').fromJSON(resp));
-    return this.http.get(this.springURL + "/temp/gamesessions", {headers}).map((resp) => {
+    return this.http.get(this.springURL + "/" + sessionStorage.getItem(USERNAME) + "/gamesessions", {headers}).map((resp) => {
 
       resp.forEach(gameSession => {
-        let session = new GameSession('', '', '', '', '', '', '', '').fromJSON(gameSession);
+        let session = new GameSession('', '', '', '', '', '', '', '', '').fromJSON(gameSession);
         gameSessions.push(session);
       });
       return gameSessions;
@@ -139,7 +139,6 @@ export class AppDataService {
     let users : UserItem[] = [];
     return this.http.get(this.springURL + "/sessions/" + sessionId + "/users", {headers}).map((resp) =>{
       resp.forEach(userDto => {
-        console.log(userDto);
         let user = new UserItem().fromJSON(userDto);
         users.push(user);
       });
@@ -147,11 +146,47 @@ export class AppDataService {
     });
   }
 
+  getAllUsers(){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    let users : UserItem[] = [];
+    return this.http.get(this.springURL + "/users/limited", {headers}).map((resp) =>{
+      resp.forEach(userDto => {
+        let user = new UserItem().fromJSON(userDto);
+        users.push(user);
+      });
+      return users;
+    });
+  }
+
+  addUserToGameSession(gameSessionId, usernameToAdd){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.post(this.springURL + "/sessions/" + gameSessionId + "/users/" + usernameToAdd, null, {headers: headers});
+  }
+
+  removeUserFromGameSession(gameSessionId, usernameToRemove){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.delete(this.springURL + "/sessions/" + gameSessionId + "/users/" + usernameToRemove + "/remove", {headers: headers});
+
+  }
+
   createGameSession(gameSesion: GameSession) {
     const headers = new HttpHeaders({
       "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
     });
-
+    //TODO
+    // return this.http.post(this.springURL + "/sessions", gameSesion, {headers: headers}).map((resp: Response) => resp);
     return this.http.post(this.springURL + "/sessions", gameSesion, {headers: headers}).map((resp: Response) => resp);
   }
 
@@ -174,6 +209,52 @@ export class AppDataService {
 
       return this.http.post(this.springURL + "/users/" + username + "/sessions/" + id, notifications, {headers: headers}).map((resp: Response) => resp);
     }
+
+
+    ///api/private/sessions/{id}/users/{username}/upgradeacceslevel
+  grantSubModeratorAccessLevel(sessionId, username){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.post(this.springURL + "/sessions/" + sessionId + "/users/" + username + "/upgradeacceslevel", null, {headers: headers}).map((resp: Response) => resp);
+  }
+
+  updatePassword(user){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.post(this.springURL + "/users/" + sessionStorage.getItem(USERNAME) + "/updatepassword", user, {headers: headers}).map((resp: Response) => resp);
+  }
+
+  createMainTheme(mainTheme){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    this.http.post(this.springURL + "/themes", mainTheme, {headers: headers}).map((resp: Response) => resp);
+  }
+
+  getAllConnectedMainThemes(){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    let mainThemes: MainThema[] = [];
+    return this.http.get(this.springURL + "/users/" + sessionStorage.getItem(USERNAME) + "/connectedthemes", {headers: headers}).map((resp) => {
+      resp.forEach(themeDto =>{
+        let theme = new MainThema('','','','').fromJSON(themeDto);
+        mainThemes.push(theme);
+      });
+      return mainThemes;
+    });
+  }
+
 }
 
 

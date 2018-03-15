@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JwttestComponent } from './jwttest.component';
+import { SharebuttonsComponent } from './sharebuttons.component';
 
-describe('JwttestComponent', () => {
-  let component: JwttestComponent;
-  let fixture: ComponentFixture<JwttestComponent>;
+describe('SharebuttonsComponent', () => {
+  let component: SharebuttonsComponent;
+  let fixture: ComponentFixture<SharebuttonsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JwttestComponent ]
+      declarations: [ SharebuttonsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JwttestComponent);
+    fixture = TestBed.createComponent(SharebuttonsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
