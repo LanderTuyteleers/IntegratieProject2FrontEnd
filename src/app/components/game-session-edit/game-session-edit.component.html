@@ -31,25 +31,36 @@
 
 <div class="holder">
   <table width="100%" *ngFor="let user of users; let index = index">
-    <thead>Users</thead>
+    <!--<thead>Users</thead>-->
 
     <tr class="item">
       <td>{{user.getFirstName()}} {{user.getLastName()}} ({{user.getUsername()}}) [{{user.getRole()}}]</td>
       <td>
         <div>
           <img [src]="domSanitizerService.bypassSecurityTrustUrl(users[index].getProfilePicture())" class="avatar"/>
+
+          <div class="modernButtonContainer" *ngIf="index > 0">
+            <button class="modernButton" (click)="onGrantRightsClick($event)" [attr.id]="user.getUsername()">Grant rights</button>
+          </div>
           <span></span>
         </div>
       </td>
     </tr>
-
   </table>
+
   <div>
     <div class="modernButtonContainer">
       <button class="modernButton" (click)="onAddUserClick()">Add user</button>
+      <span></span>
     </div>
     <ng2-completer [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0"></ng2-completer>
-    <!--<input type="text" [(ngModel)]="searchString">-->
+  </div>
+</div>
+
+<div class="holder">
+  <div class="modernButtonContainer">
+    <button class="modernButton" (click)="goBack($event)">Back</button>
+    <span></span>
   </div>
 </div>
 

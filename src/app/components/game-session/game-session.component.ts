@@ -13,7 +13,7 @@ import {USERNAME} from "../../services/auth.constant";
 })
 export class GameSessionComponent implements OnInit {
   amountOfSessions: Number;
-  gameSessions: GameSession[] = [];
+  gameSessions: GameSession[] = null;
   gameSessionImages: String[] = [];
 
   @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
@@ -63,7 +63,7 @@ export class GameSessionComponent implements OnInit {
         this.sendActiveEvent();
         this.getGameSessionImage();
       },
-      (error) => console.log(error)
+      (error) => console.log(error.status)
     );
   }
 

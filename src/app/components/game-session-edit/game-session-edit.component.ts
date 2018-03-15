@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserItem} from "../../model/UserItem";
 import {AppDataService} from "../../services/app-data.service";
 import {DomSanitizer} from "@angular/platform-browser";
@@ -13,6 +13,7 @@ import {CompleterData, Ng2CompleterModule, CompleterService,} from "ng2-complete
 export class GameSessionEditComponent implements OnInit {
 
   @Input() public chosenGameSessionId;
+  @Output() pageChanged: EventEmitter<any> = new EventEmitter<any>();
   users: UserItem[] = [];
   private http;
   domSanitizerService;
@@ -20,7 +21,7 @@ export class GameSessionEditComponent implements OnInit {
   //
   searchString;
   searchData;
-  protected dataService: CompleterData;
+  public dataService: CompleterData;
   protected completerService;
 
 
@@ -32,13 +33,20 @@ export class GameSessionEditComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getAllUsersFromSession();
+    this.getAllUsers();
+  }
+
+  getAllUsersFromSession(){
     this.http.getUsersFromSession(this.chosenGameSessionId).subscribe(
       (data) => {
         this.users = data;
         this.getProfilePicturesOfUsers();
       }
     );
+  }
 
+  getAllUsers(){
     this.http.getAllUsers().subscribe(
       (data) => {
         this.searchData = data;
@@ -80,12 +88,22 @@ export class GameSessionEditComponent implements OnInit {
   onAddUserClick() {
     if (this.searchString != "") {
       this.http.addUserToGameSession(this.chosenGameSessionId, this.searchString).subscribe(
-        (data) => console.log(data),
-        (error) => console.log(error)
+        (data) => this.getAllUsersFromSession(),
+        (error) => console.log(error.status)
       );
     }
+
   }
 
+  onGrantRightsClick(event){
+    let username = event.target.attributes.id.value;
+    this.http.grantSubModeratorAccessLevel(this.chosenGameSessionId, username).subscribe(
+      (data) => this.getAllUsersFromSession(),
+      (error) => console.log(error)
+    );
+  }
 
-
+  goBack(event: any){
+    this.pageChanged.emit("session");
+  }
 }

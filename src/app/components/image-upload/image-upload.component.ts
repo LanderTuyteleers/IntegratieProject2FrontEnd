@@ -19,6 +19,7 @@ export class ImageUploadComponent implements OnInit {
   @Input() public typeOfUpload;
   @Input() public createdSessionId;
   @Output() profilePictureChanged: EventEmitter<String> = new EventEmitter<String>();
+  @Output() pageChanged: EventEmitter<any> = new EventEmitter<any>();
   actionUrl: String;
   domSanitizerService;
   private http: Http;
@@ -35,7 +36,7 @@ export class ImageUploadComponent implements OnInit {
   });
 
   fileChange(event){
-   this.image = event.srcElement.files[0];
+   this.image = event.target.files[0];
    this.readUrl(event);
 
    let fileList: FileList = event.target.files;
@@ -59,16 +60,16 @@ export class ImageUploadComponent implements OnInit {
 
   doUploadFile(){
     if(this.typeOfUpload === 'profilePicture'){
-      this.actionUrl = "https://kandoe.herokuapp.com/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
+      this.actionUrl = "http://localhost:9090/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
     }
     else if(this.typeOfUpload === 'gameSessionImage'){
-      this.actionUrl = "https://kandoe.herokuapp.com/api/private/users/" + sessionStorage.getItem(USERNAME) + "/sessions/" + this.createdSessionId + "/uploadImage";
+      this.actionUrl = "http://localhost:9090/api/private/users/" + sessionStorage.getItem(USERNAME) + "/sessions/" + this.createdSessionId + "/uploadImage";
     }
 
     this.http.post(this.actionUrl.toString(), this.formData, this.options)
       .subscribe(
         (data) => this.profilePictureUpdated(),
-        (error) => console.log(error)
+        (error) => console.log(error.status)
       );
   }
 
@@ -77,7 +78,8 @@ export class ImageUploadComponent implements OnInit {
   }
 
   onChange(event){
-    this.image = event.srcElement.files[0];
+    console.log(event);
+    this.image = event.target.files[0];
     this.readUrl(event);
   }
 
@@ -92,7 +94,11 @@ export class ImageUploadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.actionUrl = "https://kandoe.herokuapp.com/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
+    this.actionUrl = "http://localhost:9090/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
   }
 
+
+  goBack(event: any){
+    this.pageChanged.emit("session");
+  }
 }

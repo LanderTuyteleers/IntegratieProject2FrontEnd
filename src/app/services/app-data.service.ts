@@ -15,8 +15,7 @@ import {UserItem} from "../model/UserItem";
 
 @Injectable()
 export class AppDataService {
-  //Please work
-  private springURL = "https://kandoe.herokuapp.com/api/private";
+  private springURL = "http://localhost:9090/api/private";
   public http;
 
   constructor(http: HttpClient) {
@@ -68,7 +67,6 @@ export class AppDataService {
       "Content-Type": "application/octet-stream",
       "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
     });
-  console.log("SENDING USERNAME " + username);
     return this.http.get(this.springURL + "/users/" + username + "/picture", {
       headers: headers,
       responseType: 'arraybuffer'
@@ -198,6 +196,26 @@ export class AppDataService {
 
       return this.http.post(this.springURL + "/users/" + username + "/sessions/" + id, notifications, {headers: headers}).map((resp: Response) => resp);
     }
+
+
+    ///api/private/sessions/{id}/users/{username}/upgradeacceslevel
+  grantSubModeratorAccessLevel(sessionId, username){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.post(this.springURL + "/sessions/" + sessionId + "/users/" + username + "/upgradeacceslevel", null, {headers: headers}).map((resp: Response) => resp);
+  }
+
+  updatePassword(user){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.post(this.springURL + "/users/" + sessionStorage.getItem(USERNAME) + "/updatepassword", user, {headers: headers}).map((resp: Response) => resp);
+  }
 }
 
 

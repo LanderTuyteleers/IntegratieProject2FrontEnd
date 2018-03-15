@@ -2,6 +2,7 @@ import {USERNAME} from "../services/auth.constant";
 
 export class GameSession {
 
+  //TODO ervoor zorgen dat edit knop ook showt wnr iemand een suborganisator is
   public users; //All users that play in the session
   public organisator; //Username of organisator
   public isOrganisatorPlaying;
@@ -38,8 +39,6 @@ export class GameSession {
   }
 
   checkIfOrganiser(){
-    console.log(sessionStorage.getItem(USERNAME));
-    console.log(this.organisator);
     if(sessionStorage.getItem(USERNAME) === this.organisator){
       this.isOrganiser = true;
     }
