@@ -1,11 +1,11 @@
 import {USERNAME} from "../services/auth.constant";
 
 export class MainThema {
-
- name: String;
- description: String;
- subThemes;
- image;
+  themeId;
+  name: String;
+  description: String;
+  subThemes;
+  image;
 
 
   constructor(name, description, subThemes, image) {
@@ -13,13 +13,15 @@ export class MainThema {
     this.description = description;
     this.subThemes = subThemes;
     this.image = image;
+    this.themeId = '';
   }
 
   fromJSON(obj: any){
-   this.name = obj.name;
-   this.description = obj.description;
-   this.subThemes = obj.subThemes;
-   this.image = obj.image;
+    this.themeId = obj.themeId;
+    this.name = obj.name;
+    this.description = obj.description;
+    this.subThemes = obj.subThemes;
+    this.image = obj.image;
     return this;
   }
 

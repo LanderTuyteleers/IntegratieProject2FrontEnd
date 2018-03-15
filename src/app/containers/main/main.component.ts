@@ -102,6 +102,10 @@ export class MainComponent implements OnInit{
     this.imageSrc = newUrl;
   }
 
+  myThemesClick(){
+    this.page = 'myThemes';
+  }
+
   logout(){
     sessionStorage.clear();
     this.router.navigateByUrl("login");

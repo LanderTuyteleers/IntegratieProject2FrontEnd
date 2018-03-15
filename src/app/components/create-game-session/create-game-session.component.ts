@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {GameSession} from "../../model/GameSession";
 import {AppDataService} from "../../services/app-data.service";
 import {User} from "../../model/User";
+import {MainThema} from "../../model/MainThema";
 
 @Component({
   selector: 'app-create-game-session',
@@ -21,6 +22,11 @@ export class CreateGameSessionComponent implements OnInit {
   errorMessage: String = "";
   validForm: boolean;
   currentlyActive = "theme";
+
+  //Contains the image data for a new main theme
+  private imageFormData: FormData;
+  private isNewTheme: boolean;
+  mainTheme: MainThema;
 
   constructor(http: AppDataService) {
     this.http = http;
@@ -72,6 +78,14 @@ export class CreateGameSessionComponent implements OnInit {
 
   onSubmitClicked(){
     this.gameSession.organisator = this._user$.username;
+    this.gameSession.themeForSession = this.mainTheme;
+    this.gameSession.themeForSession.subThemes.forEach(subTheme =>{
+      subTheme.theme = null;
+    });
+
+
+    console.log(this.gameSession);
+
     if(this.gameSession.title.length < 1){
       this.gameSession.title = "default";
     }
@@ -81,6 +95,7 @@ export class CreateGameSessionComponent implements OnInit {
       this.http.createGameSession(this.gameSession).subscribe(
         //(data) => this.sendPage("session"),
         (data) => {
+          console.log(data);
           this.sessionCreated = true;
           this.createdSessionId = data;
           this.loadComponenent("picture");
@@ -93,7 +108,22 @@ export class CreateGameSessionComponent implements OnInit {
     this.sendPage("session");
   }
 
+  onImageDataReceived(imageFormData){
+    // this.imageFormData = imageFormData;
+    // console.log("Image form data: " + this.imageFormData);
+  }
+
   loadComponenent(next){
     this.currentlyActive = next;
   }
+
+  onIsANewThemeReceived(isNewTheme){
+    this.isNewTheme = isNewTheme;
+  }
+
+  onMainThemeDetailsReceived(mainTheme){
+    this.mainTheme = mainTheme;
+    console.log(this.mainTheme);
+  }
+
 }

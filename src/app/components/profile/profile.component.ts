@@ -20,8 +20,6 @@ export class ProfileComponent implements OnInit{
   updatedUser: RegisterUser;
   private _passwordsAreTheSame: boolean = false;
   public passwordError = "Passwords are not the same!";
-  // copyUser: User;
-  // updateUser: RegisterUser = new RegisterUser('','','','','','','', '');
   updateUserDetails: Boolean = true;
   message = '';
 

@@ -1,4 +1,5 @@
 import {USERNAME} from "../services/auth.constant";
+import {MainThema} from "./MainThema";
 
 export class GameSession {
 
@@ -14,6 +15,10 @@ export class GameSession {
   protected isOrganiser = false;
   protected isSubOrganiser = false;
   protected subOrganisators;
+
+  //TEST
+  public themeForSession: MainThema;
+
 
   constructor(users, organisator, isOrganisatorPlaying, allowUsersToAdd, limit, selectionLimit, timer, title, subOrganisators) {
     this.users = users;
@@ -39,7 +44,6 @@ export class GameSession {
     this.subOrganisators = obj.subOrganisators;
     this.checkIfOrganiser();
     this.checkIfSubOrganiser();
-    console.log(this);
     return this;
   }
 

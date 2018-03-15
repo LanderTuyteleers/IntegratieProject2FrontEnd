@@ -11,6 +11,7 @@ import {GameSession} from "../model/GameSession";
 import {Notifications} from "../model/Notifications";
 import {Headers, RequestOptions} from "@angular/http";
 import {UserItem} from "../model/UserItem";
+import {MainThema} from "../model/MainThema";
 
 
 @Injectable()
@@ -169,12 +170,22 @@ export class AppDataService {
     return this.http.post(this.springURL + "/sessions/" + gameSessionId + "/users/" + usernameToAdd, null, {headers: headers});
   }
 
+  removeUserFromGameSession(gameSessionId, usernameToRemove){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.delete(this.springURL + "/sessions/" + gameSessionId + "/users/" + usernameToRemove + "/remove", {headers: headers});
+
+  }
+
   createGameSession(gameSesion: GameSession) {
     const headers = new HttpHeaders({
       "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
     });
-
-    console.log(gameSesion);
+    //TODO
+    // return this.http.post(this.springURL + "/sessions", gameSesion, {headers: headers}).map((resp: Response) => resp);
     return this.http.post(this.springURL + "/sessions", gameSesion, {headers: headers}).map((resp: Response) => resp);
   }
 
@@ -217,6 +228,32 @@ export class AppDataService {
 
     return this.http.post(this.springURL + "/users/" + sessionStorage.getItem(USERNAME) + "/updatepassword", user, {headers: headers}).map((resp: Response) => resp);
   }
+
+  createMainTheme(mainTheme){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    this.http.post(this.springURL + "/themes", mainTheme, {headers: headers}).map((resp: Response) => resp);
+  }
+
+  getAllConnectedMainThemes(){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    let mainThemes: MainThema[] = [];
+    return this.http.get(this.springURL + "/users/" + sessionStorage.getItem(USERNAME) + "/connectedthemes", {headers: headers}).map((resp) => {
+      resp.forEach(themeDto =>{
+        let theme = new MainThema('','','','').fromJSON(themeDto);
+        mainThemes.push(theme);
+      });
+      return mainThemes;
+    });
+  }
+
 }
 
 

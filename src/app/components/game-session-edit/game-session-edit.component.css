@@ -180,3 +180,14 @@ input[type=submit] {
 .completer{
   display: inline-block;
 }
+
+.smallButton{
+  width: 35px;
+  height: 35px;
+  vertical-align: bottom;
+}
+
+.smallImage{
+  width: 35px;
+  height: 35px;
+}

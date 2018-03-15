@@ -81,7 +81,7 @@ export class SignupFormComponent {
   }
 
   clickRegister(){
-    if(this.form.valid){
+    if(this.form.valid && this._passwordsAreTheSame){
       this.service.doRegister(this.registerUser).subscribe((data) => {}, error => console.log(this.label = error.error));
     }
   }

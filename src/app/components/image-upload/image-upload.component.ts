@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {AppDataService} from "../../services/app-data.service";
 import {TOKEN_NAME, USERNAME} from "../../services/auth.constant";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -20,6 +20,10 @@ export class ImageUploadComponent implements OnInit {
   @Input() public createdSessionId;
   @Output() profilePictureChanged: EventEmitter<String> = new EventEmitter<String>();
   @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
+  @Output() imageData: EventEmitter<FormData> = new EventEmitter<FormData>();
+  @ViewChild("imageInput") imageInput;
+
+
   actionUrl: String;
   domSanitizerService;
   private http: Http;
@@ -36,7 +40,7 @@ export class ImageUploadComponent implements OnInit {
   });
 
   fileChange(event){
-   this.image = event.srcElement.files[0];
+   this.image = event.target.files[0];
    this.readUrl(event);
 
    let fileList: FileList = event.target.files;
@@ -65,13 +69,18 @@ export class ImageUploadComponent implements OnInit {
     else if(this.typeOfUpload === 'gameSessionImage'){
       this.actionUrl = "http://localhost:8080/api/private/users/" + sessionStorage.getItem(USERNAME) + "/sessions/" + this.createdSessionId + "/uploadImage";
     }
+    else{
+      this.imageData.emit(this.formData);
+    }
 
     this.http.post(this.actionUrl.toString(), this.formData, this.options)
       .subscribe(
-        (data) => this.profilePictureUpdated(),
+        (data) => {
+          this.profilePictureUpdated();
+          this.sendPage("session");
+        },
         (error) => console.log(error.status)
       );
-    this.sendPage("session");
   }
 
   profilePictureUpdated(){
@@ -79,7 +88,7 @@ export class ImageUploadComponent implements OnInit {
   }
 
   onChange(event){
-    this.image = event.srcElement.files[0];
+    this.image = event.target.files[0];
     this.readUrl(event);
   }
 
@@ -99,5 +108,14 @@ export class ImageUploadComponent implements OnInit {
 
   sendPage(page){
     this.pageChanged.emit(page);
+  }
+
+  reset(){
+    this.imageUrl = "https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png";
+    this.imageInput.nativeElement.value = "";
+  }
+
+  resetImageInput(){
+    this.imageInput.nativeElement.value = "";
   }
 }
