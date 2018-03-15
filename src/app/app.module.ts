@@ -33,6 +33,11 @@ import {CompleterService, Ng2CompleterModule} from "ng2-completer";
 import { SharebuttonsComponent } from './components/sharebuttons/sharebuttons.component';
 //import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 import { ShareButtonsModule } from '@ngx-share/buttons';
+import { NgLoadingSpinnerModule, NgLoadingSpinnerInterceptor } from 'ng-loading-spinner';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CreateMainThemeComponent } from './components/create-main-theme/create-main-theme.component';
+import { MainThemesComponent } from './components/main-themes/main-themes.component';
+
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -63,6 +68,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     SharebuttonsComponent,
     //UpdatePasswordComponent,
     ListViewComponent,
+    CreateMainThemeComponent,
+    MainThemesComponent,
     ChatComponent
   ],
   imports: [
@@ -75,7 +82,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AppRoutingModule,
     HttpModule,
     Ng2CompleterModule,
-    routes
+    routes,
+    HttpClientModule,
+    NgLoadingSpinnerModule,
   ],
   providers: [
     {provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http]},
@@ -84,7 +93,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     HttpLoginServiceService,
     AppDataService,
     Ng2CompleterModule,
-    CompleterService
+    CompleterService,
+    { provide: HTTP_INTERCEPTORS, useClass: NgLoadingSpinnerInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent]
 })

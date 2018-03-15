@@ -34,6 +34,7 @@
           </div>
         </div>
         <div class="modernButtonContainer">
+          <button class="modernButton modernButtonEdit" (click)="onEditClick($event)" [attr.id]="index" *ngIf="gameSession.getIsOrganisator() || gameSession.getIsSubOrganistor()"></button>
           <app-sharebuttons></app-sharebuttons>
         </div>
 

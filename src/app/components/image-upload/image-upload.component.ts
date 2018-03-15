@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {AppDataService} from "../../services/app-data.service";
 import {TOKEN_NAME, USERNAME} from "../../services/auth.constant";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -19,7 +19,11 @@ export class ImageUploadComponent implements OnInit {
   @Input() public typeOfUpload;
   @Input() public createdSessionId;
   @Output() profilePictureChanged: EventEmitter<String> = new EventEmitter<String>();
-  @Output() pageChanged: EventEmitter<any> = new EventEmitter<any>();
+  @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
+  @Output() imageData: EventEmitter<FormData> = new EventEmitter<FormData>();
+  @ViewChild("imageInput") imageInput;
+
+
   actionUrl: String;
   domSanitizerService;
   private http: Http;
@@ -65,10 +69,16 @@ export class ImageUploadComponent implements OnInit {
     else if(this.typeOfUpload === 'gameSessionImage'){
       this.actionUrl = "http://localhost:9090/api/private/users/" + sessionStorage.getItem(USERNAME) + "/sessions/" + this.createdSessionId + "/uploadImage";
     }
+    else{
+      this.imageData.emit(this.formData);
+    }
 
     this.http.post(this.actionUrl.toString(), this.formData, this.options)
       .subscribe(
-        (data) => this.profilePictureUpdated(),
+        (data) => {
+          this.profilePictureUpdated();
+          this.sendPage("session");
+        },
         (error) => console.log(error.status)
       );
   }
@@ -78,7 +88,6 @@ export class ImageUploadComponent implements OnInit {
   }
 
   onChange(event){
-    console.log(event);
     this.image = event.target.files[0];
     this.readUrl(event);
   }
@@ -97,8 +106,16 @@ export class ImageUploadComponent implements OnInit {
     this.actionUrl = "http://localhost:9090/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
   }
 
+  sendPage(page){
+    this.pageChanged.emit(page);
+  }
 
-  goBack(event: any){
-    this.pageChanged.emit("session");
+  reset(){
+    this.imageUrl = "https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png";
+    this.imageInput.nativeElement.value = "";
+  }
+
+  resetImageInput(){
+    this.imageInput.nativeElement.value = "";
   }
 }

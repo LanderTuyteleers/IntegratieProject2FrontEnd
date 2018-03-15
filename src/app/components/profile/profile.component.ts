@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit{
 
 
   updateUserDetails: Boolean = true;
-
+  message = '';
 
   form = new FormGroup({
     'firstName': new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -104,9 +104,11 @@ export class ProfileComponent implements OnInit{
       this.appDataService.updateUser(this.updatedUser).subscribe(
         data => {
           this._user$ = data;
+          this.message = "Your details were updated successfully";
           this.onUserChanged();
-        }
-      );
+        },
+        error => this.message = "Oeps something went wrong while updating your details. Try again later!"
+    );
     }
   }
 
@@ -115,18 +117,20 @@ export class ProfileComponent implements OnInit{
   }
 
   onChangePasswordClicked(){
+    this.message = "";
     this.updateUserDetails = false;
   }
 
   onChangeUserDetailsClicked(){
+    this.message = "";
     this.updateUserDetails = true;
   }
 
   updatePassword(){
     if(this.changePasswordForm.valid){
       this.appDataService.updatePassword(this.updatedUser).subscribe(
-        (data) => console.log("Password updated"),
-        (error) => console.log("Something went wrong while updating your password!")
+        (data) => this.message = "Password updated successfully",
+        (error) => this.message = "Something went wrong while updating your password!"
       );
     }
   }

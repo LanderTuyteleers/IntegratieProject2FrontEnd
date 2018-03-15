@@ -4,6 +4,7 @@ import {AppDataService} from "../../services/app-data.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import {CompleterData, Ng2CompleterModule, CompleterService,} from "ng2-completer";
+import {USERNAME} from "../../services/auth.constant";
 
 @Component({
   selector: 'app-game-session-edit',
@@ -24,11 +25,14 @@ export class GameSessionEditComponent implements OnInit {
   public dataService: CompleterData;
   protected completerService;
 
+  username;
+  role;
 
   constructor(http: AppDataService, private domSanitizer: DomSanitizer, completerService: CompleterService) {
     this.http = http;
     this.domSanitizerService = domSanitizer;
     this.completerService = completerService;
+    this.username = sessionStorage.getItem(USERNAME);
   }
 
 
@@ -41,9 +45,16 @@ export class GameSessionEditComponent implements OnInit {
     this.http.getUsersFromSession(this.chosenGameSessionId).subscribe(
       (data) => {
         this.users = data;
+        this.checkForRole();
         this.getProfilePicturesOfUsers();
       }
     );
+  }
+
+  checkForRole(){
+    this.users.forEach(user =>{
+      if (user.getUsername() === this.username) this.role = user.getRole();
+    })
   }
 
   getAllUsers(){
@@ -82,7 +93,8 @@ export class GameSessionEditComponent implements OnInit {
   }
 
   initialiseSearchDataSets() {
-    this.dataService = this.completerService.local(this.searchData, 'username', 'username').imageField('profilePicture');
+    this.dataService = this.completerService.local(this.searchData, 'username', 'username');
+      //.imageField('profilePicture');
   }
 
   onAddUserClick() {
@@ -92,7 +104,14 @@ export class GameSessionEditComponent implements OnInit {
         (error) => console.log(error.status)
       );
     }
+  }
 
+  onRemoveUserClick(event){
+    let username = event.target.attributes.id.value;
+    this.http.removeUserFromGameSession(this.chosenGameSessionId, this.username).subscribe(
+        (data) => this.getAllUsersFromSession(),
+        (error) => console.log(error.status)
+      );
   }
 
   onGrantRightsClick(event){
@@ -103,7 +122,10 @@ export class GameSessionEditComponent implements OnInit {
     );
   }
 
-  goBack(event: any){
-    this.pageChanged.emit("session");
+  onRevokeRightsClick(event){
+    let username = event.target.attributes.id.value;
+    //TODO CALL
   }
+
+
 }
