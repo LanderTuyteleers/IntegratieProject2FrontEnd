@@ -15,14 +15,14 @@ export class GameSessionEditComponent implements OnInit {
 
   @Input() public chosenGameSessionId;
   users: UserItem[] = [];
-  private http;
+  http;
   domSanitizerService;
 
   //
   searchString;
   searchData;
-  protected dataService: CompleterData;
-  protected completerService;
+  dataService: CompleterData;
+  completerService;
 
   username;
   role;
