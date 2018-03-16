@@ -107,7 +107,7 @@ export class GameSessionEditComponent implements OnInit {
 
   onRemoveUserClick(event){
     let username = event.target.attributes.id.value;
-    this.http.removeUserFromGameSession(this.chosenGameSessionId, this.username).subscribe(
+    this.http.removeUserFromGameSession(this.chosenGameSessionId, username).subscribe(
         (data) => this.getAllUsersFromSession(),
         (error) => console.log(error.status)
       );
