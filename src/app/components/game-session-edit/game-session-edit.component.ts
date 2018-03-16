@@ -123,7 +123,10 @@ export class GameSessionEditComponent implements OnInit {
 
   onRevokeRightsClick(event){
     let username = event.target.attributes.id.value;
-    //TODO CALL
+    this.http.downGradeToParticipantAccessLevel(this.chosenGameSessionId, username).subscribe(
+      (data) => this.getAllUsersFromSession(),
+      (error) => console.log(error)
+    );
   }
 
 

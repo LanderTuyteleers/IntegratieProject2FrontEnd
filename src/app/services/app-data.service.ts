@@ -220,6 +220,16 @@ export class AppDataService {
     return this.http.post(this.springURL + "/sessions/" + sessionId + "/users/" + username + "/upgradeacceslevel", null, {headers: headers}).map((resp: Response) => resp);
   }
 
+  downGradeToParticipantAccessLevel(sessionId, username){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.post(this.springURL + "/sessions/" + sessionId + "/users/" + username + "/downgradeacceslevel", null, {headers: headers}).map((resp: Response) => resp);
+  }
+
+
   updatePassword(user){
     const headers = new HttpHeaders({
       "Content-type": "application/json",
