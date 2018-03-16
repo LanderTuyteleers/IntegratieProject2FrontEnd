@@ -1,4 +1,5 @@
 <div class="google-cards " *ngFor="let gameSession of gameSessions; let index = index">
+
   <div class="google-card" [class.fade-in]="index==0">
     <div class="google-card-cover">
       <img *ngIf="gameSessionImages[index] != ''" class="gameSessionImage" [src]="domSanitizerService.bypassSecurityTrustUrl(gameSessionImages[index])"/>
@@ -18,7 +19,7 @@
         </div>
 
         <div class="modernButtonContainer">
-          <button class="modernButton modernButtonEdit" (click)="onEditClick($event)" [attr.id]="index"></button>
+          <button class="modernButton modernButtonEdit" (click)="onEditClick($event)" [attr.id]="index" *ngIf="gameSession.getIsOrganisator() || gameSession.getIsSubOrganistor()"></button>
         </div>
 
         <div class="modernButtonContainer">
@@ -30,7 +31,7 @@
   <div (click)="onAddClick()" class="plus-button"></div>
 </div>
 
-<div *ngIf="gameSessions?.length == 0">
-  <h3>You have no session yet!</h3>
+<div *ngIf="gameSessions?.length == 0" class="text-center align-middle">
+  <h3 class="realmiddle">You have no session yet!</h3>
   <div (click)="onAddClick()" class="plus-button"></div>
 </div>

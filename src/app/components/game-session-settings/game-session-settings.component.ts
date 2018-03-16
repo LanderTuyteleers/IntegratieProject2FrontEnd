@@ -25,14 +25,14 @@ export class GameSessionSettingsComponent implements OnInit {
       (data) => {
         this.notifications = data;
       },
-      (error) => console.log(error)
+      (error) => console.log(error.status)
     );
   }
 
   onSubmitClicked(){
       this.http.updateNotificationsForGameSession(this.username, this.chosenGameSessionId, this.notifications).subscribe(
         (data) => this.success = true,
-        (error) => console.log(error)
+        (error) => console.log(error.status)
       );
   }
 
