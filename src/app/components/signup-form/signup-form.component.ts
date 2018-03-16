@@ -9,7 +9,7 @@ import {RegisterUser} from "../../model/RegisterUser";
   styleUrls: ['./signup-form.component.css']
 })
 export class SignupFormComponent {
-  private service: HttpLoginServiceService;
+  service: HttpLoginServiceService;
   registerUser: RegisterUser = new RegisterUser('','','','','','','', '');
   public label;
   public _passwordsAreTheSame: boolean = false;

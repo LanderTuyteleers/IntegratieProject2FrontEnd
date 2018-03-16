@@ -15,7 +15,7 @@ export class GameSessionEditComponent implements OnInit {
 
   @Input() public chosenGameSessionId;
   users: UserItem[] = [];
-  private http;
+  http;
   domSanitizerService;
 
   //
