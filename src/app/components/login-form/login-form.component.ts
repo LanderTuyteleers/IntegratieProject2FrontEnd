@@ -14,12 +14,12 @@ import {TOKEN_NAME} from "../../services/auth.constant";
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit{
-  private service: AuthService;
-  private httpService: HttpLoginServiceService;
+  service: AuthService;
+  httpService: HttpLoginServiceService;
   loginUser = new LoginUser('','');
-  private router: Router;
+  public router: Router;
   public error = '';
-  private feedback='';
+  public feedback='';
 
   constructor(router: Router, private userService: UserService, private authService: AuthService, private httpLoginService: HttpLoginServiceService) {
     this.service = authService;

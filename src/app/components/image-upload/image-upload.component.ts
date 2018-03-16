@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {AppDataService} from "../../services/app-data.service";
 import {TOKEN_NAME, USERNAME} from "../../services/auth.constant";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -13,15 +13,20 @@ import {User} from "../../model/User";
   styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent implements OnInit {
-  private fileService: AppDataService;
+  fileService: AppDataService;
   public image: File;
   @Input() public imageUrl: String = "https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png";
   @Input() public typeOfUpload;
   @Input() public createdSessionId;
   @Output() profilePictureChanged: EventEmitter<String> = new EventEmitter<String>();
+  @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
+  @Output() imageData: EventEmitter<FormData> = new EventEmitter<FormData>();
+  @ViewChild("imageInput") imageInput;
+
+
   actionUrl: String;
   domSanitizerService;
-  private http: Http;
+  http: Http;
   formData;
   options;
 
@@ -35,7 +40,7 @@ export class ImageUploadComponent implements OnInit {
   });
 
   fileChange(event){
-   this.image = event.srcElement.files[0];
+   this.image = event.target.files[0];
    this.readUrl(event);
 
    let fileList: FileList = event.target.files;
@@ -59,16 +64,22 @@ export class ImageUploadComponent implements OnInit {
 
   doUploadFile(){
     if(this.typeOfUpload === 'profilePicture'){
-      this.actionUrl = "http://localhost:8080/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
+      this.actionUrl = "https://kandoe.herokuapp.com/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
     }
     else if(this.typeOfUpload === 'gameSessionImage'){
-      this.actionUrl = "http://localhost:8080/api/private/users/" + sessionStorage.getItem(USERNAME) + "/sessions/" + this.createdSessionId + "/uploadImage";
+      this.actionUrl = "https://kandoe.herokuapp.com/api/private/users/" + sessionStorage.getItem(USERNAME) + "/sessions/" + this.createdSessionId + "/uploadImage";
+    }
+    else{
+      this.imageData.emit(this.formData);
     }
 
     this.http.post(this.actionUrl.toString(), this.formData, this.options)
       .subscribe(
-        (data) => this.profilePictureUpdated(),
-        (error) => console.log(error)
+        (data) => {
+          this.profilePictureUpdated();
+          this.sendPage("session");
+        },
+        (error) => console.log(error.status)
       );
   }
 
@@ -77,7 +88,7 @@ export class ImageUploadComponent implements OnInit {
   }
 
   onChange(event){
-    this.image = event.srcElement.files[0];
+    this.image = event.target.files[0];
     this.readUrl(event);
   }
 
@@ -92,7 +103,19 @@ export class ImageUploadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.actionUrl = "http://localhost:8080/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
+    this.actionUrl = "https://kandoe.herokuapp.com/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
   }
 
+  sendPage(page){
+    this.pageChanged.emit(page);
+  }
+
+  reset(){
+    this.imageUrl = "https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png";
+    this.imageInput.nativeElement.value = "";
+  }
+
+  resetImageInput(){
+    this.imageInput.nativeElement.value = "";
+  }
 }

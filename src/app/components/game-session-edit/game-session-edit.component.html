@@ -1,0 +1,81 @@
+
+<div class="holder">
+    <table width="100%">
+      <thead>Edit game session {{chosenGameSessionId}}</thead>
+
+      <tr>
+        <td>I think it's time to stop</td>
+        <td>
+          <div>
+            <div class="modernButtonContainer">
+              <button class="modernButton modernButtonEndGame"></button>
+            </div>
+            <span></span>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>I want to create a new session based on this one</td>
+        <td>
+          <div>
+            <div class="modernButtonContainer">
+              <button class="modernButton">CLONE GAME</button>
+            </div>
+            <span></span>
+          </div>
+        </td>
+      </tr>
+
+    </table>
+</div>
+
+<div class="holder">
+  <table width="100%" *ngFor="let user of users; let index = index">
+    <!--<thead>Users</thead>-->
+
+    <tr class="item">
+      <td>{{user.getFirstName()}} {{user.getLastName()}} ({{user.getUsername()}})
+        <img *ngIf="user.getRole() === 'Moderator' || user.getRole() === 'ModeratorParticipant'" src="../../../assets/verified-user.png" class="smallImage"/>
+        <img *ngIf="user.getRole() === 'SubModerator'" src="../../../assets/user-verified-2.png" class="smallImage"/>
+      </td>
+      <td>
+        <div>
+          <img [src]="domSanitizerService.bypassSecurityTrustUrl(users[index].getProfilePicture())" class="avatar"/>
+
+          <div class="modernButtonContainer"  *ngIf="user.getRole() === 'Participant'">
+            <!--<button class="modernButton" (click)="onGrantRightsClick($event)" [attr.id]="user.getUsername()">Grant rights</button>-->
+            <input class="smallButton" type="image" src="../../../assets/user-check.png" (click)="onGrantRightsClick($event)" [attr.id]="user.getUsername()"/>
+            <input class="smallButton" type="image" src="../../../assets/user-times.png" (click)="onRemoveUserClick($event)" [attr.id]="user.getUsername()"/>
+          </div>
+
+          <div class="modernButtonContainer"  *ngIf="user.getRole() === 'SubModerator' && (role === 'Moderator' || role === 'ModeratorParticipant')">
+            <input class="smallButton" type="image" src="../../../assets/restore.png" (click)="onRevokeRightsClick($event)" [attr.id]="user.getUsername()"/>
+            <input class="smallButton" type="image" src="../../../assets/user-times.png" (click)="onRemoveUserClick($event)" [attr.id]="user.getUsername()"/>
+          </div>
+
+          <span></span>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div>
+    <div class="modernButtonContainer">
+      <ng2-completer class="completer" [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0" [clearUnselected]="true" [textNoResults]="'No results found'"></ng2-completer>
+      <!--<button class="modernButton" (click)="onAddUserClick()">Add user</button>-->
+      <!--<button class="modernButton" (click)="onAddUserClick()">Remove user</button>-->
+
+      <input class="smallButton" type="image" src="../../../assets/user-plus.png" (click)="onAddUserClick()"/>
+      <!--<input class="smallButton" type="image" src="../../../assets/user-times.png" (click)="onRemoveUserClick()"/>-->
+
+
+      <span></span>
+    </div>
+  </div>
+</div>
+
+
+
+
+
