@@ -13,7 +13,7 @@ import {User} from "../../model/User";
   styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent implements OnInit {
-  private fileService: AppDataService;
+  fileService: AppDataService;
   public image: File;
   @Input() public imageUrl: String = "https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png";
   @Input() public typeOfUpload;
@@ -26,7 +26,7 @@ export class ImageUploadComponent implements OnInit {
 
   actionUrl: String;
   domSanitizerService;
-  private http: Http;
+  http: Http;
   formData;
   options;
 

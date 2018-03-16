@@ -22,7 +22,7 @@ export class GameSessionComponent implements OnInit {
   animationClass = 'is-paused';
   domSanitizerService;
 
-  private http: AppDataService;
+  http: AppDataService;
 
   constructor(http: AppDataService, private domSanitizer: DomSanitizer) {
     this.http = http;
