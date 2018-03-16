@@ -14,8 +14,8 @@ import {ElementRef} from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit{
-  private router: Router;
-  private service: HttpLoginServiceService;
+  router: Router;
+  service: HttpLoginServiceService;
   session = true;
   profile = false;
   profileImageUpload = false;

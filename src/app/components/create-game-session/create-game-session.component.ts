@@ -16,7 +16,7 @@ export class CreateGameSessionComponent implements OnInit {
   @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
 
   gameSession: GameSession = new GameSession('', '', true, true, 3, 3, 84600, '', '');
-  private http: AppDataService;
+  http: AppDataService;
   sessionCreated: Boolean = false;
   createdSessionId;
   errorMessage: String = "";
@@ -24,8 +24,8 @@ export class CreateGameSessionComponent implements OnInit {
   currentlyActive = "theme";
 
   //Contains the image data for a new main theme
-  private imageFormData: FormData;
-  private isNewTheme: boolean;
+  imageFormData: FormData;
+  isNewTheme: boolean;
   mainTheme: MainThema;
 
   constructor(http: AppDataService) {

@@ -31,6 +31,8 @@ import { NgLoadingSpinnerModule, NgLoadingSpinnerInterceptor } from 'ng-loading-
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CreateMainThemeComponent } from './components/create-main-theme/create-main-theme.component';
 import { MainThemesComponent } from './components/main-themes/main-themes.component';
+import {CardComponent} from "./components/card/card.component";
+import {SessionSetupComponent} from "./components/session-setup/session-setup.component";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -60,6 +62,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ListViewComponent,
     CreateMainThemeComponent,
     MainThemesComponent,
+    CardComponent,
+    SessionSetupComponent
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,7 @@ import {AppDataService} from "../../services/app-data.service";
   styleUrls: ['./game-session-settings.component.css']
 })
 export class GameSessionSettingsComponent implements OnInit {
-  private http: AppDataService;
+  http: AppDataService;
   notifications: Notifications = new Notifications(false, false, false, false);
   @Input() chosenGameSessionId: Number;
   @Input() username: String;

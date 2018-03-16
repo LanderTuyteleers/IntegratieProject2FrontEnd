@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit{
   @Output() profilePictureChanged: EventEmitter<String> = new EventEmitter<String>();
 
   updatedUser: RegisterUser;
-  private _passwordsAreTheSame: boolean = false;
+  _passwordsAreTheSame: boolean = false;
   public passwordError = "Passwords are not the same!";
   updateUserDetails: Boolean = true;
   message = '';
