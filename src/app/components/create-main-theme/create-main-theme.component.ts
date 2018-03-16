@@ -37,8 +37,8 @@ export class CreateMainThemeComponent implements OnInit {
 
   searchString;
   searchData = [];
-  protected dataService: CompleterData;
-  protected completerService;
+  dataService: CompleterData;
+  completerService;
 
 
   constructor(http: AppDataService, completerService: CompleterService) {

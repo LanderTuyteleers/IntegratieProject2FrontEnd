@@ -18,8 +18,8 @@ export class MainThemesComponent implements OnInit {
 
   searchString;
   searchData = [];
-  protected dataService: CompleterData;
-  protected completerService;
+  dataService: CompleterData;
+  completerService;
 
   http;
 

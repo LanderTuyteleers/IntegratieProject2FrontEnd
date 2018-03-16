@@ -21,8 +21,8 @@ export class GameSessionEditComponent implements OnInit {
   //
   searchString;
   searchData;
-  protected dataService: CompleterData;
-  protected completerService;
+  dataService: CompleterData;
+  completerService;
 
   username;
   role;
