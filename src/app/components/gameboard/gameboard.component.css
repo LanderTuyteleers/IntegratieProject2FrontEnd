@@ -1,0 +1,53 @@
+#playerList {
+  width: 12.5vw;
+  height: 98vh;
+  border: 1px solid black;
+  display: inline-block;
+}
+
+#gameBoard {
+  width: 67.5vw;
+  height: 98vh;
+  border: 1px solid black;
+  display: inline-block;
+}
+
+#rightPanel {
+  width: 25vw;
+  height: 98vh;
+  border: 1px solid black;
+  display: block;
+  overflow: hidden;
+}
+
+#legend {
+  display: block;
+  width: 25vw;
+  height: 68vh;
+  border: solid 1px black;
+}
+
+#chatbox {
+  display: block;
+  width: 25vw;
+  height: 30vh;
+  border: solid 1px black;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-item {
+  flex-wrap: nowrap;
+}
+
+svg {
+  height: 100%;
+  width: 100%;
+}
+
+circle {
+  height: 100%;
+  width: 100%;
+}

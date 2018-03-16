@@ -4,6 +4,7 @@
   border: solid black 2px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 7%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -11,16 +12,29 @@
   align-content: flex-start;
   align-items: flex-start;
   padding: 2%;
+  background: white;
+}
+
+h1 {
+  text-align: center;
+}
+
+.flex-item{
+  /*margin: 5px 5px;*/
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  /*padding: 2%;*/
+  margin: 5px;
 }
 
 app-card {
-  margin: auto;
+  /*margin: auto;*/
+  background: slategrey;
 }
 
 .themename, .themedescription {
-  display: inline-block;
-  margin-left:auto; margin-right:0;
-  float: right;
+ /* display: inline-block;*/
 }
 
 .addCard {
@@ -28,5 +42,7 @@ app-card {
   height: 98%;
   padding: 20%;
 }
+
+
 
 

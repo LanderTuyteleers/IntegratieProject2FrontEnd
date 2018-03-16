@@ -35,8 +35,10 @@ export class GameSessionEditComponent implements OnInit {
       let username = this.users[i].getUsername();
       this.http.getProfilePictureOfUser(username).subscribe(
         (data) => {
+          console.log(data);
           this.users[i].setProfilePicture(data);
-        }
+        },
+        (error) => console.log(error)
       );
     }
   }

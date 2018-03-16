@@ -29,6 +29,8 @@ import { GameSessionEditComponent } from './components/game-session-edit/game-se
 import { ListViewComponent } from './components/list-view/list-view.component';
 import { SessionSetupComponent } from './components/session-setup/session-setup.component';
 import { CardComponent } from './components/card/card.component';
+import { GameboardComponent } from './components/gameboard/gameboard.component';
+import { PlayerCardComponent } from './components/player-card/player-card.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -57,7 +59,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     CreateGameSessionComponent,
     GameSessionSettingsComponent,
     GameSessionEditComponent,
-    ListViewComponent
+    ListViewComponent,
+    GameboardComponent,
+    PlayerCardComponent
   ],
   imports: [
     BrowserModule,

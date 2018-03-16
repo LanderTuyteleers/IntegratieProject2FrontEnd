@@ -30,4 +30,7 @@ export class CardComponent implements OnInit {
     this._http.delete(url).subscribe(theme => this.myEvent.emit(theme.json()));
   }
 
+  selectTheme() {
+    alert(this.theme.name)
+  }
 }
