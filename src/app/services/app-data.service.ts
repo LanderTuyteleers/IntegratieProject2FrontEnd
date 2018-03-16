@@ -16,7 +16,8 @@ import {MainThema} from "../model/MainThema";
 
 @Injectable()
 export class AppDataService {
-  private springURL = "http://localhost:8080/api/private";
+  //Please work
+  private springURL = "https://kandoe.herokuapp.com/api/private";
   public http;
 
   constructor(http: HttpClient) {

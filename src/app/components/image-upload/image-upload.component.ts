@@ -64,10 +64,10 @@ export class ImageUploadComponent implements OnInit {
 
   doUploadFile(){
     if(this.typeOfUpload === 'profilePicture'){
-      this.actionUrl = "http://localhost:8080/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
+      this.actionUrl = "https://kandoe.herokuapp.com/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
     }
     else if(this.typeOfUpload === 'gameSessionImage'){
-      this.actionUrl = "http://localhost:8080/api/private/users/" + sessionStorage.getItem(USERNAME) + "/sessions/" + this.createdSessionId + "/uploadImage";
+      this.actionUrl = "https://kandoe.herokuapp.com/api/private/users/" + sessionStorage.getItem(USERNAME) + "/sessions/" + this.createdSessionId + "/uploadImage";
     }
     else{
       this.imageData.emit(this.formData);
@@ -103,7 +103,7 @@ export class ImageUploadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.actionUrl = "http://localhost:8080/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
+    this.actionUrl = "https://kandoe.herokuapp.com/api/private/users/" + sessionStorage.getItem(USERNAME) + "/uploadImage";
   }
 
   sendPage(page){
