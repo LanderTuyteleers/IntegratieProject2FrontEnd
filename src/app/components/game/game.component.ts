@@ -18,13 +18,14 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private defaultStrokeWidth = 10;
   private defaultCircleRadiusSize = 300;
   private defaultCardRadiusSize = 20;
-  private bollekes: Circle[] = [];
-  private circles = [];
+  // Key = card; Value = number of votes on that card
+  cards = new Map<Circle, number>();
+  private circles: Circle[] = [];
   private numberOfCircles = 8;
   private numberOfCards = 10;
   private circleOptions: ShapeOptions;
   private cardOptions: ShapeOptions;
-  private currentCircle = 0;
+  cardArray: Array<Circle>;
 
   constructor() {
     this.circleOptions = {stroke: {color: 'red', width: this.defaultStrokeWidth}};
@@ -40,7 +41,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   }
 
   private drawScene(surface: Surface) {
-    this.geometry = new GeomCircle([this.parentDivWidth / 2, (this.parentDivHeight / 2) - 100], this.defaultCircleRadiusSize);
+    this.geometry = new GeomCircle([this.parentDivWidth / 2, this.defaultCircleRadiusSize + this.defaultCircleRadiusSize / 10],
+      this.defaultCircleRadiusSize);
     this.createCirclesForGame();
     this.createCards();
   }
@@ -57,13 +59,20 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.moveCardToCircle(this.bolleke1, this.circle1, 'y', 'neg');
     this.moveCardToCircle(this.bolleke2, this.circle1, 'x', 'pos');
     this.moveCardToCircle(this.bolleke3, this.circle1, 'x', 'neg');
+    this.moveCardToCircle(this.cards[0], this.circles[1], 'y', 'pos');
     */
-    // this.moveCardToCircle(this.bollekes[0], this.circles[1], 'y', 'pos');
+
+    /*if (this.currentCircle < this.numberOfCircles - 1) {
+      this.surface.destroy();
+      this.cards = [];
+      this.circles = [];
+      this.currentCircle++;
+      this.drawScene(this.createSurface());
+    }*/
   }
 
-  moveCardToCircle(cardToMove: Circle, circleToMoveTo: Circle, axis: string, direction: string) {
+  /*moveCardToCircle(cardToMove: Circle, circleToMoveTo: Circle, axis: string, direction: string) {
     let point: Point;
-
     if (axis.toLowerCase() === 'y') {
       if (direction.toLowerCase() === 'pos') {
         point = new Point(
@@ -86,7 +95,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       }
     }
     cardToMove.geometry().setCenter(point);
-  }
+  }*/
 
   createCirclesForGame() {
 
@@ -112,26 +121,44 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     for (let i = 0; i < this.numberOfCards; i++) {
       const cardCircle = new Circle(new GeomCircle(this.geometry.center,
         this.defaultCardRadiusSize), this.cardOptions);
-      this.bollekes.push(cardCircle);
+      this.cards.push(cardCircle);
     }
 
-    this.bollekes.forEach(c => {
+    this.cards.forEach(c => {
       this.surface.draw(c);
     });
     */
-    console.log(this.circles[this.currentCircle]);
     for (let i = 0; i < this.numberOfCards; i++) {
-      this.drawCardOnCircle(this.circles[this.currentCircle].geometry().getRadius(), (360 / this.numberOfCards * i));
+      this.drawCardOnCircle(this.circles[0].geometry().getRadius(), (360 / this.numberOfCards * i));
     }
-    console.log(this.bollekes);
+    this.cardArray = Array.from(this.cards.keys());
   }
 
   drawCardOnCircle(radiusOfDestinationCircle: number, angle: number) {
     // angle o = right & angle -90 = top
+    const point = this.createNewPointForCard(radiusOfDestinationCircle, angle);
+    const c = new Circle(new GeomCircle(point, this.defaultCardRadiusSize), this.cardOptions);
+    this.cards.set(c, 0);
+    this.surface.draw(c);
+  }
+
+  createNewPointForCard(radiusOfDestinationCircle: number, angle: number): Point {
     const x = this.geometry.getCenter().getX() + radiusOfDestinationCircle * Math.cos(angle * Math.PI / 180);
     const y = this.geometry.getCenter().getY() + radiusOfDestinationCircle * Math.sin(angle * Math.PI / 180);
-    const c = new Circle(new GeomCircle(new Point(x, y), this.defaultCardRadiusSize), this.cardOptions);
-    this.bollekes.push(c);
-    this.surface.draw(c);
+    return new Point(x, y);
+  }
+
+  updateCard(event) {
+    this.cards.set(event.card, event.value);
+    const angle = 360 / this.numberOfCards;
+    let cardToMoveByIndex = 0;
+    this.cards.forEach((value, key) => {
+      if (key === event.card) {
+        const point = this.createNewPointForCard(this.circles[value].geometry().getRadius(), cardToMoveByIndex * angle);
+        key.geometry().setCenter(point);
+      } else {
+        cardToMoveByIndex++;
+      }
+    });
   }
 }

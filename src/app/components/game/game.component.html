@@ -1,2 +1,5 @@
 <button id="moveBollekeButton" (click)="Click()">Click me pls</button>
 <div #surface id="surface"></div>
+<div id="card-container">
+  <app-game-card *ngFor="let card of cardArray" [card]="card" [value]="cards.get(card)" (change)="updateCard($event)"></app-game-card>
+</div>

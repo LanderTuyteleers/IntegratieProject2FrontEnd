@@ -23,6 +23,7 @@ import {LobbyListComponent} from './components/lobby-list/lobby-list.component';
 import {ChatboxComponent} from './components/chatbox/chatbox.component';
 import {GameComponent} from './components/game/game.component';
 import {LobbyItemUserComponent} from './components/lobby-item-user/lobby-item-user.component';
+import { GameCardComponent } from './components/game-card/game-card.component';
 
 export function authHttpServiceFactory(http: Http) {
   return new AuthHttp(new AuthConfig({
@@ -50,7 +51,8 @@ export function authHttpServiceFactory(http: Http) {
     LobbyListComponent,
     ChatboxComponent,
     GameComponent,
-    LobbyItemUserComponent
+    LobbyItemUserComponent,
+    GameCardComponent
   ],
   imports: [
     BrowserModule,
