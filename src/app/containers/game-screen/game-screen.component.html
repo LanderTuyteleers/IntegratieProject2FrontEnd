@@ -5,9 +5,9 @@
       <p>Lobby with all players</p>
       <app-lobby-list></app-lobby-list>
     </div>
-    <div class="col-md-8">
-      <p>Kandoe game area</p>
-      <app-game></app-game>
+    <div class="col-md-8" #gameArea>
+      <p>Kandoe game area<br />{{gameArea.offsetWidth}},{{gameArea.offsetHeight}}</p>
+      <app-game [parentDivWidth]="gameArea.offsetWidth" [parentDivHeight]="gameArea.offsetHeight"></app-game>
     </div>
     <div class="col-md-2 text-center">
       <p>Chatbox</p>
