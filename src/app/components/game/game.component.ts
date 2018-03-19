@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
 import {Circle, ShapeOptions, Surface} from '@progress/kendo-drawing';
 import {Point, Circle as GeomCircle} from '@progress/kendo-drawing/geometry';
+import {Card} from '../../model/Card';
 
 @Component({
   selector: 'app-game',
@@ -25,7 +26,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private numberOfCards = 10;
   private circleOptions: ShapeOptions;
   private cardOptions: ShapeOptions;
-  cardArray: Array<Circle>;
+  cardCircleArray: Array<Circle>;
+  cardIdArray: Array<Card>;
 
   constructor() {
     this.circleOptions = {stroke: {color: 'red', width: this.defaultStrokeWidth}};
@@ -71,7 +73,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     }*/
   }
 
-  /*moveCardToCircle(cardToMove: Circle, circleToMoveTo: Circle, axis: string, direction: string) {
+  moveCardToCircle(cardToMove: Circle, circleToMoveTo: Circle, axis: string, direction: string) {
     let point: Point;
     if (axis.toLowerCase() === 'y') {
       if (direction.toLowerCase() === 'pos') {
@@ -95,7 +97,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
       }
     }
     cardToMove.geometry().setCenter(point);
-  }*/
+  }
 
   createCirclesForGame() {
 
@@ -131,7 +133,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     for (let i = 0; i < this.numberOfCards; i++) {
       this.drawCardOnCircle(this.circles[0].geometry().getRadius(), (360 / this.numberOfCards * i));
     }
-    this.cardArray = Array.from(this.cards.keys());
+    this.cardCircleArray = Array.from(this.cards.keys());
   }
 
   drawCardOnCircle(radiusOfDestinationCircle: number, angle: number) {
