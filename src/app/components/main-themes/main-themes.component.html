@@ -23,23 +23,17 @@
         </div>
 
         <div class="modernButtonContainer" *ngIf="type=='edit'">
-          <button class="modernButton  modernButtonEdit" (click)="onEditClick()" *ngIf="activeIndex != index" [attr.index]="index"></button>
+          <button class="modernButton  modernButtonEdit" (click)="onEditClick()" *ngIf="activeIndex != index"
+                  [attr.index]="index"></button>
         </div>
         <div class="modernButtonContainer" *ngIf="type=='edit'">
-          <button class="modernButton modernButtonAdd" (click)="onAddCardsClick()" *ngIf="activeIndex != index" [attr.index]="index"></button>
+          <button class="modernButton modernButtonAdd" (click)="onAddCardsClick()" *ngIf="activeIndex != index"
+                  [attr.index]="index"></button>
         </div>
 
       </div>
     </div>
-    <div>
-
-    </div>
-    <div *ngIf="type=='edit'">
-
-    </div>
-
-
   </div>
 </div>
 
-<h3 *ngIf="themes.length == 0" class="text-center">You have no connected main themes yet!</h3>
+<h3 *ngIf="themes.length == 0" class="text-center">You have no connected themes yet!</h3>

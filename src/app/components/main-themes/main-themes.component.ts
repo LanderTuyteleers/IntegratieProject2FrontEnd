@@ -12,11 +12,12 @@ import {AppDataService} from "../../services/app-data.service";
 })
 export class MainThemesComponent implements OnInit {
   @Input() type;
+  @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
   @Output() activeThemeChanged: EventEmitter<MainThema> = new EventEmitter<MainThema>();
+  @Output() chosenThemeId: EventEmitter<Number> = new EventEmitter<Number>();
   themes: MainThema[] = [];
   domSanitizerService;
   activeIndex;
-
   searchString;
   searchData = [];
   dataService: CompleterData;
@@ -48,6 +49,7 @@ export class MainThemesComponent implements OnInit {
   getMainThemes(){
     this.http.getAllConnectedMainThemes().subscribe(
       (data) => this.themes = data,
+      //todo 404 opvangen?
       (error) => console.log(error)
     );
   }
@@ -85,12 +87,20 @@ export class MainThemesComponent implements OnInit {
     this.scrollToTop(300);
   }
 
-  onAddCardsClick(){
-  //todo
+  onAddCardsClick(event){
+    var target = event.target;
+    var idAttr = target.attributes.id;
+    var id = idAttr.nodeValue;
+    this.pageChanged.emit("playingcard");
+    this.chosenThemeId.emit(this.themes[id].themeId);
   }
 
-  onEditClick() {
-    //todo
+  onEditClick(event){
+    var target = event.target;
+    var idAttr = target.attributes.id;
+    var id = idAttr.nodeValue;
+    this.pageChanged.emit('editTheme');
+    this.chosenThemeId.emit(this.themes[id].themeId);
   }
 
 }
