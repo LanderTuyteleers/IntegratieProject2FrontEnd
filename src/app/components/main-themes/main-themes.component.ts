@@ -85,6 +85,12 @@ export class MainThemesComponent implements OnInit {
     this.scrollToTop(300);
   }
 
+  onAddCardsClick(){
+  //todo
+  }
 
+  onEditClick() {
+    //todo
+  }
 
 }

@@ -156,12 +156,8 @@ h1 {
   letter-spacing: 2px;
 }
 
-.modernButtonSettings:after {
-  content: "SETTINGS";
-}
-
-.modernButtonPlay:after {
-  content: "PLAY";
+.modernButtonAdd:after {
+  content: "CARDS";
 }
 
 .modernButtonEdit:after {
