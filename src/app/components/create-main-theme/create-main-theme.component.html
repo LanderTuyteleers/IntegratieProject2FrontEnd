@@ -5,10 +5,6 @@
       <div class="text-center" *ngIf="isMainTheme">
         <h2>Create new theme</h2>
       </div>
-      <!--<div class="text-center" *ngIf="!isMainTheme">-->
-        <!--<h2>Create new sub theme</h2>-->
-      <!--</div>-->
-
       <table *ngIf="isMainTheme">
         <tr>
           <td class="fullWidth">What will be the main theme of your kandoe session?
@@ -24,25 +20,6 @@
         </tr>
       </table>
       <p class="error text-danger">{{errorMessage}}</p>
-
-      <!--<ng-container *ngIf="!isMainTheme">-->
-        <!--<table *ngFor="let subTheme of subThemes; let index = index">-->
-          <!--<tr>-->
-            <!--<td class="fullWidth">What will be a sub theme of your main theme {{mainTheme.name}}?-->
-              <!--<input type="text" name="name" id="subThemeName" [(ngModel)]="subTheme.subThemeName"></td>-->
-          <!--</tr>-->
-
-          <!--<tr>-->
-            <!--<td class="fullWidth">-->
-              <!--<label for="description">Describe your sub theme</label>-->
-              <!--<textarea name="description" id="subThemeDescription" [(ngModel)]="subTheme.subThemeDescription"></textarea>-->
-              <!--<span></span>-->
-            <!--</td>-->
-          <!--</tr>-->
-        <!--</table>-->
-        <!--<button class="btn btn-primary" (click)="onAddSubThemePressed()">Add sub theme</button>-->
-      <!--</ng-container>-->
-
       <button class="btn btn-primary" (click)="gotoNextStep()">Next step</button>
       <button class="btn btn-danger" (click)="onClearClick()">Clear</button>
     </div>
@@ -64,7 +41,7 @@
 <div class="themes" *ngIf="isMainTheme">
   <h1>Or chose an existing theme</h1>
   <!--<p>Search:<ng2-completer class="completer" [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0" [clearUnselected]="true" [clearSelected]="true" [textNoResults]="'No results found'" (selected)="onItemSelected($event)"></ng2-completer></p>-->
-  <app-main-themes #mainThemes (activeThemeChanged)="mainThemeChanged($event)"></app-main-themes>
+  <app-main-themes #mainThemes (activeThemeChanged)="mainThemeChanged($event)" [type]="'select'"></app-main-themes>
 </div>
 
 <ng-container *ngIf="!isMainTheme">

@@ -54,8 +54,9 @@
       <app-create-game-session *ngSwitchCase="'createGameSession'" [_user$]="user$" (pageChanged)="onPageChanged($event)"></app-create-game-session>
       <app-game-session-settings *ngSwitchCase="'gameSessionSettings'" [chosenGameSessionId]="chosenGameSessionId" [username]="user$.username"></app-game-session-settings>
       <app-game-session-edit *ngSwitchCase="'gameSessionEdit'" [chosenGameSessionId]="chosenGameSessionId"></app-game-session-edit>
-      <app-main-themes *ngSwitchCase="'theme'"></app-main-themes>
+      <app-main-themes *ngSwitchCase="'theme'" [type]="'edit'"></app-main-themes>
       <app-playingcard *ngSwitchCase="'playingcard'" (pageChanged)="onPageChanged($event)" (chosenPlayingcardId)="setChosenCardId($event)"></app-playingcard>
+      <app-create-card *ngSwitchCase="'createCard'" [_user$]="user$" (pageChanged)="onPageChanged($event)"></app-create-card>
     </div>
 </div>
 

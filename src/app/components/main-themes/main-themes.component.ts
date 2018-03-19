@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MainThema} from "../../model/MainThema";
 import {DomSanitizer} from '@angular/platform-browser';
 import {User} from "../../model/User";
@@ -11,6 +11,7 @@ import {AppDataService} from "../../services/app-data.service";
   styleUrls: ['./main-themes.component.css']
 })
 export class MainThemesComponent implements OnInit {
+  @Input() type;
   @Output() activeThemeChanged: EventEmitter<MainThema> = new EventEmitter<MainThema>();
   themes: MainThema[] = [];
   domSanitizerService;
@@ -31,7 +32,7 @@ export class MainThemesComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.themes.push(new MainThema("Bier", "Dit is een game sessie dat probeert te bepalen wat het beste bier van Belgie is.", [], "https://vignette.wikia.nocookie.net/the-darkest-minds/images/4/47/Placeholder.png/revision/latest?cb=20160927044640"));
+     this.themes.push(new MainThema("Bier", "Dit is een game sessie dat probeert te bepalen wat het beste bier van Belgie is.", [], "https://vignette.wikia.nocookie.net/the-darkest-minds/images/4/47/Placeholder.png/revision/latest?cb=20160927044640"));
     // this.themes.push(new MainThema("OS", "Dit is een game sessie dat probeert te bepalen wat het operating system is.", [], "https://vignette.wikia.nocookie.net/the-darkest-minds/images/4/47/Placeholder.png/revision/latest?cb=20160927044640"));
     // this.themes.push(new MainThema("Pc merk", "Dit is een game sessie dat probeert te bepalen wat het beste pc merk is.", [], "https://vignette.wikia.nocookie.net/the-darkest-minds/images/4/47/Placeholder.png/revision/latest?cb=20160927044640"));
     // this.themes.push(new MainThema("Dummy", "Dit is een game sessie dummy lorum ipsum lorum ipsum lorum ipsum lorum ipsum .", [], "https://vignette.wikia.nocookie.net/the-darkest-minds/images/4/47/Placeholder.png/revision/latest?cb=20160927044640"));

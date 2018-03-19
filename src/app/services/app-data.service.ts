@@ -266,14 +266,15 @@ export class AppDataService {
     });
   }
 
-  getPlayingcards(){
+  getPlayingcards(subthemeId){
     const headers = new HttpHeaders({
       "Content-type": "application/json",
       "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
     });
 
+    //api/public/subtheme/{subThemeId}/cards
     let playingcards: Playingcard[] = [];
-    return this.http.get(this.springURL + "/" + sessionStorage.getItem(USERNAME) + "/cards", {headers}).map((resp) => {
+    return this.http.get(this.springURL + "/subtheme/" + subthemeId + "/cards", {headers}).map((resp) => {
 
       resp.forEach(playingcard => {
         let card = new Playingcard('', '', '', '', '', '').fromJSON(playingcard);
@@ -282,6 +283,10 @@ export class AppDataService {
       return playingcards;
 
     });
+  }
+
+  getAllThemes() {
+
   }
 }
 

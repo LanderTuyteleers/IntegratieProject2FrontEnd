@@ -8,8 +8,15 @@
     <div class="google-card-content">
       <h3>{{theme.name}}</h3>
       <p>{{theme.description}}</p>
-      <button class="btn btn-primary" (click)="onSelectPressed($event)" *ngIf="activeIndex != index" [attr.index]="index">Select</button>
-      <button class="btn btn-danger" (click)="onDeselectPressed($event)" *ngIf="activeIndex == index" [attr.index]="index">Deselect</button>
+      <div *ngIf="type=='select'">
+        <button class="btn btn-primary" (click)="onSelectPressed($event)" *ngIf="activeIndex != index" [attr.index]="index">Select</button>
+        <button class="btn btn-danger" (click)="onDeselectPressed($event)" *ngIf="activeIndex == index" [attr.index]="index">Deselect</button>
+      </div>
+      <div *ngIf="type=='edit'">
+        <button class="btn btn-primary" (click)="onEditClick()" *ngIf="activeIndex != index" [attr.index]="index">Edit</button>
+      </div>
+
+
     </div>
   </div>
 </div>

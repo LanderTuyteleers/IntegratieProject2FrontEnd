@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {AppDataService} from '../../services/app-data.service';
 import {Playingcard} from '../../model/Playingcard';
@@ -12,6 +12,7 @@ export class PlayingcardComponent implements OnInit {
   playingcards: Playingcard[] = [];
   playingcardImages: string[] = [];
 
+  @Input() public chosenSubthemeId;
   @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
   @Output() chosenPlayingcardId: EventEmitter<Number> = new EventEmitter<Number>();
   domSanitizerService;
@@ -35,7 +36,7 @@ export class PlayingcardComponent implements OnInit {
   }
 
   getPlayingcards(){
-    this.http.getPlayingcards().subscribe(
+    this.http.getPlayingcards(this.chosenSubthemeId).subscribe(
       (data) => {
         this.playingcards = data.reverse();
         this.getPlayingcardImage();
@@ -46,8 +47,9 @@ export class PlayingcardComponent implements OnInit {
 
   getPlayingcardImage(){
     for(let i = 0; i < this.playingcards.length; i++){
-      let sessionId = this.playingcards[i].playingcardId;
-      this.http.getGameSessionImage(sessionId).subscribe(
+      let cardId = this.playingcards[i].playingcardId;
+      //todo getPlayingcardimage// getthemeimage??
+      this.http.getGameSessionImage(cardId).subscribe(
         (data) => {
           this.playingcardImages[i] = data;
         }
