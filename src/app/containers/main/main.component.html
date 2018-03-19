@@ -1,20 +1,59 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3 sidebar text-center">
-      <img (click)="profileImageUploadClick()" id="profilePic" [src]="domSanitizerService.bypassSecurityTrustUrl(imageSrc)"/>
-      <h4>{{user$.firstName}} {{user$.lastName}}</h4>
-      <p>active sessions: {{activeSessionsNumber}}</p>
-      <hr/>
-      <h5 (click)=sessionClick()>My sessions</h5>
-      <h5 (click)=profileClick()>My profile</h5>
+<div class="Wrapper" ng-app="myApp">
+  <div class="Sidebar" ng-class="boolie ? 'is-collapsed' : ''">
+
+    <div class="scrollable">
+      <header class="Sidebar-header">
+        <img class="Sidebar-logo" (click)="profileImageUploadClick()" id="profilePic" [src]="domSanitizerService.bypassSecurityTrustUrl(imageSrc)"/>
+      </header>
+
+      <div class="underpic">
+        <span>{{user$.firstName}} {{user$.lastName}}</span>
+        <br/>
+        <span>Active sessions: {{activeSessionsNumber}}</span>
+      </div>
+
+      <nav role="navigation">
+        <ul>
+          <li class="Sidebar-navItem" #session (click)=sessionClick()>
+            <i class="Sidebar-menuIcon fa fa-shopping-cart"></i>
+            <!--<a href="" (click)=sessionClick()>My sessions</a>-->
+            <p>My sessions</p>
+          </li>
+          <li class="Sidebar-navItem" #profile (click)=profileClick()>
+            <i class="Sidebar-menuIcon fa fa-bar-chart"></i>
+            <p (click)=profileClick()>My profile</p>
+          </li>
+          <li class="Sidebar-navItem" (click)="myThemesClick()">
+            <i class="Sidebar-menuIcon fa fa-cog"></i>
+            <!--<a href="#">Comming soon</a>-->
+            <p>My themes</p>
+          </li>
+          <li class="Sidebar-navItem">
+            <i class="Sidebar-menuIcon fa fa-question-circle"></i>
+            <!--<a href="#">Help & Support</a>-->
+            <p href="#">Help & Support</p>
+          </li>
+          <li class="Sidebar-navItem" (click)="logout()">
+            <i class="Sidebar-menuIcon fa fa-sign-out"></i>
+            <!--<a href="#">Log out</a>-->
+            <p href="#">Log out</p>
+          </li>
+        </ul>
+      </nav>
     </div>
 
-    <div class="col-md-9 main" align="center" [ngSwitch]="page">
+  </div>
+    <div class="Main col-md-9" [ngSwitch]="page">
       <app-profile *ngSwitchCase="'profile'" [_user$]="user$" (userChanged)="onUserChanged($event)" [imageSrc]="imageSrc" (profilePictureChanged)="updateProfilePicture($event)"></app-profile>
       <app-game-session *ngSwitchCase="'session'" (pageChanged)="onPageChanged($event)" (activeSessionsChanged)="updateActiveSessions($event)" (chosenGameSessionId)="setChosenGameSessionId($event)"></app-game-session>
       <app-create-game-session *ngSwitchCase="'createGameSession'" [_user$]="user$" (pageChanged)="onPageChanged($event)"></app-create-game-session>
       <app-game-session-settings *ngSwitchCase="'gameSessionSettings'" [chosenGameSessionId]="chosenGameSessionId" [username]="user$.username"></app-game-session-settings>
       <app-game-session-edit *ngSwitchCase="'gameSessionEdit'" [chosenGameSessionId]="chosenGameSessionId"></app-game-session-edit>
+      <app-main-themes *ngSwitchCase="'myThemes'"></app-main-themes>
     </div>
-  </div>
 </div>
+
+
+
+
+

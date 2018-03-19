@@ -9,7 +9,7 @@ import {AppDataService} from "../../services/app-data.service";
   styleUrls: ['./game-session-settings.component.css']
 })
 export class GameSessionSettingsComponent implements OnInit {
-  private http: AppDataService;
+  http: AppDataService;
   notifications: Notifications = new Notifications(false, false, false, false);
   @Input() chosenGameSessionId: Number;
   @Input() username: String;
@@ -25,14 +25,14 @@ export class GameSessionSettingsComponent implements OnInit {
       (data) => {
         this.notifications = data;
       },
-      (error) => console.log(error)
+      (error) => console.log(error.status)
     );
   }
 
   onSubmitClicked(){
       this.http.updateNotificationsForGameSession(this.username, this.chosenGameSessionId, this.notifications).subscribe(
         (data) => this.success = true,
-        (error) => console.log(error)
+        (error) => console.log(error.status)
       );
   }
 

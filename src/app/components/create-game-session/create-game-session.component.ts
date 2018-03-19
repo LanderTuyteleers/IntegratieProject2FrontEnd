@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {GameSession} from "../../model/GameSession";
 import {AppDataService} from "../../services/app-data.service";
 import {User} from "../../model/User";
+import {MainThema} from "../../model/MainThema";
 
 @Component({
   selector: 'app-create-game-session',
@@ -12,11 +13,20 @@ import {User} from "../../model/User";
 export class CreateGameSessionComponent implements OnInit {
 
   @Input() public _user$: User;
-  gameSession: GameSession = new GameSession('', '', true, true, 3, 3, 84600, '');
-  private http: AppDataService;
   @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
+
+  gameSession: GameSession = new GameSession('', '', true, true, 3, 3, 84600, '', '');
+  http: AppDataService;
   sessionCreated: Boolean = false;
   createdSessionId;
+  errorMessage: String = "";
+  validForm: boolean;
+  currentlyActive = "theme";
+
+  //Contains the image data for a new main theme
+  imageFormData: FormData;
+  isNewTheme: boolean;
+  mainTheme: MainThema;
 
   constructor(http: AppDataService) {
     this.http = http;
@@ -32,6 +42,10 @@ export class CreateGameSessionComponent implements OnInit {
   });
 
   ngOnInit() {
+  }
+
+  reset(){
+    this.errorMessage = "";
   }
 
   get title() {
@@ -64,25 +78,52 @@ export class CreateGameSessionComponent implements OnInit {
 
   onSubmitClicked(){
     this.gameSession.organisator = this._user$.username;
+    this.gameSession.themeForSession = this.mainTheme;
+    this.gameSession.themeForSession.subThemes.forEach(subTheme =>{
+      subTheme.theme = null;
+    });
 
-    if(!this.gameSession.allowUsersToAdd){
-      this.gameSession.limit = 0;
 
+    console.log(this.gameSession);
+
+    if(this.gameSession.title.length < 1){
+      this.gameSession.title = "default";
     }
 
+      this.gameSession.setSubOrganisators([]);
 
-    this.http.createGameSession(this.gameSession).subscribe(
-      //(data) => this.sendPage("session"),
-      (data) => {
-        this.sessionCreated = true;
-        this.createdSessionId = data;
-      },
-      (error) => console.log(error)
-    );
-
-    //
+      this.http.createGameSession(this.gameSession).subscribe(
+        //(data) => this.sendPage("session"),
+        (data) => {
+          console.log(data);
+          this.sessionCreated = true;
+          this.createdSessionId = data;
+          this.loadComponenent("picture");
+        },
+        (error) => console.log(error.status)
+      );
   }
 
+  onSkipPressed(){
+    this.sendPage("session");
+  }
 
+  onImageDataReceived(imageFormData){
+    // this.imageFormData = imageFormData;
+    // console.log("Image form data: " + this.imageFormData);
+  }
+
+  loadComponenent(next){
+    this.currentlyActive = next;
+  }
+
+  onIsANewThemeReceived(isNewTheme){
+    this.isNewTheme = isNewTheme;
+  }
+
+  onMainThemeDetailsReceived(mainTheme){
+    this.mainTheme = mainTheme;
+    console.log(this.mainTheme);
+  }
 
 }

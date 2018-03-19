@@ -9,7 +9,7 @@ import {RegisterUser} from "../../model/RegisterUser";
   styleUrls: ['./signup-form.component.css']
 })
 export class SignupFormComponent {
-  private service: HttpLoginServiceService;
+  service: HttpLoginServiceService;
   registerUser: RegisterUser = new RegisterUser('','','','','','','', '');
   public label;
   public _passwordsAreTheSame: boolean = false;
@@ -81,7 +81,7 @@ export class SignupFormComponent {
   }
 
   clickRegister(){
-    if(this.form.valid){
+    if(this.form.valid && this._passwordsAreTheSame){
       this.service.doRegister(this.registerUser).subscribe((data) => {}, error => console.log(this.label = error.error));
     }
   }

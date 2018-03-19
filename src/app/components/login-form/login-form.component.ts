@@ -14,8 +14,8 @@ import {TOKEN_NAME} from "../../services/auth.constant";
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit{
-  private service: AuthService;
-  private httpService: HttpLoginServiceService;
+  service: AuthService;
+  httpService: HttpLoginServiceService;
   loginUser = new LoginUser('','');
   public router: Router;
   public error = '';

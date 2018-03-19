@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JwttestComponent } from './jwttest.component';
+import { CreateMainThemeComponent } from './create-main-theme.component';
 
-describe('JwttestComponent', () => {
-  let component: JwttestComponent;
-  let fixture: ComponentFixture<JwttestComponent>;
+describe('CreateMainThemeComponent', () => {
+  let component: CreateMainThemeComponent;
+  let fixture: ComponentFixture<CreateMainThemeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JwttestComponent ]
+      declarations: [ CreateMainThemeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JwttestComponent);
+    fixture = TestBed.createComponent(CreateMainThemeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

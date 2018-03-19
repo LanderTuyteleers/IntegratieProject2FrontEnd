@@ -206,6 +206,7 @@ h1 {
   transform: translate(-50%,-50%);
 }
 
-.themes{
- width: 100%;
+.activeTheme{
+  background-color: yellow !important;
 }
+
