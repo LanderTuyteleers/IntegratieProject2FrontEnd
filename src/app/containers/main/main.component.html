@@ -21,17 +21,22 @@
           </li>
           <li class="Sidebar-navItem" #profile (click)=profileClick()>
             <i class="Sidebar-menuIcon fa fa-bar-chart"></i>
-            <p (click)=profileClick()>My profile</p>
+            <p>My profile</p>
           </li>
           <li class="Sidebar-navItem" (click)="myThemesClick()">
             <i class="Sidebar-menuIcon fa fa-cog"></i>
             <!--<a href="#">Comming soon</a>-->
             <p>My themes</p>
           </li>
-          <li class="Sidebar-navItem">
+          <li class="Sidebar-navItem" (click)="cardClick()">
+            <i class="Sidebar-menuIcon fa fa-cog"></i>
+            <!--<a href="#">Comming soon</a>-->
+            <p>My cards</p>
+          </li>
+          <li class="Sidebar-navItem" (click)="supportClick()" >
             <i class="Sidebar-menuIcon fa fa-question-circle"></i>
             <!--<a href="#">Help & Support</a>-->
-            <p href="#">Help & Support</p>
+            <p>Help & Support</p>
           </li>
           <li class="Sidebar-navItem" (click)="logout()">
             <i class="Sidebar-menuIcon fa fa-sign-out"></i>
@@ -49,7 +54,8 @@
       <app-create-game-session *ngSwitchCase="'createGameSession'" [_user$]="user$" (pageChanged)="onPageChanged($event)"></app-create-game-session>
       <app-game-session-settings *ngSwitchCase="'gameSessionSettings'" [chosenGameSessionId]="chosenGameSessionId" [username]="user$.username"></app-game-session-settings>
       <app-game-session-edit *ngSwitchCase="'gameSessionEdit'" [chosenGameSessionId]="chosenGameSessionId"></app-game-session-edit>
-      <app-main-themes *ngSwitchCase="'myThemes'"></app-main-themes>
+      <app-main-themes *ngSwitchCase="'theme'"></app-main-themes>
+      <app-playingcard *ngSwitchCase="'playingcard'" (pageChanged)="onPageChanged($event)" (chosenPlayingcardId)="setChosenCardId($event)"></app-playingcard>
     </div>
 </div>
 

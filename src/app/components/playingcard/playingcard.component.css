@@ -156,16 +156,11 @@ h1 {
   letter-spacing: 2px;
 }
 
-.modernButtonSettings:after {
-  content: "NOTIFY";
-}
-
-.modernButtonPlay:after {
-  content: "PLAY";
-}
-
 .modernButtonEdit:after {
   content: "EDIT";
+}
+.modernButtonReview:after {
+  content: "REVIEW";
 }
 
 
@@ -193,7 +188,7 @@ h1 {
   }
 }
 
-.gameSessionImage{
+.playingcardImage{
   /*border: 3px solid black;*/
   height: 250px;
   width: 200px;
@@ -207,5 +202,5 @@ h1 {
 }
 
 .themes{
- width: 100%;
+  width: 100%;
 }

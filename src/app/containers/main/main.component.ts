@@ -18,11 +18,15 @@ export class MainComponent implements OnInit{
   service: HttpLoginServiceService;
   session = true;
   profile = false;
+  playingcard = false;
+  support = false;
+  theme = false;
   profileImageUpload = false;
   user$: User;
   page: string = 'session';
   activeSessionsNumber: 0;
   chosenGameSessionId: Number;
+  chosenCardId: Number;
   imageSrc = "https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png";
   domSanitizerService;
   @ViewChild('session') sessionElement:ElementRef;
@@ -66,6 +70,9 @@ export class MainComponent implements OnInit{
     this.session = true;
     this.profileImageUpload = false;
     this.profile = false;
+    this.playingcard = false;
+    this.support = false;
+    this.theme = false;
     this.page = 'session';
   }
 
@@ -74,12 +81,28 @@ export class MainComponent implements OnInit{
     this.profile = true;
     this.session = false;
     this.profileImageUpload = false;
+    this.playingcard = false;
+    this.support = false;
+    this.theme = false;
     this.page = 'profile';
 
   }
 
+  cardClick(){
+    this.page = 'playingcard'
+  }
+
+  supportClick() {
+    this.page = 'support'
+  }
+
+
+  myThemesClick(){
+    this.page = 'theme';
+  }
+
   profileImageUploadClick(){
-    this.page = 'imageUpload';
+    this.page = 'profile';
   }
 
   onPageChanged(newPage){
@@ -98,13 +121,14 @@ export class MainComponent implements OnInit{
     this.chosenGameSessionId = id;
   }
 
+  setChosenCardId(id) {
+    this.chosenCardId = id;
+  }
+
   updateProfilePicture(newUrl){
     this.imageSrc = newUrl;
   }
 
-  myThemesClick(){
-    this.page = 'myThemes';
-  }
 
   logout(){
     sessionStorage.clear();

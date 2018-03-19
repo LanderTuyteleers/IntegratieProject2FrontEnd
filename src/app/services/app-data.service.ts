@@ -12,6 +12,7 @@ import {Notifications} from "../model/Notifications";
 import {Headers, RequestOptions} from "@angular/http";
 import {UserItem} from "../model/UserItem";
 import {MainThema} from "../model/MainThema";
+import {Playingcard} from '../model/Playingcard';
 
 
 @Injectable()
@@ -265,6 +266,23 @@ export class AppDataService {
     });
   }
 
+  getPlayingcards(){
+    const headers = new HttpHeaders({
+      "Content-type": "application/json",
+      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    let playingcards: Playingcard[] = [];
+    return this.http.get(this.springURL + "/" + sessionStorage.getItem(USERNAME) + "/cards", {headers}).map((resp) => {
+
+      resp.forEach(playingcard => {
+        let card = new Playingcard('', '', '', '', '', '').fromJSON(playingcard);
+        playingcards.push(card);
+      });
+      return playingcards;
+
+    });
+  }
 }
 
 

@@ -1,3 +1,4 @@
+//TODO change loc
 export interface Theme {
   themeId: number;
   name: string;
