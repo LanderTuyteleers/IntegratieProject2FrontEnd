@@ -4,6 +4,7 @@ import {SubTheme} from "../../model/SubTheme";
 import {User} from "../../model/User";
 import {CompleterData, CompleterService} from "ng2-completer";
 import {AppDataService} from "../../services/app-data.service";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-create-main-theme',
@@ -33,11 +34,7 @@ export class CreateMainThemeComponent implements OnInit {
   isNewTheme: boolean;
   ordinal;
 
-  http;
-
-  searchString;
-  searchData = [];
-  dataService: CompleterData;
+  http :AppDataService;
   completerService;
 
 
@@ -45,6 +42,11 @@ export class CreateMainThemeComponent implements OnInit {
     this.completerService = completerService;
     this.http = http;
   }
+
+  form = new FormGroup({
+    'name': new FormControl('', [Validators.required, Validators.maxLength(19), Validators.minLength(4)]),
+    'description': new FormControl('', [Validators.required])
+  });
 
   ngOnInit() {
     if(this.typeOfTheme == 'theme'){
@@ -54,10 +56,10 @@ export class CreateMainThemeComponent implements OnInit {
       this.isMainTheme = false;
     }
     this.subThemes.push(new SubTheme(this.mainTheme,'',''));
-    this.initialiseSearchDataSets();
   }
 
   gotoNextStep(){
+    this.createNewTheme();
     let validSubThemeName = false;
     let validSubThemeDesc = false;
     if(!this.isMainTheme){
@@ -115,21 +117,6 @@ export class CreateMainThemeComponent implements OnInit {
     }
   }
 
-  initialiseSearchDataSets() {
-    // this.searchData.push(new MainThema("Bier", "Dit is een game sessie dat probeert te bepalen wat het beste bier van Belgie is.", [], "../src/images/lock.svg"));
-    // this.searchData.push(new MainThema("OS", "Dit is een game sessie dat probeert te bepalen wat het operating system is.", [], "src/images/lock.svg"));
-    // this.searchData.push(new MainThema("Pc merk", "Dit is een game sessie dat probeert te bepalen wat het beste pc merk is.", [], "src/images/lock.svg"));
-    // this.searchData.push(new MainThema("Dummy", "Dit is een game sessie dummy lorum ipsum lorum ipsum lorum ipsum lorum ipsum .", [], "src/images/lock.svg"));
-    // this.searchData.push(new MainThema("Dummy 2", "Dit is een game sessie dummy lorum ipsum lorum ipsum lorum ipsum lorum ipsum .", [], "src/images/lock.svg"));
-    // this.searchData.push(new MainThema("Dummy 3", "Dit is een game sessie dummy lorum ipsum lorum ipsum lorum ipsum lorum ipsum .", [], "src/images/lock.svg"));
-    // this.searchData.push(new MainThema("Dummy 4", "Dit is een game sessie dummy lorum ipsum lorum ipsum lorum ipsum lorum ipsum .", [], "src/images/lock.svg"));
-    // this.searchData.push(new MainThema("Dummy 5", "Dit is een game sessie dummy lorum ipsum lorum ipsum lorum ipsum lorum ipsum .", [], "src/images/lock.svg"));
-    // this.searchData.push(new MainThema("Dummy 6", "Dit is een game sessie dummy lorum ipsum lorum ipsum lorum ipsum lorum ipsum .", [], "src/images/lock.svg"));
-    //
-    //
-    // this.dataService = this.completerService.local(this.searchData, 'name', 'name');
-  }
-
   onClearClick(){
     this.imageChild.reset();
     this.child.onDeselectPressed();
@@ -144,6 +131,7 @@ export class CreateMainThemeComponent implements OnInit {
   }
 
   onAddSubThemePressed(){
+    //this.http.createSubTheme()?
     this.subThemes.push(new SubTheme(this.mainTheme,'',''));
   }
 
@@ -160,5 +148,27 @@ export class CreateMainThemeComponent implements OnInit {
       return i + "rd";
     }
     return i + "th";
+  }
+
+  get name() {
+    return this.form.get('name');
+  }
+
+  get description() {
+    return this.form.get('description');
+  }
+
+  createNewTheme() {
+    this.mainTheme.name = this.mainTheme.name;
+    this.mainTheme.description = this.mainTheme.description;
+    this.http.createMainTheme(this.mainTheme).subscribe(
+      //(data) => this.sendPage("session"),
+      (data) => {
+        console.log(data);
+        //this.themeCreated = true;
+        //this.createdThemeId = data;
+      },
+      (error) => console.log(error.status)
+    );
   }
 }

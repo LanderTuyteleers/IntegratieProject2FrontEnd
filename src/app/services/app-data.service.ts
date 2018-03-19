@@ -19,6 +19,7 @@ import {Playingcard} from '../model/Playingcard';
 export class AppDataService {
   //Please work
   private springURL = "http://localhost:9090/api/private";
+  private openSpringUrl = "http://localhost:9090/api/public";
   public http;
 
   constructor(http: HttpClient) {
@@ -247,7 +248,7 @@ export class AppDataService {
       "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
     });
 
-    this.http.post(this.springURL + "/themes", mainTheme, {headers: headers}).map((resp: Response) => resp);
+    return this.http.post(this.openSpringUrl + "/themes", mainTheme, {headers: headers}).map((resp: Response) => resp);
   }
 
   getAllConnectedMainThemes(){
@@ -257,7 +258,7 @@ export class AppDataService {
     });
 
     let mainThemes: MainThema[] = [];
-    return this.http.get(this.springURL + "/users/" + sessionStorage.getItem(USERNAME) + "/connectedthemes", {headers: headers}).map((resp) => {
+    return this.http.get(this.openSpringUrl + "/themes", {headers: headers}).map((resp) => {
       resp.forEach(themeDto =>{
         let theme = new MainThema('','','','').fromJSON(themeDto);
         mainThemes.push(theme);
@@ -274,7 +275,7 @@ export class AppDataService {
 
     //api/public/subtheme/{subThemeId}/cards
     let playingcards: Playingcard[] = [];
-    return this.http.get(this.springURL + "/subtheme/" + subthemeId + "/cards", {headers}).map((resp) => {
+    return this.http.get(this.openSpringUrl + "/subtheme/" + subthemeId + "/cards", {headers}).map((resp) => {
 
       resp.forEach(playingcard => {
         let card = new Playingcard('', '', '', '', '', '').fromJSON(playingcard);
@@ -283,10 +284,6 @@ export class AppDataService {
       return playingcards;
 
     });
-  }
-
-  getAllThemes() {
-
   }
 }
 
