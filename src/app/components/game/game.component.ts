@@ -31,7 +31,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private textOptions: TextOptions;
   private angleForPlacingCardsOnCircle: number;
   cardCircleArray: Array<Circle>;
-  cardIdArray: Card[] = [];
+  cardArray: Card[] = [];
 
   constructor(private color: ColorService) {
     this.circleOptions = {stroke: {color: '#00a8ff', width: this.defaultStrokeWidth}};
@@ -40,7 +40,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
     for (let i = 0; i < this.numberOfCards; i++) {
       const c = new Card(i, 'Jupiler', 0);
-      this.cardIdArray.push(c);
+      this.cardArray.push(c);
     }
   }
 
@@ -96,7 +96,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.cardOptions.fill.color = this.color.createFixedMainColors2(iForCardLoop, this.numberOfCards);
     const c = new Circle(new GeomCircle(point, this.defaultCardRadiusSize), this.cardOptions);
     const textPoint = new Point(c.bbox().topLeft().getX() + 5, c.bbox().topLeft().getY() + 10);
-    const text = new Text(this.cardIdArray[iForCardLoop].description.toUpperCase().slice(0, 3), textPoint, this.textOptions);
+    const text = new Text(this.cardArray[iForCardLoop].description.toUpperCase().slice(0, 3), textPoint, this.textOptions);
     const group = new Group();
     group.append(c, text);
     this.cardsMap.set(c, 0);
