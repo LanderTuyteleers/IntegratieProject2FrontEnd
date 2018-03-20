@@ -24,6 +24,7 @@ import {ChatboxComponent} from './components/chatbox/chatbox.component';
 import {GameComponent} from './components/game/game.component';
 import {LobbyItemUserComponent} from './components/lobby-item-user/lobby-item-user.component';
 import { GameCardComponent } from './components/game-card/game-card.component';
+import {ColorService} from './services/color.service';
 
 export function authHttpServiceFactory(http: Http) {
   return new AuthHttp(new AuthConfig({
@@ -66,7 +67,8 @@ export function authHttpServiceFactory(http: Http) {
     {provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http]},
     AuthService,
     UserService,
-    HttpLoginServiceService
+    HttpLoginServiceService,
+    ColorService
   ],
   bootstrap: [AppComponent]
 })

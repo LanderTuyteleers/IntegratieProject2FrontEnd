@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from 
 import {Circle, ShapeOptions, Surface} from '@progress/kendo-drawing';
 import {Point, Circle as GeomCircle} from '@progress/kendo-drawing/geometry';
 import {Card} from '../../model/Card';
+import {ColorService} from '../../services/color.service';
 
 @Component({
   selector: 'app-game',
@@ -19,8 +20,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private defaultStrokeWidth = 10;
   private defaultCircleRadiusSize = 300;
   private defaultCardRadiusSize = 20;
-  // Key = card; Value = number of votes on that card
-  cards = new Map<Circle, number>();
+  // Key = circle of card; Value = number of votes on that card
+  cardsMap = new Map<Circle, number>();
   private circles: Circle[] = [];
   numberOfCircles = 8;
   private numberOfCards = 12;
@@ -31,9 +32,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   cardCircleArray: Array<Circle>;
   cardIdArray: Array<Card>;
 
-  constructor() {
+  constructor(private color: ColorService) {
     this.circleOptions = {stroke: {color: '#00a8ff', width: this.defaultStrokeWidth}};
-    this.cardOptions = {fill: {color: 'blue'}};
+    this.cardOptions = {fill: {color: 'red'}};
   }
 
   ngAfterViewInit(): void {
@@ -57,9 +58,6 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     return this.surface;
   }
 
-  Click() {
-  }
-
   createCirclesForGame() {
     for (let i = 0; i < this.numberOfCircles; i++) {
       const circle = new Circle(new GeomCircle(this.geometry.center,
@@ -76,21 +74,20 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   createCards() {
     this.angleForPlacingCardsOnCircle = 360 / this.numberOfCards;
     for (let i = 0; i < this.numberOfCards; i++) {
-      this.drawCardOnCircle(this.circles[0].geometry().getRadius(), this.angleForPlacingCardsOnCircle * i);
+      this.drawCardOnCircle(this.circles[0].geometry().getRadius(), this.angleForPlacingCardsOnCircle * i, i);
     }
-    this.cardCircleArray = Array.from(this.cards.keys());
+    this.cardCircleArray = Array.from(this.cardsMap.keys());
   }
 
-  drawCardOnCircle(radiusOfDestinationCircle: number, angle: number) {
-    // angle o = right & angle -90 = top
+  drawCardOnCircle(radiusOfDestinationCircle: number, angle: number, iForColors: number) {
+    // angle o° = right & angle -90° = top
     const point = this.createNewPointForCard(radiusOfDestinationCircle, angle);
-
-    const randomColor = 'rgb(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ','
-      + Math.floor(Math.random() * 255) + ')';
-
-    this.cardOptions.fill.color = randomColor;
+    // OTHER COLOR OPTIONS
+    // this.cardOptions.fill.color = this.color.createRandomColors();
+    // this.cardOptions.fill.color = this.color.createFixedMainColors(iForColors);
+    this.cardOptions.fill.color = this.color.createFixedMainColors2(iForColors, this.numberOfCards);
     const c = new Circle(new GeomCircle(point, this.defaultCardRadiusSize), this.cardOptions);
-    this.cards.set(c, 0);
+    this.cardsMap.set(c, 0);
     this.surface.draw(c);
   }
 
@@ -101,7 +98,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   }
 
   updateCard(event) {
-    this.cards.set(event.card, event.value);
+    this.cardsMap.set(event.card, event.value);
     this.moveCard(event.card);
     this.checkForWinners();
 
@@ -110,7 +107,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   moveCard(circleCard: Circle) {
     let cardToMoveByIndex = 0;
 
-    this.cards.forEach((value, key) => {
+    this.cardsMap.forEach((value, key) => {
       if (key === circleCard && value < this.numberOfCircles) {
         const point = this.createNewPointForCard(this.circles[value].geometry().getRadius(),
           cardToMoveByIndex * this.angleForPlacingCardsOnCircle);
@@ -123,7 +120,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   checkForWinners() {
     let winners = 0;
-    this.cards.forEach((value) => {
+    this.cardsMap.forEach((value) => {
       if (value === this.numberOfCircles - 1) {
         winners++;
       }

@@ -1,9 +1,8 @@
-<button id="moveBollekeButton" (click)="Click()">Click me pls</button>
 <div #surface id="surface"></div>
 <div id="card-container">
   <app-game-card *ngFor="let card of cardCircleArray"
                  [card]="card"
-                 [value]="cards.get(card)"
+                 [value]="cardsMap.get(card)"
                  [numberOfCircles]="numberOfCircles"
                  (change)="updateCard($event)" [ngStyle]="{'background-color': card.options.get('fill').color}"></app-game-card>
 </div>
