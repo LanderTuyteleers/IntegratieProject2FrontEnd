@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
-import {Circle, ShapeOptions, Surface} from '@progress/kendo-drawing';
+import {Circle, Group, ShapeOptions, Surface, Text, TextOptions} from '@progress/kendo-drawing';
 import {Point, Circle as GeomCircle} from '@progress/kendo-drawing/geometry';
 import {Card} from '../../model/Card';
 import {ColorService} from '../../services/color.service';
@@ -28,13 +28,20 @@ export class GameComponent implements AfterViewInit, OnDestroy {
   private MAX_NUMBER_OF_WINNERS = 2;
   private circleOptions: ShapeOptions;
   private cardOptions: ShapeOptions;
+  private textOptions: TextOptions;
   private angleForPlacingCardsOnCircle: number;
   cardCircleArray: Array<Circle>;
-  cardIdArray: Array<Card>;
+  cardIdArray: Card[] = [];
 
   constructor(private color: ColorService) {
     this.circleOptions = {stroke: {color: '#00a8ff', width: this.defaultStrokeWidth}};
     this.cardOptions = {fill: {color: 'red'}};
+    this.textOptions = {font: 'bold 15px Arial'};
+
+    for (let i = 0; i < this.numberOfCards; i++) {
+      const c = new Card(i, 'Jupiler', 0);
+      this.cardIdArray.push(c);
+    }
   }
 
   ngAfterViewInit(): void {
@@ -60,6 +67,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 
   createCirclesForGame() {
     for (let i = 0; i < this.numberOfCircles; i++) {
+      this.circleOptions.stroke.color = this.color.createGradientForCircle(i);
       const circle = new Circle(new GeomCircle(this.geometry.center,
         this.defaultCircleRadiusSize - (this.defaultCircleRadiusSize / this.numberOfCircles) * i),
         this.circleOptions);
@@ -79,16 +87,20 @@ export class GameComponent implements AfterViewInit, OnDestroy {
     this.cardCircleArray = Array.from(this.cardsMap.keys());
   }
 
-  drawCardOnCircle(radiusOfDestinationCircle: number, angle: number, iForColors: number) {
+  drawCardOnCircle(radiusOfDestinationCircle: number, angle: number, iForCardLoop: number) {
     // angle o° = right & angle -90° = top
     const point = this.createNewPointForCard(radiusOfDestinationCircle, angle);
     // OTHER COLOR OPTIONS
     // this.cardOptions.fill.color = this.color.createRandomColors();
     // this.cardOptions.fill.color = this.color.createFixedMainColors(iForColors);
-    this.cardOptions.fill.color = this.color.createFixedMainColors2(iForColors, this.numberOfCards);
+    this.cardOptions.fill.color = this.color.createFixedMainColors2(iForCardLoop, this.numberOfCards);
     const c = new Circle(new GeomCircle(point, this.defaultCardRadiusSize), this.cardOptions);
+    const textPoint = new Point(c.bbox().topLeft().getX() + 5, c.bbox().topLeft().getY() + 10);
+    const text = new Text(this.cardIdArray[iForCardLoop].description.toUpperCase().slice(0, 3), textPoint, this.textOptions);
+    const group = new Group();
+    group.append(c, text);
     this.cardsMap.set(c, 0);
-    this.surface.draw(c);
+    this.surface.draw(group);
   }
 
   createNewPointForCard(radiusOfDestinationCircle: number, angle: number): Point {

@@ -16,6 +16,14 @@ export class ColorService {
     this.hueValue = 0;
   }
 
+  createGradientForCircle(i: number): string {
+    this.hueValue = 240;
+    const delta = i * 5;
+    this.lightnessValue = 15 + delta;
+    this.lightnessString = this.lightnessValue + '%';
+    return 'hsl(' + this.hueValue + ',' + this.saturationString + ',' + this.lightnessString + ')';
+  }
+
   createRandomColors(): string {
     return 'rgb(' + this.randomizeColor() + ',' + this.randomizeColor() + ','
       + this.randomizeColor() + ')';
