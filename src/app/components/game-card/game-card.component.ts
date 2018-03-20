@@ -9,14 +9,19 @@ import {Circle} from '@progress/kendo-drawing';
 export class GameCardComponent implements OnInit {
   @Input() card: Circle;
   @Input() value = 0;
+  @Input() numberOfCircles = 0;
   @Output() change = new EventEmitter<any>();
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
   moveCard() {
-    this.value++;
-    this.change.emit({card: this.card, value: this.value});
+    if (this.value < this.numberOfCircles - 1) {
+      this.value++;
+      this.change.emit({card: this.card, value: this.value});
+    }
   }
 }
