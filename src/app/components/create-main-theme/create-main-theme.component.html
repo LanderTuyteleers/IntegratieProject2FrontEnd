@@ -20,7 +20,7 @@
         </tr>
       </table>
       <p class="error text-danger">{{errorMessage}}</p>
-      <button class="btn btn-primary" (click)="gotoNextStep()">Next step</button>
+      <button class="btn btn-primary" (click)="saveTheme()">Save</button>
       <button class="btn btn-danger" (click)="onClearClick()">Clear</button>
     </div>
   </div>
@@ -41,7 +41,9 @@
 <div class="themes" *ngIf="isMainTheme">
   <h1>Or choose an existing theme</h1>
   <!--<p>Search:<ng2-completer class="completer" [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0" [clearUnselected]="true" [clearSelected]="true" [textNoResults]="'No results found'" (selected)="onItemSelected($event)"></ng2-completer></p>-->
+<!--
   <app-main-themes #mainThemes (activeThemeChanged)="mainThemeChanged($event)" [type]="'select'"></app-main-themes>
+-->
 </div>
 
 <ng-container *ngIf="!isMainTheme">

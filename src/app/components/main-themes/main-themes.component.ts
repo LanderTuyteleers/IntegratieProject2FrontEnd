@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MainThema} from "../../model/MainThema";
+import {MainThema} from '../../model/MainThema';
 import {DomSanitizer} from '@angular/platform-browser';
-import {User} from "../../model/User";
-import {CompleterData, CompleterService} from "ng2-completer";
-import {AppDataService} from "../../services/app-data.service";
+import {User} from '../../model/User';
+import {CompleterData, CompleterService} from 'ng2-completer';
+import {AppDataService} from '../../services/app-data.service';
 
 @Component({
   selector: 'app-main-themes',
@@ -46,7 +46,7 @@ export class MainThemesComponent implements OnInit {
     this.initialiseSearchDataSets();
   }
 
-  getMainThemes(){
+  getMainThemes() {
     this.http.getAllConnectedMainThemes().subscribe(
       (data) => this.themes = data,
       //todo 404 opvangen?
@@ -54,13 +54,13 @@ export class MainThemesComponent implements OnInit {
     );
   }
 
-  onSelectPressed(event){
+  onSelectPressed(event) {
     this.activeIndex = event.target.attributes.index.value;
     this.activeThemeChanged.emit(this.themes[this.activeIndex]);
     this.scrollToTop(300);
   }
 
-  onDeselectPressed(){
+  onDeselectPressed() {
     this.activeIndex = -1;
     this.activeThemeChanged.emit(null);
     this.scrollToTop(300);
@@ -68,12 +68,12 @@ export class MainThemesComponent implements OnInit {
 
   scrollToTop(scrollDuration) {
     var scrollStep = -window.scrollY / (scrollDuration / 15),
-      scrollInterval = setInterval(function(){
-        if ( window.scrollY != 0 ) {
-          window.scrollBy( 0, scrollStep );
+      scrollInterval = setInterval(function () {
+        if (window.scrollY != 0) {
+          window.scrollBy(0, scrollStep);
         }
         else clearInterval(scrollInterval);
-      },15);
+      }, 15);
   }
 
   initialiseSearchDataSets() {
@@ -81,21 +81,21 @@ export class MainThemesComponent implements OnInit {
     this.dataService = this.completerService.local(this.searchData, 'name', 'name');
   }
 
-  onItemSelected(selectedItem){
+  onItemSelected(selectedItem) {
     this.activeIndex = this.themes.indexOf(selectedItem.originalObject);
     this.activeThemeChanged.emit(this.themes[this.activeIndex]);
     this.scrollToTop(300);
   }
 
-  onAddCardsClick(event){
+  onAddCardsClick(event) {
     var target = event.target;
     var idAttr = target.attributes.id;
     var id = idAttr.nodeValue;
-    this.pageChanged.emit("playingcard");
+    this.pageChanged.emit('playingcard');
     this.chosenThemeId.emit(this.themes[id].themeId);
   }
 
-  onEditClick(event){
+  onEditClick(event) {
     var target = event.target;
     var idAttr = target.attributes.id;
     var id = idAttr.nodeValue;
@@ -103,4 +103,8 @@ export class MainThemesComponent implements OnInit {
     this.chosenThemeId.emit(this.themes[id].themeId);
   }
 
+  onMainThemeDetailsReceived(event){
+    console.log(event);
+    this.themes.push()
+  }
 }

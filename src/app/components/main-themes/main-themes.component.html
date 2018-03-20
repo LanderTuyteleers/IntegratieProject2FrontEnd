@@ -1,3 +1,4 @@
+<app-create-main-theme [typeOfTheme]="'theme'" (mainThemeDetails)="onMainThemeDetailsReceived($event)" (imageData)="onImageDataReceived($event)"></app-create-main-theme>
 <p>Search:
   <ng2-completer class="completer" [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0"
                  [clearUnselected]="true" [clearSelected]="true" [textNoResults]="'No results found'"
@@ -34,6 +35,6 @@
       </div>
     </div>
   </div>
-</div>
 
+</div>
 <h3 *ngIf="themes.length == 0" class="text-center">You have no connected themes yet!</h3>

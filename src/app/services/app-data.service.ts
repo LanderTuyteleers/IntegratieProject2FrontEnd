@@ -1,25 +1,25 @@
 import {Injectable, Input} from '@angular/core';
-import {AuthHttp} from "angular2-jwt";
-import {TOKEN_NAME, USERNAME} from "./auth.constant";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {AuthHttp} from 'angular2-jwt';
+import {TOKEN_NAME, USERNAME} from './auth.constant';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import {User} from "../model/User";
-import {Observable} from "rxjs/Observable";
-import {RegisterUser} from "../model/RegisterUser";
-import {tap} from "rxjs/operators";
-import {GameSession} from "../model/GameSession";
-import {Notifications} from "../model/Notifications";
-import {Headers, RequestOptions} from "@angular/http";
-import {UserItem} from "../model/UserItem";
-import {MainThema} from "../model/MainThema";
+import {User} from '../model/User';
+import {Observable} from 'rxjs/Observable';
+import {RegisterUser} from '../model/RegisterUser';
+import {tap} from 'rxjs/operators';
+import {GameSession} from '../model/GameSession';
+import {Notifications} from '../model/Notifications';
+import {Headers, RequestOptions} from '@angular/http';
+import {UserItem} from '../model/UserItem';
+import {MainThema} from '../model/MainThema';
 import {Playingcard} from '../model/Playingcard';
 
 
 @Injectable()
 export class AppDataService {
   //Please work
-  private springURL = "http://localhost:9090/api/private";
-  private openSpringUrl = "http://localhost:9090/api/public";
+  private springURL = 'http://localhost:9090/api/private';
+  private openSpringUrl = 'http://localhost:9090/api/public';
   public http;
 
   constructor(http: HttpClient) {
@@ -28,23 +28,23 @@ export class AppDataService {
 
   getUser(username): Observable<User> {
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
 
-    return this.http.get(this.springURL + "/users/username/" + sessionStorage.getItem(USERNAME), {headers}).map((resp: Response) => new User().fromJSON(resp));
+    return this.http.get(this.springURL + '/users/username/' + sessionStorage.getItem(USERNAME), {headers}).map((resp: Response) => new User().fromJSON(resp));
 
   }
 
   getProfilePicture() {
     const headers = new HttpHeaders({
-      "Accept": "application/octet-stream",
-      "Content-Type": "application/octet-stream",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Accept': 'application/octet-stream',
+      'Content-Type': 'application/octet-stream',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
-    return this.http.get(this.springURL + "/users/" + sessionStorage.getItem(USERNAME) + "/picture", {
+    return this.http.get(this.springURL + '/users/' + sessionStorage.getItem(USERNAME) + '/picture', {
       headers: headers,
       responseType: 'arraybuffer'
     }).map((resp) => {
@@ -65,13 +65,13 @@ export class AppDataService {
     // );
   }
 
-  getProfilePictureOfUser(username){
+  getProfilePictureOfUser(username) {
     const headers = new HttpHeaders({
-      "Accept": "application/octet-stream",
-      "Content-Type": "application/octet-stream",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Accept': 'application/octet-stream',
+      'Content-Type': 'application/octet-stream',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
-    return this.http.get(this.springURL + "/users/" + username + "/picture", {
+    return this.http.get(this.springURL + '/users/' + username + '/picture', {
       headers: headers,
       responseType: 'arraybuffer'
     }).map((resp) => {
@@ -87,12 +87,12 @@ export class AppDataService {
 
   getGameSessionImage(sessionId) {
     const headers = new HttpHeaders({
-      "Accept": "application/octet-stream",
-      "Content-Type": "application/octet-stream",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Accept': 'application/octet-stream',
+      'Content-Type': 'application/octet-stream',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
-    return this.http.get(this.springURL + "/sessions/" + sessionId + "/image", {
+    return this.http.get(this.springURL + '/sessions/' + sessionId + '/image', {
       headers: headers,
       responseType: 'arraybuffer'
     }).map((resp) => {
@@ -105,23 +105,23 @@ export class AppDataService {
 
   getNotificationSettings(id) {
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
-    return this.http.get(this.springURL + "/users/" + sessionStorage.getItem(USERNAME) + "/sessions/" + id + "/notifications", {headers})
+    return this.http.get(this.springURL + '/users/' + sessionStorage.getItem(USERNAME) + '/sessions/' + id + '/notifications', {headers})
       .map((resp: Response) => new Notifications(false, false, false, false).fromJSON(resp));
   }
 
   getGameSessions() {
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
     let gameSessions: GameSession[] = [];
     //return this.http.get(this.springURL + "/temp/gamesessions", {headers}).map((resp: Response) => new GameSession('', '','','','','','','').fromJSON(resp));
-    return this.http.get(this.springURL + "/" + sessionStorage.getItem(USERNAME) + "/gamesessions", {headers}).map((resp) => {
+    return this.http.get(this.springURL + '/' + sessionStorage.getItem(USERNAME) + '/gamesessions', {headers}).map((resp) => {
 
       resp.forEach(gameSession => {
         let session = new GameSession('', '', '', '', '', '', '', '', '').fromJSON(gameSession);
@@ -132,14 +132,14 @@ export class AppDataService {
     });
   }
 
-  getUsersFromSession(sessionId){
+  getUsersFromSession(sessionId) {
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
-    let users : UserItem[] = [];
-    return this.http.get(this.springURL + "/sessions/" + sessionId + "/users", {headers}).map((resp) =>{
+    let users: UserItem[] = [];
+    return this.http.get(this.springURL + '/sessions/' + sessionId + '/users', {headers}).map((resp) => {
       resp.forEach(userDto => {
         let user = new UserItem().fromJSON(userDto);
         users.push(user);
@@ -148,14 +148,14 @@ export class AppDataService {
     });
   }
 
-  getAllUsers(){
+  getAllUsers() {
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
-    let users : UserItem[] = [];
-    return this.http.get(this.springURL + "/users/limited", {headers}).map((resp) =>{
+    let users: UserItem[] = [];
+    return this.http.get(this.springURL + '/users/limited', {headers}).map((resp) => {
       resp.forEach(userDto => {
         let user = new UserItem().fromJSON(userDto);
         users.push(user);
@@ -164,118 +164,118 @@ export class AppDataService {
     });
   }
 
-  addUserToGameSession(gameSessionId, usernameToAdd){
+  addUserToGameSession(gameSessionId, usernameToAdd) {
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
-    return this.http.post(this.springURL + "/sessions/" + gameSessionId + "/users/" + usernameToAdd, null, {headers: headers});
+    return this.http.post(this.springURL + '/sessions/' + gameSessionId + '/users/' + usernameToAdd, null, {headers: headers});
   }
 
-  removeUserFromGameSession(gameSessionId, usernameToRemove){
+  removeUserFromGameSession(gameSessionId, usernameToRemove) {
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
-    return this.http.delete(this.springURL + "/sessions/" + gameSessionId + "/users/" + usernameToRemove + "/remove", {headers: headers});
+    return this.http.delete(this.springURL + '/sessions/' + gameSessionId + '/users/' + usernameToRemove + '/remove', {headers: headers});
 
   }
 
   createGameSession(gameSesion: GameSession) {
     const headers = new HttpHeaders({
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
     //TODO
     // return this.http.post(this.springURL + "/sessions", gameSesion, {headers: headers}).map((resp: Response) => resp);
-    return this.http.post(this.springURL + "/sessions", gameSesion, {headers: headers}).map((resp: Response) => resp);
+    return this.http.post(this.springURL + '/sessions', gameSesion, {headers: headers}).map((resp: Response) => resp);
   }
 
   updateUser(user: RegisterUser) {
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
     //map((resp: Response) => new User().fromJSON(resp));
 
-    return this.http.put(this.springURL + "/users/" + user.username, user, {headers: headers}).map((resp: Response) => new User().fromJSON(resp));
+    return this.http.put(this.springURL + '/users/' + user.username, user, {headers: headers}).map((resp: Response) => new User().fromJSON(resp));
   }
 
   updateNotificationsForGameSession(username, id, notifications) {
-      const headers = new HttpHeaders({
-        "Content-type": "application/json",
-        "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
-      });
-
-      return this.http.post(this.springURL + "/users/" + username + "/sessions/" + id, notifications, {headers: headers}).map((resp: Response) => resp);
-    }
-
-
-    ///api/private/sessions/{id}/users/{username}/upgradeacceslevel
-  grantSubModeratorAccessLevel(sessionId, username){
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
-    return this.http.post(this.springURL + "/sessions/" + sessionId + "/users/" + username + "/upgradeacceslevel", null, {headers: headers}).map((resp: Response) => resp);
-  }
-
-  downGradeToParticipantAccessLevel(sessionId, username){
-    const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
-    });
-
-    return this.http.post(this.springURL + "/sessions/" + sessionId + "/users/" + username + "/downgradeacceslevel", null, {headers: headers}).map((resp: Response) => resp);
+    return this.http.post(this.springURL + '/users/' + username + '/sessions/' + id, notifications, {headers: headers}).map((resp: Response) => resp);
   }
 
 
-  updatePassword(user){
+  ///api/private/sessions/{id}/users/{username}/upgradeacceslevel
+  grantSubModeratorAccessLevel(sessionId, username) {
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
-    return this.http.post(this.springURL + "/users/" + sessionStorage.getItem(USERNAME) + "/updatepassword", user, {headers: headers}).map((resp: Response) => resp);
+    return this.http.post(this.springURL + '/sessions/' + sessionId + '/users/' + username + '/upgradeacceslevel', null, {headers: headers}).map((resp: Response) => resp);
   }
 
-  createMainTheme(mainTheme){
+  downGradeToParticipantAccessLevel(sessionId, username) {
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
-    return this.http.post(this.openSpringUrl + "/themes", mainTheme, {headers: headers}).map((resp: Response) => resp);
+    return this.http.post(this.springURL + '/sessions/' + sessionId + '/users/' + username + '/downgradeacceslevel', null, {headers: headers}).map((resp: Response) => resp);
   }
 
-  getAllConnectedMainThemes(){
+
+  updatePassword(user) {
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.post(this.springURL + '/users/' + sessionStorage.getItem(USERNAME) + '/updatepassword', user, {headers: headers}).map((resp: Response) => resp);
+  }
+
+  createMainTheme(mainTheme) {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.post(this.openSpringUrl + '/themes', mainTheme, {headers: headers}).map((resp: Response) => resp);
+  }
+
+  getAllConnectedMainThemes() {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
     let mainThemes: MainThema[] = [];
-    return this.http.get(this.openSpringUrl + "/themes", {headers: headers}).map((resp) => {
-      resp.forEach(themeDto =>{
-        let theme = new MainThema('','','','').fromJSON(themeDto);
+    return this.http.get(this.openSpringUrl + '/themes', {headers: headers}).map((resp) => {
+      resp.forEach(themeDto => {
+        let theme = new MainThema('', '', '', '').fromJSON(themeDto);
         mainThemes.push(theme);
       });
       return mainThemes;
     });
   }
 
-  getPlayingcards(subthemeId){
+  getPlayingcards(subthemeId) {
     const headers = new HttpHeaders({
-      "Content-type": "application/json",
-      "Authorization": "Bearer " + sessionStorage.getItem(TOKEN_NAME)
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
     });
 
     //api/public/subtheme/{subThemeId}/cards
     let playingcards: Playingcard[] = [];
-    return this.http.get(this.openSpringUrl + "/subtheme/" + subthemeId + "/cards", {headers}).map((resp) => {
+    return this.http.get(this.openSpringUrl + '/subtheme/' + subthemeId + '/cards', {headers}).map((resp) => {
 
       resp.forEach(playingcard => {
         let card = new Playingcard('', '', '', '', '', '').fromJSON(playingcard);

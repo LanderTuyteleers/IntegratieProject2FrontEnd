@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {Http} from "@angular/http";
-import {Theme} from "./theme";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {MainThema} from '../../model/MainThema';
 
 @Component({
   selector: 'app-session-setup',
@@ -10,7 +10,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class SessionSetupComponent implements OnInit {
 
-  themes: Theme[];
+  themes: MainThema[];
   create: boolean = false;
   public myForm: FormGroup;
 
@@ -25,14 +25,14 @@ export class SessionSetupComponent implements OnInit {
     });
   }
 
-  ngAfterViewChecked() {
+  /*ngAfterViewChecked() {
     if (this.themes != null) {
       this.themes.forEach(theme => theme.edit = false);
     }
   }
   addCard() {
     this.create = true;
-  }
+  }*/
 
   cancelTheme() {
     this.create = false;
