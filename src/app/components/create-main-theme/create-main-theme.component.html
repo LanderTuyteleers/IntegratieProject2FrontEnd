@@ -42,7 +42,7 @@
   <h1>Choose an existing theme</h1>
   <!--<p>Search:<ng2-completer class="completer" [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0" [clearUnselected]="true" [clearSelected]="true" [textNoResults]="'No results found'" (selected)="onItemSelected($event)"></ng2-completer></p>-->
 
-  <app-main-themes #mainThemes (activeThemeChanged)="mainThemeChanged($event)" [type]="'select'"></app-main-themes>
+  <app-main-themes #mainThemes (activeThemeChanged)="mainThemeChanged($event)" [type]="type"></app-main-themes>
 
 </div>
 

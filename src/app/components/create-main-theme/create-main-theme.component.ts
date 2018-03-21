@@ -12,6 +12,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./create-main-theme.component.css']
 })
 export class CreateMainThemeComponent implements OnInit {
+  @Input() type;
   @Input() public typeOfTheme: String;
   @Input() nextStep: String = '';
   @Input() mainTheme = new MainThema('', '', [], '');
