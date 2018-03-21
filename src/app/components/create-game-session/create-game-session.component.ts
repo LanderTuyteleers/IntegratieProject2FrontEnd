@@ -80,7 +80,7 @@ export class CreateGameSessionComponent implements OnInit {
     this.gameSession.organisator = this._user$.username;
     this.gameSession.themeForSession = this.mainTheme;
     this.gameSession.themeForSession.subThemes.forEach(subTheme =>{
-      subTheme.theme = null;
+      subTheme.theme = null;  //todo???
     });
 
 

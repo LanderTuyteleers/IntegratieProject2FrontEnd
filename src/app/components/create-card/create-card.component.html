@@ -1,0 +1,89 @@
+<div class="holder" *ngIf="!sessionCreated && currentlyActive == 'session'">
+  <table width="100%">
+    <tr>
+      <td>What will be the title of your session?</td>
+      <input type="text" name="title" id="gameTitle" (change)="reset()" [(ngModel)]="gameSession.title">
+    </tr>
+
+    <tr>
+      <td>I will participate in the session</td>
+      <td>
+        <div>
+          <input type="checkbox" name="isOrganisatorPlaying" id="isOrganisatorPlaying"  [checked]="gameSession.isOrganisatorPlaying" [(ngModel)]="gameSession.isOrganisatorPlaying" />
+          <span></span>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Others can add custom cards</td>
+      <td>
+        <div>
+          <input type="checkbox" name="allowUsersToAdd" id="allowUsersToAdd" value="true" [checked]="gameSession.allowUsersToAdd" (change)="reset()" [(ngModel)]="gameSession.allowUsersToAdd"/>
+          <span></span>
+        </div>
+      </td>
+    </tr>
+
+    <tr *ngIf="gameSession.allowUsersToAdd">
+      <td>A player can add up to <span class="font-weight-bold text-info">{{gameSession.limit}}</span> cards</td>
+      <td>
+        <div>
+          <input type="number" class="smallInput" name="limit" id="limit" min="1" max="9" (change)="reset()" [(ngModel)]="gameSession.limit">
+          <span></span>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>A player can choose up to <span class="font-weight-bold text-info">{{gameSession.selectionLimit}}</span> cards</td>
+      <td>
+        <div>
+          <input type="number" class="smallInput" name="selectionLimit" id="selectionLimit" min="1" max="9" (change)="reset()" [(ngModel)]="gameSession.selectionLimit">
+          <span></span>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>A player can take up to <span class="font-weight-bold text-info">{{gameSession.timer}} </span> seconds before making a move</td>
+      <td>
+        <div>
+          <input type="number" name="timer" id="timer" min="3600" max="86400" (change)="reset()" [(ngModel)]="gameSession.timer">
+          <span></span>
+        </div>
+      </td>
+    </tr>
+
+    <tr *ngIf="!validForm">
+      <td class="alert text-danger">{{errorMessage}}</td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <input type="submit" value="Create Game Session" (click)="onSubmitClicked()">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<app-create-main-theme (loadNext)="loadComponenent($event)" [nextStep]="'subTheme'" *ngIf="currentlyActive == 'theme'" [typeOfTheme]="'theme'" (mainThemeDetails)="onMainThemeDetailsReceived($event)" (imageData)="onImageDataReceived($event)" (isANewTheme)="onIsANewThemeReceived($event)"></app-create-main-theme>
+
+<app-create-main-theme (loadNext)="loadComponenent($event)" [nextStep]="'session'" *ngIf="currentlyActive == 'subTheme'" [typeOfTheme]="'subtheme'" [mainTheme]="mainTheme" (mainThemeDetails)="onMainThemeDetailsReceived($event)"></app-create-main-theme>
+
+<div class="holder" *ngIf="sessionCreated && currentlyActive == 'picture'">
+  <table width="100%">
+    <tr>
+      <td>Upload an image to customize your game session</td>
+      <td>
+        <div>
+          <app-image-upload [typeOfUpload]="'gameSessionImage'" [createdSessionId]="createdSessionId" (pageChanged)="onSkipPressed()"></app-image-upload>
+          <span></span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <button class="btn btn-primary" (click)="onSkipPressed()">Skip this step</button>
+    </tr>
+  </table>
+</div>

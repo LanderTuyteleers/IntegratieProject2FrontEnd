@@ -1,0 +1,31 @@
+<div class="google-cards " *ngFor="let playingcard of playingcards; let index = index">
+
+  <div class="google-card" [class.fade-in]="index==0">
+    <div class="google-card-cover">
+      <img *ngIf="playingcardImages[index] != ''" class="playingcardImage"
+           [src]="domSanitizerService.bypassSecurityTrustUrl(playingcardImages[index])"/>
+    </div>
+    <div class="google-card-content">
+      <h3>{{playingcard.name}}</h3>
+      <p>Card ID: {{playingcard.playingcardId}}</p>
+      <p>Created by: <span class="username">{{playingcard.organisator}}</span></p>
+      <p>Description: {{playingcard.description}}</p>
+      <div class="buttonCollection">
+        <div class="modernButtonContainer">
+          <button class="modernButton modernButtonReview" (click)="onReviewClick($event)" [attr.id]="index"></button>
+        </div>
+
+        <div class="modernButtonContainer">
+          <button class="modernButton modernButtonEdit" (click)="onEditClick($event)" [attr.id]="index"
+                  *ngIf="playingcard.getIsOrganisator() || playingcard.getIsSubOrganistor()"></button>
+        </div>
+      </div>
+    </div>
+    <div (click)="onAddClick()" class="plus-button"></div>
+  </div>
+
+  <div *ngIf="playingcards?.length == 0" class="text-center align-middle">
+    <h3 class="realmiddle">You have no cards yet!</h3>
+    <div (click)="onAddClick()" class="plus-button"></div>
+  </div>
+</div>

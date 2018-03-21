@@ -1,4 +1,8 @@
-<p>Search:<ng2-completer class="completer" [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0" [clearUnselected]="true" [clearSelected]="true" [textNoResults]="'No results found'" (selected)="onItemSelected($event)"></ng2-completer></p>
+<p>Search:
+  <ng2-completer class="completer" [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0"
+                 [clearUnselected]="true" [clearSelected]="true" [textNoResults]="'No results found'"
+                 (selected)="onItemSelected($event)"></ng2-completer>
+</p>
 <div class="google-cards" *ngFor="let theme of themes; let index = index">
   <div [ngClass]="{'google-card': true, 'activeTheme': activeIndex == index}">
     <div class="google-card-cover">
@@ -8,10 +12,24 @@
     <div class="google-card-content">
       <h3>{{theme.name}}</h3>
       <p>{{theme.description}}</p>
-      <button class="btn btn-primary" (click)="onSelectPressed($event)" *ngIf="activeIndex != index" [attr.index]="index">Select</button>
-      <button class="btn btn-danger" (click)="onDeselectPressed($event)" *ngIf="activeIndex == index" [attr.index]="index">Deselect</button>
+      <div class="buttonCollection">
+        <div class="modernButtonContainer" *ngIf="type=='select'">
+          <button class="modernButton" (click)="onSelectPressed($event)" *ngIf="activeIndex != index"
+                  [attr.index]="index">Select
+          </button>
+          <button class="modernButton" (click)="onDeselectPressed($event)"
+                  *ngIf="activeIndex == index" [attr.index]="index">Deselect
+          </button>
+        </div>
+
+        <div class="modernButtonContainer" *ngIf="type=='edit'">
+          <button class="modernButton" (click)="onDetailsClick($event)"  [attr.chosenThemeId]="theme.themeId"  *ngIf="activeIndex != index"
+                  [attr.index]="index">Details</button>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
 
-<h3 *ngIf="themes.length == 0" class="text-center">You have no connected main themes yet!</h3>
+</div>
+<h3 *ngIf="themes.length == 0" class="text-center">You have no connected themes yet!</h3>

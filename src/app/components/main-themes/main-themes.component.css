@@ -115,7 +115,9 @@ h1 {
   box-shadow: 2px 3px 11px 1px rgba(0,0,0,0.53);
 }
 
-
+p{
+  text-align: center;
+}
 
 /*CSS for buttons inside the card*/
 
@@ -156,12 +158,8 @@ h1 {
   letter-spacing: 2px;
 }
 
-.modernButtonSettings:after {
-  content: "SETTINGS";
-}
-
-.modernButtonPlay:after {
-  content: "PLAY";
+.modernButtonAdd:after {
+  content: "CARDS";
 }
 
 .modernButtonEdit:after {

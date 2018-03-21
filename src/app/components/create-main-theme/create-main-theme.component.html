@@ -5,10 +5,6 @@
       <div class="text-center" *ngIf="isMainTheme">
         <h2>Create new theme</h2>
       </div>
-      <!--<div class="text-center" *ngIf="!isMainTheme">-->
-        <!--<h2>Create new sub theme</h2>-->
-      <!--</div>-->
-
       <table *ngIf="isMainTheme">
         <tr>
           <td class="fullWidth">What will be the main theme of your kandoe session?
@@ -24,26 +20,7 @@
         </tr>
       </table>
       <p class="error text-danger">{{errorMessage}}</p>
-
-      <!--<ng-container *ngIf="!isMainTheme">-->
-        <!--<table *ngFor="let subTheme of subThemes; let index = index">-->
-          <!--<tr>-->
-            <!--<td class="fullWidth">What will be a sub theme of your main theme {{mainTheme.name}}?-->
-              <!--<input type="text" name="name" id="subThemeName" [(ngModel)]="subTheme.subThemeName"></td>-->
-          <!--</tr>-->
-
-          <!--<tr>-->
-            <!--<td class="fullWidth">-->
-              <!--<label for="description">Describe your sub theme</label>-->
-              <!--<textarea name="description" id="subThemeDescription" [(ngModel)]="subTheme.subThemeDescription"></textarea>-->
-              <!--<span></span>-->
-            <!--</td>-->
-          <!--</tr>-->
-        <!--</table>-->
-        <!--<button class="btn btn-primary" (click)="onAddSubThemePressed()">Add sub theme</button>-->
-      <!--</ng-container>-->
-
-      <button class="btn btn-primary" (click)="gotoNextStep()">Next step</button>
+      <button class="btn btn-primary" (click)="gotoNextStep()">Save</button>
       <button class="btn btn-danger" (click)="onClearClick()">Clear</button>
     </div>
   </div>
@@ -62,9 +39,11 @@
   </div>
 </div>
 <div class="themes" *ngIf="isMainTheme">
-  <h1>Or chose an existing theme</h1>
+  <h1>Choose an existing theme</h1>
   <!--<p>Search:<ng2-completer class="completer" [(ngModel)]="searchString" [datasource]="dataService" [minSearchLength]="0" [clearUnselected]="true" [clearSelected]="true" [textNoResults]="'No results found'" (selected)="onItemSelected($event)"></ng2-completer></p>-->
-  <app-main-themes #mainThemes (activeThemeChanged)="mainThemeChanged($event)"></app-main-themes>
+
+  <app-main-themes #mainThemes (activeThemeChanged)="mainThemeChanged($event)" [type]="type" (chosenThemeId)="onPageChanged($event)"></app-main-themes>
+
 </div>
 
 <ng-container *ngIf="!isMainTheme">
@@ -77,7 +56,7 @@
 
       <table>
         <tr>
-          <td class="fullWidth">What will be the {{ordinalValueOf(index + 1)}} sub theme for main theme: {{mainTheme.name}}?
+          <td class="fullWidth">What will be the subtheme for main theme: {{mainTheme.name}}?
             <input type="text" name="name" id="subThemeName" [(ngModel)]="subTheme.subThemeName">
           </td>
         </tr>
@@ -87,12 +66,6 @@
           </td>
         </tr>
       </table>
-
-
-      <!--<label for="subThemeName">What will be the {{ordinalValueOf(index + 1)}} sub theme for main theme: {{mainTheme.name}}?</label>-->
-      <!--<input type="text" name="name" id="subThemeName" [(ngModel)]="subTheme.subThemeName">-->
-      <!--<label for="description">Describe your sub theme</label>-->
-      <!--<textarea name="description" id="subThemeDescription" [(ngModel)]="subTheme.subThemeDescription"></textarea>-->
     </div>
 
   </div>
@@ -100,67 +73,3 @@
   <div class="next-button" (click)="gotoNextStep()"></div>
   <div (click)="onAddSubThemePressed()" class="plus-button"></div>
 </ng-container>
-
-
-
-
-
-
-
-
-<!--<div class="holder" >-->
-
-  <!--<table *ngIf="isMainTheme"  width="100%">-->
-    <!--&lt;!&ndash;<thead>Create a theme</thead>&ndash;&gt;-->
-    <!--<tr>-->
-      <!--<td class="fullWidth">What will be the main theme of your kandoe session?-->
-        <!--<input type="text" name="name" id="name"  [(ngModel)]="mainTheme.name"></td>-->
-      <!--&lt;!&ndash;<input type="text" name="name" id="name"  [(ngModel)]="mainTheme.name">&ndash;&gt;-->
-    <!--</tr>-->
-
-    <!--<tr>-->
-      <!--<td class="fullWidth">-->
-        <!--<label for="description">Describe your main theme</label>-->
-        <!--<textarea name="description" id="description" [(ngModel)]="mainTheme.description" ></textarea>-->
-        <!--<span></span>-->
-      <!--</td>-->
-    <!--</tr>-->
-
-  <!--</table>-->
-
-  <!--<div *ngFor="let subTheme of subThemes; let index = index">-->
-    <!--<table *ngIf="!isMainTheme">-->
-      <!--&lt;!&ndash;<thead>Create a theme</thead>&ndash;&gt;-->
-      <!--<tr>-->
-        <!--<td>What will be the name of a sub theme of your kandoe session?</td>-->
-        <!--<input type="text" name="subThemeName" id="subThemeName"  [(ngModel)]="subTheme.subThemeName">-->
-      <!--</tr>-->
-
-      <!--<tr>-->
-        <!--<td>Describe your sub theme</td>-->
-      <!--</tr>-->
-
-      <!--<tr>-->
-        <!--<td>-->
-          <!--<textarea name="subThemeDescription" id="subThemeDescription" [(ngModel)]="subTheme.subThemeDescription" ></textarea>-->
-          <!--<span></span>-->
-        <!--</td>-->
-      <!--</tr>-->
-
-      <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td colspan="2">&ndash;&gt;-->
-          <!--&lt;!&ndash;<button class="btn btn-primary" (click)="addSubtheme()">Add new subtheme</button>&ndash;&gt;-->
-          <!--&lt;!&ndash;<button class="btn btn-primary" (click)="gotoNextStep()">Next step</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;</td>&ndash;&gt;-->
-      <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--</table>-->
-  <!--</div>-->
-  <!--<button *ngIf="!isMainTheme" class="btn btn-primary" (click)="addSubtheme()">Add new subtheme</button>-->
-  <!--<button class="btn btn-primary" (click)="gotoNextStep()">Next step</button>-->
-<!--</div>-->
-
-<!--<div class="holder">-->
-  <!--<app-image-upload *ngIf="isMainTheme"></app-image-upload>-->
-<!--</div>-->
-
-

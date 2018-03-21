@@ -5,6 +5,7 @@ import {AppDataService} from "../../services/app-data.service";
 import {error} from "util";
 import {DomSanitizer} from "@angular/platform-browser";
 import {USERNAME} from "../../services/auth.constant";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-game-session',
@@ -23,10 +24,12 @@ export class GameSessionComponent implements OnInit {
   domSanitizerService;
 
   http: AppDataService;
+  public router: Router;
 
-  constructor(http: AppDataService, private domSanitizer: DomSanitizer) {
+  constructor(http: AppDataService, private domSanitizer: DomSanitizer,router: Router) {
     this.http = http;
     this.domSanitizerService = this.domSanitizer;
+    this.router = router;
 
     let allUsers = [];
   }
@@ -83,6 +86,6 @@ export class GameSessionComponent implements OnInit {
   }
 
   onPlayClick(event){
-
+    this.router.navigateByUrl('game');
   }
 }

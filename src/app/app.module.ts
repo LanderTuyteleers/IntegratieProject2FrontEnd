@@ -33,6 +33,17 @@ import { CreateMainThemeComponent } from './components/create-main-theme/create-
 import { MainThemesComponent } from './components/main-themes/main-themes.component';
 import {CardComponent} from "./components/card/card.component";
 import {SessionSetupComponent} from "./components/session-setup/session-setup.component";
+import { CreateCardComponent } from './components/create-card/create-card.component';
+import { PlayingcardComponent } from './components/playingcard/playingcard.component';
+import {EditCardComponent} from './components/edit-card/edit-card.component';
+import { ThemesComponent } from './containers/themes/themes.component';
+import { GameCardComponent } from './components/game-card/game-card.component';
+import {LobbyItemUserComponent} from './components/lobby-item-user/lobby-item-user.component';
+import {GameComponent} from './components/game/game.component';
+import {ChatboxComponent} from './components/chatbox/chatbox.component';
+import {LobbyListComponent} from './components/lobby-list/lobby-list.component';
+import {GameScreenComponent} from './containers/game-screen/game-screen.component';
+import {ColorService} from './services/color.service';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -63,7 +74,17 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     CreateMainThemeComponent,
     MainThemesComponent,
     CardComponent,
-    SessionSetupComponent
+    SessionSetupComponent,
+    CreateCardComponent,
+    PlayingcardComponent,
+    EditCardComponent,
+    ThemesComponent,
+    GameScreenComponent,
+    LobbyListComponent,
+    ChatboxComponent,
+    GameComponent,
+    LobbyItemUserComponent,
+    GameCardComponent
   ],
   imports: [
     BrowserModule,
@@ -85,9 +106,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AppDataService,
     Ng2CompleterModule,
     CompleterService,
-    { provide: HTTP_INTERCEPTORS, useClass: NgLoadingSpinnerInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: NgLoadingSpinnerInterceptor, multi: true },
 
+    ColorService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

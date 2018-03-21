@@ -1,0 +1,4 @@
+
+<app-create-main-theme (chosenThemeId)="onChosenThemeId($event)" (pageChanged)="onPageChanged($event)" (loadNext)="loadComponenent($event)" [nextStep]="'subTheme'" *ngIf="currentlyActive == 'theme'" [typeOfTheme]="'theme'" [type]="'edit'" (mainThemeDetails)="onMainThemeDetailsReceived($event)" (imageData)="onImageDataReceived($event)" (isANewTheme)="onIsANewThemeReceived($event)"></app-create-main-theme>
+
+<app-create-main-theme (chosenThemeId)="onChosenThemeId($event)" (pageChanged)="onPageChanged($event)" (loadNext)="loadComponenent($event)" [nextStep]="'session'" *ngIf="currentlyActive == 'subTheme'" [typeOfTheme]="'subtheme'" [mainTheme]="mainTheme" [type]="'edit'" (mainThemeDetails)="onMainThemeDetailsReceived($event)"></app-create-main-theme>
