@@ -23,8 +23,8 @@
         </div>
 
         <div class="modernButtonContainer" *ngIf="type=='edit'">
-          <button class="modernButton modernButtonAdd" (click)="onAddCardsClick($event)"  [attr.chosenThemeId]="theme.themeId"  *ngIf="activeIndex != index"
-                  [attr.index]="index"></button>
+          <button class="modernButton" (click)="onDetailsClick($event)"  [attr.chosenThemeId]="theme.themeId"  *ngIf="activeIndex != index"
+                  [attr.index]="index">Details</button>
         </div>
 
       </div>

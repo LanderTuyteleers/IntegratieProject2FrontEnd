@@ -4,6 +4,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {User} from '../../model/User';
 import {CompleterData, CompleterService} from 'ng2-completer';
 import {AppDataService} from '../../services/app-data.service';
+import {applyRedirects} from '@angular/router/src/apply_redirects';
 
 @Component({
   selector: 'app-main-themes',
@@ -87,9 +88,8 @@ export class MainThemesComponent implements OnInit {
     this.scrollToTop(300);
   }
 
-  onAddCardsClick(event) {
+  onDetailsClick(event) {
     this.chosenThemeId.emit(event.target.attributes.chosenThemeId);
-    this.pageChanged.emit('playingcard');
   }
 
   onMainThemeDetailsReceived(event){

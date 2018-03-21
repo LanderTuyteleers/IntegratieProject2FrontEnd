@@ -36,7 +36,8 @@ export class CreateMainThemeComponent implements OnInit {
 
   http: AppDataService;
   completerService;
-
+  @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
+  @Output() chosenThemeId: EventEmitter<Number> = new EventEmitter<Number>();
 
   constructor(http: AppDataService, completerService: CompleterService) {
     this.completerService = completerService;
@@ -153,5 +154,11 @@ export class CreateMainThemeComponent implements OnInit {
         }
       );
     }
+  }
+
+
+  onPageChanged (event) {
+    this.chosenThemeId.emit(event);
+    this.pageChanged.emit('playingcard');
   }
 }

@@ -15,4 +15,11 @@ export class ThemesComponent implements OnInit {
   ngOnInit() {
   }
 
+  onChosenThemeId(event) {
+    this.chosenThemeId.emit(event);
+  }
+
+  onPageChanged(event) {
+    this.pageChanged.emit(event);
+  }
 }
