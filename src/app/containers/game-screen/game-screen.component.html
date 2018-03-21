@@ -1,0 +1,17 @@
+<navigation-bar></navigation-bar>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <p>Lobby with all players</p>
+      <app-lobby-list></app-lobby-list>
+    </div>
+    <div class="col-md-8" #gameArea>
+      <p>Kandoe game area<br /><!--{{gameArea.offsetWidth}},{{gameArea.offsetHeight}}--></p>
+      <app-game [parentDivWidth]="gameArea.offsetWidth" [parentDivHeight]="gameArea.offsetHeight"></app-game>
+    </div>
+    <div class="col-md-2 text-center">
+      <p>Chatbox</p>
+      <app-chatbox></app-chatbox>
+    </div>
+  </div>
+</div>

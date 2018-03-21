@@ -1,0 +1,10 @@
+<div #surface id="surface"></div>
+<div id="card-container" class="google-cards">
+  <app-game-card class="google-card"
+                 *ngFor="let card of cardCircleArray"
+                 [card]="card"
+                 [value]="cardsMap.get(card)"
+                 [numberOfCircles]="numberOfCircles"
+                 (change)="updateCard($event)"
+                 [ngStyle]="{'background-color': card.options.get('fill').color}"></app-game-card>
+</div>
