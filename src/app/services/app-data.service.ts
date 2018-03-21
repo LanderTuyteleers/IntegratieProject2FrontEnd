@@ -285,6 +285,15 @@ export class AppDataService {
 
     });
   }
+
+  createSubTheme(subTheme) {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem(TOKEN_NAME)
+    });
+
+    return this.http.post(this.openSpringUrl + '/subthemes/'+ subTheme.theme.themeId , subTheme, {headers: headers}).map((resp: Response) => resp);
+  }
 }
 
 

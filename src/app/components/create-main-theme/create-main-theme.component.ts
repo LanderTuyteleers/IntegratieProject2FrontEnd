@@ -60,8 +60,34 @@ export class CreateMainThemeComponent implements OnInit {
   }
 
   gotoNextStep() {
-    this.saveTheme()
-    let validSubThemeName = false;
+
+
+    if(!this.isMainTheme) {
+
+      this.subThemes.forEach(st => {
+        if (st.subThemeName.length <= 0) {
+          this.errorMessage = 'Please fill in the name of your sub theme';
+        }
+        else if (st.subThemeDescription.length <= 0) {
+          this.errorMessage = 'Please fill in the description of your sub theme';
+        } else {
+          this.saveSubTheme(st);
+        }
+      });
+    } else {
+      if (this.mainTheme.name.length <= 0) {
+        this.errorMessage = 'Please fill in the name of your theme';
+      }
+      else if (this.mainTheme.description.length <= 0) {
+        this.errorMessage = 'Please fill in the description of your theme';
+      }
+      else {
+        this.saveTheme();
+      }
+
+
+    }
+/*    let validSubThemeName = false;
     let validSubThemeDesc = false;
     if (!this.isMainTheme) {
 
@@ -72,26 +98,26 @@ export class CreateMainThemeComponent implements OnInit {
         this.errorMessage = 'Please fill in the description of your sub theme';
       }
       else {
+        this.saveSubTheme();
         validSubThemeName = true;
         validSubThemeDesc = true;
       }
 
     }
 
-    if (this.mainTheme.name.length <= 0) {
-      this.errorMessage = 'Please fill in the name of your theme';
-    }
-
-    else if (this.mainTheme.description.length <= 0) {
-      this.errorMessage = 'Please fill in the description of your theme';
-    }
     else {
-      if (!this.isMainTheme) {
-        this.mainTheme.subThemes = this.subThemes;
+      if (this.mainTheme.name.length <= 0) {
+        this.errorMessage = 'Please fill in the name of your theme';
       }
-      this.sendInformation();
-      this.loadNext.emit(this.nextStep);
+      else if (this.mainTheme.description.length <= 0) {
+        this.errorMessage = 'Please fill in the description of your theme';
+      }
+      else {
+        this.saveTheme();
+      }
     }
+    this.sendInformation();*/
+    this.loadNext.emit(this.nextStep);
   }
 
   sendInformation() {
@@ -132,7 +158,6 @@ export class CreateMainThemeComponent implements OnInit {
   }
 
   onAddSubThemePressed() {
-    //this.http.createSubTheme()?
     this.subThemes.push(new SubTheme(this.mainTheme, '', ''));
   }
 
@@ -150,14 +175,24 @@ export class CreateMainThemeComponent implements OnInit {
       this.http.createMainTheme(this.mainTheme).subscribe(
         (data) => {
           console.log(data);
+          this.subTheme.theme=JSON.parse(data);
           this.mainThemeDetails.emit(data);
         }
       );
     }
   }
 
+  saveSubTheme(st) {
+    console.log(st);
+    this.http.createSubTheme(st).subscribe(
+      (data)=> {
+        this.mainTheme.subThemes.push(JSON.parse(data));
+      }
+    );
+  }
 
-  onPageChanged (event) {
+
+  onPageChanged(event) {
     this.chosenThemeId.emit(event);
     this.pageChanged.emit('playingcard');
   }
