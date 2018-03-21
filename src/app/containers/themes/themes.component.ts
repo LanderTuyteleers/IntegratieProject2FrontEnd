@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-themes',
@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./themes.component.css']
 })
 export class ThemesComponent implements OnInit {
-
+  @Input() type;
+  @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
+  @Output() chosenThemeId: EventEmitter<Number> = new EventEmitter<Number>();
+  currentlyActive = 'theme';
   constructor() { }
 
   ngOnInit() {
