@@ -35,7 +35,6 @@ import {CardComponent} from "./components/card/card.component";
 import {SessionSetupComponent} from "./components/session-setup/session-setup.component";
 import { CreateCardComponent } from './components/create-card/create-card.component';
 import { PlayingcardComponent } from './components/playingcard/playingcard.component';
-import { EditThemeComponent } from './components/edit-theme/edit-theme.component';
 import {EditCardComponent} from './components/edit-card/edit-card.component';
 import { ThemesComponent } from './containers/themes/themes.component';
 
@@ -71,7 +70,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     SessionSetupComponent,
     CreateCardComponent,
     PlayingcardComponent,
-    EditThemeComponent,
     EditCardComponent,
     ThemesComponent
   ],

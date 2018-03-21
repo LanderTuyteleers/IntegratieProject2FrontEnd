@@ -88,19 +88,8 @@ export class MainThemesComponent implements OnInit {
   }
 
   onAddCardsClick(event) {
-    var target = event.target;
-    var idAttr = target.attributes.id;
-    var id = idAttr.nodeValue;
+    this.chosenThemeId.emit(event.target.attributes.chosenThemeId);
     this.pageChanged.emit('playingcard');
-    this.chosenThemeId.emit(this.themes[id].themeId);
-  }
-
-  onEditClick(event) {
-    var target = event.target;
-    var idAttr = target.attributes.id;
-    var id = idAttr.nodeValue;
-    this.pageChanged.emit('editTheme');
-    this.chosenThemeId.emit(this.themes[id].themeId);
   }
 
   onMainThemeDetailsReceived(event){

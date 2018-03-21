@@ -32,7 +32,7 @@ export class MainComponent implements OnInit{
   @ViewChild('session') sessionElement:ElementRef;
   @ViewChild('profile') profileElement:ElementRef;
   activeItem;
-
+  chosenThemeId;
 
   constructor(router: Router, service: HttpLoginServiceService, private userService: UserService, private appDataService: AppDataService, private domSanitizer: DomSanitizer) {
     this.router = router;
@@ -129,6 +129,9 @@ export class MainComponent implements OnInit{
     this.imageSrc = newUrl;
   }
 
+  onThemeChosen(event) {
+    this.chosenThemeId = event;
+  }
 
   logout(){
     sessionStorage.clear();

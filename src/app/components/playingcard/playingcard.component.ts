@@ -12,7 +12,7 @@ export class PlayingcardComponent implements OnInit {
   playingcards: Playingcard[] = [];
   playingcardImages: string[] = [];
 
-  @Input() public chosenSubthemeId;
+  @Input() public chosenThemeId;
   @Output() pageChanged: EventEmitter<String> = new EventEmitter<String>();
   @Output() chosenPlayingcardId: EventEmitter<Number> = new EventEmitter<Number>();
   domSanitizerService;
@@ -31,12 +31,12 @@ export class PlayingcardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.playingcards.push(new Playingcard('naam','test','sveneman','Card','true','test'));
+    this.playingcards.push(new Playingcard('naam','test','sveneman','beauke','true','test'));
     this.getPlayingcards();
   }
 
   getPlayingcards(){
-    this.http.getPlayingcards(this.chosenSubthemeId).subscribe(
+    this.http.getPlayingcards(this.chosenThemeId).subscribe(
       (data) => {
         this.playingcards = data.reverse();
         this.getPlayingcardImage();
