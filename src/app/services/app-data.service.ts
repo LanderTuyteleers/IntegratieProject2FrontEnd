@@ -18,8 +18,8 @@ import {Playingcard} from '../model/Playingcard';
 @Injectable()
 export class AppDataService {
   //Please work
-  private springURL = 'http://localhost:9090/api/private';
-  private openSpringUrl = 'http://localhost:9090/api/public';
+  private springURL = 'https://kandoe.herokuapp.com/api/private';
+  private openSpringUrl = 'https://kandoe.herokuapp.com/api/public';
   public http;
 
   constructor(http: HttpClient) {

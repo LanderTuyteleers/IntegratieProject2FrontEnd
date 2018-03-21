@@ -26,7 +26,7 @@ export class CardComponent implements OnInit {
   }
 
   deleteTheme() {
-    let url = "http://localhost:9090/api/theme?name="+ this.theme.name;
+    let url = "https://kandoe.herokuapp.com/api/theme?name="+ this.theme.name;
     this._http.delete(url).subscribe(theme => this.myEvent.emit(theme.json()));
   }
 
