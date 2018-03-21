@@ -32,7 +32,6 @@ export class CreateMainThemeComponent implements OnInit {
   imageSrc = 'https://www.vccircle.com/wp-content/uploads/2017/03/default-profile.png';
   //Marks whether a user chose an existing theme or created a new one
   isNewTheme: boolean;
-  ordinal;
 
   http: AppDataService;
   completerService;
@@ -59,7 +58,7 @@ export class CreateMainThemeComponent implements OnInit {
   }
 
   gotoNextStep() {
-    this.createNewTheme();
+    this.saveTheme()
     let validSubThemeName = false;
     let validSubThemeDesc = false;
     if (!this.isMainTheme) {
@@ -135,41 +134,12 @@ export class CreateMainThemeComponent implements OnInit {
     this.subThemes.push(new SubTheme(this.mainTheme, '', ''));
   }
 
-  ordinalValueOf(i) {
-    var j = i % 10,
-      k = i % 100;
-    if (j == 1 && k != 11) {
-      return i + 'st';
-    }
-    if (j == 2 && k != 12) {
-      return i + 'nd';
-    }
-    if (j == 3 && k != 13) {
-      return i + 'rd';
-    }
-    return i + 'th';
-  }
-
   get name() {
     return this.form.get('name');
   }
 
   get description() {
     return this.form.get('description');
-  }
-
-  createNewTheme() {
-    this.mainTheme.name = this.mainTheme.name;
-    this.mainTheme.description = this.mainTheme.description;
-    this.http.createMainTheme(this.mainTheme).subscribe(
-      //(data) => this.sendPage("session"),
-      (data) => {
-        console.log(data);
-        //this.themeCreated = true;
-        //this.createdThemeId = data;
-      },
-      (error) => console.log(error.status)
-    );
   }
 
   saveTheme() {
