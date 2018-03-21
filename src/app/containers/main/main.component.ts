@@ -88,10 +88,6 @@ export class MainComponent implements OnInit{
 
   }
 
-  cardClick(){
-    this.page = 'playingcard'
-  }
-
   supportClick() {
     this.page = 'support'
   }
